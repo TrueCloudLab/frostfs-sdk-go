@@ -807,6 +807,10 @@ func (p *Pool) DeleteObject(ctx context.Context, addr address.Address, opts ...C
 		prm.ByID(*obj)
 	}
 
+	if cfg.btoken != nil {
+		prm.WithBearerToken(*cfg.btoken)
+	}
+
 	prm.UseKey(*cc.key)
 
 	return p.callWithRetry(&cc, func() error {
@@ -862,6 +866,10 @@ func (p *Pool) GetObject(ctx context.Context, addr address.Address, opts ...Call
 		prm.ByID(*obj)
 	}
 
+	if cfg.btoken != nil {
+		prm.WithBearerToken(*cfg.btoken)
+	}
+
 	var res ResGetObject
 
 	err = p.callWithRetry(&cc, func() error {
@@ -912,6 +920,10 @@ func (p *Pool) HeadObject(ctx context.Context, addr address.Address, opts ...Cal
 
 	if obj := addr.ObjectID(); obj != nil {
 		prm.ByID(*obj)
+	}
+
+	if cfg.btoken != nil {
+		prm.WithBearerToken(*cfg.btoken)
 	}
 
 	prm.UseKey(*cc.key)
@@ -979,6 +991,10 @@ func (p *Pool) ObjectRange(ctx context.Context, addr address.Address, off, ln ui
 		prm.ByID(*obj)
 	}
 
+	if cfg.btoken != nil {
+		prm.WithBearerToken(*cfg.btoken)
+	}
+
 	var res ResObjectRange
 
 	err = p.callWithRetry(&cc, func() error {
@@ -1036,6 +1052,10 @@ func (p *Pool) SearchObjects(ctx context.Context, idCnr cid.ID, filters object.S
 
 	prm.InContainer(idCnr)
 	prm.SetFilters(filters)
+
+	if cfg.btoken != nil {
+		prm.WithBearerToken(*cfg.btoken)
+	}
 
 	var cc callContextWithRetry
 
