@@ -19,6 +19,7 @@ import (
 	"github.com/nspcc-dev/neofs-sdk-go/object/address"
 	"github.com/nspcc-dev/neofs-sdk-go/owner"
 	"github.com/nspcc-dev/neofs-sdk-go/session"
+	sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
 )
@@ -588,5 +589,34 @@ func TestWaitPresence(t *testing.T) {
 			PollInterval:    500 * time.Millisecond,
 		})
 		require.NoError(t, err)
+	})
+}
+
+func TestCopySessionTokenWithoutSignatureAndContext(t *testing.T) {
+	from := sessiontest.SignedToken()
+	to := copySessionTokenWithoutSignatureAndContext(*from)
+
+	require.Equal(t, from.Nbf(), to.Nbf())
+	require.Equal(t, from.Exp(), to.Exp())
+	require.Equal(t, from.Iat(), to.Iat())
+	require.Equal(t, from.ID(), to.ID())
+	require.Equal(t, from.OwnerID().String(), to.OwnerID().String())
+	require.Equal(t, from.SessionKey(), to.SessionKey())
+
+	require.Empty(t, to.Signature().Sign())
+	require.Empty(t, to.Signature().Key())
+
+	t.Run("empty object context", func(t *testing.T) {
+		octx := sessiontest.ObjectContext()
+		from.SetContext(octx)
+		to = copySessionTokenWithoutSignatureAndContext(*from)
+		require.Nil(t, to.Context())
+	})
+
+	t.Run("empty container context", func(t *testing.T) {
+		cctx := sessiontest.ContainerContext()
+		from.SetContext(cctx)
+		to = copySessionTokenWithoutSignatureAndContext(*from)
+		require.Nil(t, to.Context())
 	})
 }

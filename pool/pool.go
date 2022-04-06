@@ -1297,3 +1297,30 @@ func newAddressFromCnrID(cnrID *cid.ID) *address.Address {
 	addr.SetContainerID(cnrID)
 	return addr
 }
+
+func copySessionTokenWithoutSignatureAndContext(from session.Token) (to session.Token) {
+	to.SetIat(from.Iat())
+	to.SetExp(from.Exp())
+	to.SetNbf(from.Nbf())
+
+	sessionTokenID := make([]byte, len(from.ID()))
+	copy(sessionTokenID, from.ID())
+	to.SetID(sessionTokenID)
+
+	sessionTokenKey := make([]byte, len(from.SessionKey()))
+	copy(sessionTokenKey, from.SessionKey())
+	to.SetSessionKey(sessionTokenKey)
+
+	var sessionTokenOwner owner.ID
+	buf, err := from.OwnerID().Marshal()
+	if err != nil {
+		panic(err) // should never happen
+	}
+	err = sessionTokenOwner.Unmarshal(buf)
+	if err != nil {
+		panic(err) // should never happen
+	}
+	to.SetOwnerID(&sessionTokenOwner)
+
+	return to
+}
