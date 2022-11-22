@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"crypto/ecdsa"
 	"fmt"
 
 	"github.com/TrueCloudLab/frostfs-api-go/v2/acl"
@@ -27,6 +28,16 @@ type PrmObjectHash struct {
 	csAlgo v2refs.ChecksumType
 
 	addr v2refs.Address
+
+	keySet bool
+	key    ecdsa.PrivateKey
+}
+
+// UseKey specifies private key to sign the requests.
+// If key is not provided, then Client default key is used.
+func (x *PrmObjectHash) UseKey(key ecdsa.PrivateKey) {
+	x.keySet = true
+	x.key = key
 }
 
 // MarkLocal tells the server to execute the operation locally.
@@ -176,7 +187,12 @@ func (c *Client) ObjectHash(ctx context.Context, prm PrmObjectHash) (*ResObjectH
 	c.prepareRequest(&req, &prm.meta)
 	req.SetBody(&prm.body)
 
-	err := signature.SignServiceMessage(&c.prm.key, &req)
+	key := c.prm.key
+	if prm.keySet {
+		key = prm.key
+	}
+
+	err := signature.SignServiceMessage(&key, &req)
 	if err != nil {
 		return nil, fmt.Errorf("sign request: %w", err)
 	}
