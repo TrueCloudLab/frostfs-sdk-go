@@ -224,12 +224,13 @@ type clientWrapper struct {
 
 // wrapperPrm is params to create clientWrapper.
 type wrapperPrm struct {
-	address              string
-	key                  ecdsa.PrivateKey
-	dialTimeout          time.Duration
-	streamTimeout        time.Duration
-	errorThreshold       uint32
-	responseInfoCallback func(sdkClient.ResponseMetaInfo) error
+	address                 string
+	key                     ecdsa.PrivateKey
+	dialTimeout             time.Duration
+	streamTimeout           time.Duration
+	errorThreshold          uint32
+	responseInfoCallback    func(sdkClient.ResponseMetaInfo) error
+	poolRequestInfoCallback func(RequestInfo)
 }
 
 // setAddress sets endpoint to connect in NeoFS network.
@@ -256,6 +257,11 @@ func (x *wrapperPrm) setStreamTimeout(timeout time.Duration) {
 // until Pool.startRebalance routing updates its status.
 func (x *wrapperPrm) setErrorThreshold(threshold uint32) {
 	x.errorThreshold = threshold
+}
+
+// setPoolRequestCallback sets callback that will be invoked after every pool response.
+func (x *wrapperPrm) setPoolRequestCallback(f func(RequestInfo)) {
+	x.poolRequestInfoCallback = f
 }
 
 // setResponseInfoCallback sets callback that will be invoked after every response.
@@ -964,9 +970,16 @@ func (c *clientStatusMonitor) methodsStatus() []statusSnapshot {
 	return result
 }
 
-func (c *clientStatusMonitor) incRequests(elapsed time.Duration, method MethodIndex) {
+func (c *clientWrapper) incRequests(elapsed time.Duration, method MethodIndex) {
 	methodStat := c.methods[method]
 	methodStat.incRequests(elapsed)
+	if c.prm.poolRequestInfoCallback != nil {
+		c.prm.poolRequestInfoCallback(RequestInfo{
+			Address: c.prm.address,
+			Method:  method,
+			Elapsed: elapsed,
+		})
+	}
 }
 
 func (c *clientStatusMonitor) handleError(st apistatus.Status, err error) error {
@@ -991,6 +1004,13 @@ func (c *clientStatusMonitor) handleError(st apistatus.Status, err error) error 
 // to the given endpoint.
 type clientBuilder = func(endpoint string) client
 
+// RequestInfo groups info about pool request.
+type RequestInfo struct {
+	Address string
+	Method  MethodIndex
+	Elapsed time.Duration
+}
+
 // InitParameters contains values used to initialize connection Pool.
 type InitParameters struct {
 	key                       *ecdsa.PrivateKey
@@ -1002,6 +1022,7 @@ type InitParameters struct {
 	sessionExpirationDuration uint64
 	errorThreshold            uint32
 	nodeParams                []NodeParam
+	requestCallback           func(RequestInfo)
 
 	clientBuilder clientBuilder
 }
@@ -1048,6 +1069,12 @@ func (x *InitParameters) SetSessionExpirationDuration(expirationDuration uint64)
 // SetErrorThreshold specifies the number of errors on connection after which node is considered as unhealthy.
 func (x *InitParameters) SetErrorThreshold(threshold uint32) {
 	x.errorThreshold = threshold
+}
+
+// SetRequestCallback makes the pool client to pass RequestInfo for each
+// request to f. Nil (default) means ignore RequestInfo.
+func (x *InitParameters) SetRequestCallback(f func(RequestInfo)) {
+	x.requestCallback = f
 }
 
 // AddNode append information about the node to which you want to connect.
@@ -1651,6 +1678,7 @@ func fillDefaultInitParams(params *InitParameters, cache *sessionCache) {
 			prm.setDialTimeout(params.nodeDialTimeout)
 			prm.setStreamTimeout(params.nodeStreamTimeout)
 			prm.setErrorThreshold(params.errorThreshold)
+			prm.setPoolRequestCallback(params.requestCallback)
 			prm.setResponseInfoCallback(func(info sdkClient.ResponseMetaInfo) error {
 				cache.updateEpoch(info.Epoch())
 				return nil
