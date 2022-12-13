@@ -4,11 +4,11 @@ import (
 	"crypto/sha256"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	eacltest "github.com/nspcc-dev/neofs-sdk-go/eacl/test"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	eacltest "github.com/TrueCloudLab/frostfs-sdk-go/eacl/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 	"github.com/stretchr/testify/require"
 )
 

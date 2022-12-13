@@ -13,22 +13,22 @@ import (
 	"sync"
 	"time"
 
+	"github.com/TrueCloudLab/frostfs-sdk-go/accounting"
+	"github.com/TrueCloudLab/frostfs-sdk-go/bearer"
+	sdkClient "github.com/TrueCloudLab/frostfs-sdk-go/client"
+	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object/relations"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 	"github.com/google/uuid"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-sdk-go/accounting"
-	"github.com/nspcc-dev/neofs-sdk-go/bearer"
-	sdkClient "github.com/nspcc-dev/neofs-sdk-go/client"
-	apistatus "github.com/nspcc-dev/neofs-sdk-go/client/status"
-	"github.com/nspcc-dev/neofs-sdk-go/container"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
-	"github.com/nspcc-dev/neofs-sdk-go/object"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	"github.com/nspcc-dev/neofs-sdk-go/object/relations"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
 )
@@ -1315,7 +1315,7 @@ type PrmContainerPut struct {
 // SetContainer container structure to be used as a parameter of the base
 // client's operation.
 //
-// See github.com/nspcc-dev/neofs-sdk-go/client.PrmContainerPut.SetContainer.
+// See github.com/TrueCloudLab/frostfs-sdk-go/client.PrmContainerPut.SetContainer.
 func (x *PrmContainerPut) SetContainer(cnr container.Container) {
 	x.prmClient.SetContainer(cnr)
 }
@@ -1323,7 +1323,7 @@ func (x *PrmContainerPut) SetContainer(cnr container.Container) {
 // WithinSession specifies session to be used as a parameter of the base
 // client's operation.
 //
-// See github.com/nspcc-dev/neofs-sdk-go/client.PrmContainerPut.WithinSession.
+// See github.com/TrueCloudLab/frostfs-sdk-go/client.PrmContainerPut.WithinSession.
 func (x *PrmContainerPut) WithinSession(s session.Container) {
 	x.prmClient.WithinSession(s)
 }
@@ -1412,7 +1412,7 @@ type PrmContainerSetEACL struct {
 // SetTable sets structure of container's extended ACL to be used as a
 // parameter of the base client's operation.
 //
-// See github.com/nspcc-dev/neofs-sdk-go/client.PrmContainerSetEACL.SetTable.
+// See github.com/TrueCloudLab/frostfs-sdk-go/client.PrmContainerSetEACL.SetTable.
 func (x *PrmContainerSetEACL) SetTable(table eacl.Table) {
 	x.table = table
 }
@@ -1420,7 +1420,7 @@ func (x *PrmContainerSetEACL) SetTable(table eacl.Table) {
 // WithinSession specifies session to be used as a parameter of the base
 // client's operation.
 //
-// See github.com/nspcc-dev/neofs-sdk-go/client.PrmContainerSetEACL.WithinSession.
+// See github.com/TrueCloudLab/frostfs-sdk-go/client.PrmContainerSetEACL.WithinSession.
 func (x *PrmContainerSetEACL) WithinSession(s session.Container) {
 	x.session = s
 	x.sessionSet = true
@@ -1587,7 +1587,7 @@ func (p *Pool) Dial(ctx context.Context) error {
 			if err != nil {
 				clients[j].setUnhealthy()
 				if p.logger != nil {
-					p.logger.Warn("failed to create neofs session token for client",
+					p.logger.Warn("failed to create frostfs session token for client",
 						zap.String("address", addr), zap.Error(err))
 				}
 				continue
@@ -1860,7 +1860,7 @@ func initSessionForDuration(ctx context.Context, dst *session.Object, c client, 
 		return fmt.Errorf("invalid session token ID: %w", err)
 	}
 
-	var key neofsecdsa.PublicKey
+	var key frostfsecdsa.PublicKey
 
 	err = key.Decode(res.sessionKey)
 	if err != nil {

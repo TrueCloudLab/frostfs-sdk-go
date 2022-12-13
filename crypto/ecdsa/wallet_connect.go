@@ -1,4 +1,4 @@
-package neofsecdsa
+package frostfsecdsa
 
 import (
 	"crypto/ecdsa"
@@ -6,9 +6,9 @@ import (
 	"encoding/base64"
 	"fmt"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/util/signature/walletconnect"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-api-go/v2/util/signature/walletconnect"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
 )
 
 // SignerWalletConnect is similar to SignerRFC6979 with 2 changes:
@@ -18,28 +18,28 @@ import (
 // Instances MUST be initialized from ecdsa.PrivateKey using type conversion.
 type SignerWalletConnect ecdsa.PrivateKey
 
-// Scheme returns neofscrypto.ECDSA_WALLETCONNECT.
-// Implements neofscrypto.Signer.
-func (x SignerWalletConnect) Scheme() neofscrypto.Scheme {
-	return neofscrypto.ECDSA_WALLETCONNECT
+// Scheme returns frostfscrypto.ECDSA_WALLETCONNECT.
+// Implements frostfscrypto.Signer.
+func (x SignerWalletConnect) Scheme() frostfscrypto.Scheme {
+	return frostfscrypto.ECDSA_WALLETCONNECT
 }
 
 // Sign signs data using ECDSA algorithm with SHA-512 hashing.
-// Implements neofscrypto.Signer.
+// Implements frostfscrypto.Signer.
 func (x SignerWalletConnect) Sign(data []byte) ([]byte, error) {
 	b64 := make([]byte, base64.StdEncoding.EncodedLen(len(data)))
 	base64.StdEncoding.Encode(b64, data)
 	return walletconnect.Sign((*ecdsa.PrivateKey)(&x), b64)
 }
 
-// Public initializes PublicKey and returns it as neofscrypto.PublicKey.
-// Implements neofscrypto.Signer.
-func (x SignerWalletConnect) Public() neofscrypto.PublicKey {
+// Public initializes PublicKey and returns it as frostfscrypto.PublicKey.
+// Implements frostfscrypto.Signer.
+func (x SignerWalletConnect) Public() frostfscrypto.PublicKey {
 	return (*PublicKeyWalletConnect)(&x.PublicKey)
 }
 
 // PublicKeyWalletConnect is a wrapper over ecdsa.PublicKey used for NeoFS needs.
-// Provides neofscrypto.PublicKey interface.
+// Provides frostfscrypto.PublicKey interface.
 //
 // Instances MUST be initialized from ecdsa.PublicKey using type conversion.
 type PublicKeyWalletConnect ecdsa.PublicKey

@@ -1,6 +1,6 @@
-# neofs-sdk-go
+# frostfs-sdk-go
 Go implementation of NeoFS SDK. It contains high-level version-independent wrappers
-for structures from [neofs-api-go](https://github.com/nspcc-dev/neofs-api-go) as well as
+for structures from [frostfs-api-go](https://github.com/TrueCloudLab/frostfs-api-go) as well as
 helper functions for simplifying node/dApp implementations.
 
 ## Repository structure
@@ -14,7 +14,7 @@ There is also a reference implementation of checking algorithm which is used in 
 
 ### checksum
 Contains `Checksum` type encapsulating checksum as well as it's kind.
-Currently Sha256 and [Tillich-Zemor hashsum](https://github.com/nspcc-dev/tzhash) are in use.
+Currently Sha256 and [Tillich-Zemor hashsum](https://github.com/TrueCloudLab/tzhash) are in use.
 
 ### owner
 `owner.ID` type represents single account interacting with NeoFS. In v2 version of protocol
@@ -27,7 +27,7 @@ Contains Bearer token type with several NeoFS-specific methods.
 
 ### ns
 In NeoFS there are 2 types of name resolution: DNS and NNS. NNS stands for Neo Name Service
-is just a [contract](https://github.com/nspcc-dev/neofs-contract/) deployed on a Neo blockchain.
+is just a [contract](https://github.com/TrueCloudLab/frostfs-contract) deployed on a Neo blockchain.
 Basically, NNS is just a DNS-on-chain which can be used for resolving container nice-names as well
 as any other name in dApps. See our [CoreDNS plugin](https://github.com/nspcc-dev/coredns/tree/master/plugin/nns)
 for the example of how NNS can be integrated in DNS.
@@ -77,7 +77,7 @@ if needed and perform any desired action. In the case above we may want to repor
 these details to the user as well as retry an operation, possibly with different parameters.
 Status wire-format is extendable and each node can report any set of details it wants.
 The set of reserved status codes can be found in
-[NeoFS API](https://github.com/nspcc-dev/neofs-api/blob/master/status/types.proto). There is also
+[NeoFS API](https://github.com/TrueCloudLab/frostfs-api/blob/master/status/types.proto). There is also
 a `client.PrmInit.ResolveNeoFSFailures()` to seamlessly convert erroneous statuses into Go error type.
 
 ### policy
@@ -102,11 +102,11 @@ outdated in some details.
 
 ```go
 import (
-    "github.com/nspcc-dev/neofs-sdk-go/netmap"
-    "github.com/nspcc-dev/neofs-sdk-go/object"
+    "github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+    "github.com/TrueCloudLab/frostfs-sdk-go/object"
 )
 
-func placementNodes(addr *object.Address, p *netmap.PlacementPolicy, neofsNodes []netmap.NodeInfo) {
+func placementNodes(addr *object.Address, p *netmap.PlacementPolicy, frostfsNodes []netmap.NodeInfo) {
     // Convert list of nodes in NeoFS API format to the intermediate representation.
     nodes := netmap.NodesFromInfo(nodes)
 

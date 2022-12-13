@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/tzhash/tz"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/tzhash/tz"
 )
 
 // Checksum represents checksum of some digital data.
 //
-// Checksum is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.Checksum
+// Checksum is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.Checksum
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

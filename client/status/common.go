@@ -3,7 +3,7 @@ package apistatus
 import (
 	"encoding/binary"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/status"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
 // ServerInternal describes failure statuses related to internal server errors.

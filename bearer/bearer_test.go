@@ -5,18 +5,18 @@ import (
 	"math/rand"
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/acl"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-sdk-go/bearer"
+	bearertest "github.com/TrueCloudLab/frostfs-sdk-go/bearer/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	eacltest "github.com/TrueCloudLab/frostfs-sdk-go/eacl/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-api-go/v2/acl"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-sdk-go/bearer"
-	bearertest "github.com/nspcc-dev/neofs-sdk-go/bearer/test"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	eacltest "github.com/nspcc-dev/neofs-sdk-go/eacl/test"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
 	"github.com/stretchr/testify/require"
 )
 
@@ -349,9 +349,9 @@ func TestToken_ReadFromV2(t *testing.T) {
 	k, err := keys.NewPrivateKey()
 	require.NoError(t, err)
 
-	signer := neofsecdsa.Signer(k.PrivateKey)
+	signer := frostfsecdsa.Signer(k.PrivateKey)
 
-	var s neofscrypto.Signature
+	var s frostfscrypto.Signature
 
 	require.NoError(t, s.Calculate(signer, body.StableMarshal(nil)))
 

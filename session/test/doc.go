@@ -5,7 +5,7 @@ Note that importing the package into source files is highly discouraged.
 
 Random instance generation functions can be useful when testing expects any value, e.g.:
 
-	import sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
+	import sessiontest "github.com/TrueCloudLab/frostfs-sdk-go/session/test"
 
 	val := sessiontest.Container()
 	// test the value

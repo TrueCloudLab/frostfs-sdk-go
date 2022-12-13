@@ -1,10 +1,10 @@
 package eacltest
 
 import (
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
-	versiontest "github.com/nspcc-dev/neofs-sdk-go/version/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
+	versiontest "github.com/TrueCloudLab/frostfs-sdk-go/version/test"
 )
 
 // Target returns random eacl.Target.

@@ -3,9 +3,9 @@ package container_test
 import (
 	"testing"
 
-	"github.com/nspcc-dev/neofs-sdk-go/container"
-	containertest "github.com/nspcc-dev/neofs-sdk-go/container/test"
-	netmaptest "github.com/nspcc-dev/neofs-sdk-go/netmap/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container"
+	containertest "github.com/TrueCloudLab/frostfs-sdk-go/container/test"
+	netmaptest "github.com/TrueCloudLab/frostfs-sdk-go/netmap/test"
 	"github.com/stretchr/testify/require"
 )
 

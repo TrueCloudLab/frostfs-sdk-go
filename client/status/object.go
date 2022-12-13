@@ -1,8 +1,8 @@
 package apistatus
 
 import (
-	"github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-api-go/v2/status"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
 // ObjectLocked describes status of the failure because of the locked object.

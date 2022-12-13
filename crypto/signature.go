@@ -1,16 +1,16 @@
-package neofscrypto
+package frostfscrypto
 
 import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 )
 
 // Signature represents a confirmation of data integrity received by the
 // digital signature mechanism.
 //
-// Signature is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.Signature
+// Signature is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.Signature
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Note that direct typecast is not safe and may result in loss of compatibility:

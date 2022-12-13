@@ -3,10 +3,10 @@ package oid_test
 import (
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
 	"github.com/stretchr/testify/require"
 )
 

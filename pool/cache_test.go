@@ -3,9 +3,9 @@ package pool
 import (
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	sessiontest "github.com/TrueCloudLab/frostfs-sdk-go/session/test"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
 	"github.com/stretchr/testify/require"
 )
 

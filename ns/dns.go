@@ -3,7 +3,7 @@ package ns
 import (
 	"net"
 
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 )
 
 // DNS looks up NeoFS names using system DNS.

@@ -7,18 +7,18 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap/parser"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-sdk-go/netmap/parser"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
 )
 
 // PlacementPolicy declares policy to store objects in the NeoFS container.
 // Within itself, PlacementPolicy represents a set of rules to select a subset
 // of nodes from NeoFS network map - node-candidates for object storage.
 //
-// PlacementPolicy is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/netmap.PlacementPolicy
+// PlacementPolicy is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.PlacementPolicy
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

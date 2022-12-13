@@ -4,8 +4,8 @@ import (
 	"crypto/sha256"
 	"math/rand"
 
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 )
 
 // ID returns random oid.ID.

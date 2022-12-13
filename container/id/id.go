@@ -4,13 +4,13 @@ import (
 	"crypto/sha256"
 	"fmt"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 	"github.com/mr-tron/base58"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
 )
 
 // ID represents NeoFS container identifier.
 //
-// ID is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.ContainerID
+// ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.ContainerID
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

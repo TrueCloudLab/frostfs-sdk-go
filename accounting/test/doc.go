@@ -5,7 +5,7 @@ Note that importing the package into source files is highly discouraged.
 
 Random instance generation functions can be useful when testing expects any value, e.g.:
 
-	import accountingtest "github.com/nspcc-dev/neofs-sdk-go/accounting/test"
+	import accountingtest "github.com/TrueCloudLab/frostfs-sdk-go/accounting/test"
 
 	dec := accountingtest.Decimal()
 	// test the value

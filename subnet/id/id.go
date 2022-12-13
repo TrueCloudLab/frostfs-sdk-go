@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 )
 
 // ID represents unique identifier of the subnet in the NeoFS network.
 //
-// ID is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.SubnetID
+// ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.SubnetID
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration. Zero value is

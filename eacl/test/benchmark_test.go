@@ -5,9 +5,9 @@ import (
 	"math/rand"
 	"testing"
 
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	versiontest "github.com/nspcc-dev/neofs-sdk-go/version/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	versiontest "github.com/TrueCloudLab/frostfs-sdk-go/version/test"
 	"github.com/stretchr/testify/require"
 )
 

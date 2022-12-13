@@ -5,18 +5,18 @@ import (
 	"errors"
 	"fmt"
 
-	v2container "github.com/nspcc-dev/neofs-api-go/v2/container"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	rpcapi "github.com/nspcc-dev/neofs-api-go/v2/rpc"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
-	v2session "github.com/nspcc-dev/neofs-api-go/v2/session"
-	"github.com/nspcc-dev/neofs-sdk-go/container"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
+	v2container "github.com/TrueCloudLab/frostfs-api-go/v2/container"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	rpcapi "github.com/TrueCloudLab/frostfs-api-go/v2/rpc"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
+	v2session "github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
 // PrmContainerPut groups parameters of ContainerPut operation.
@@ -96,7 +96,7 @@ func (c *Client) ContainerPut(ctx context.Context, prm PrmContainerPut) (*ResCon
 	var cnr v2container.Container
 	prm.cnr.WriteToV2(&cnr)
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	err := container.CalculateSignature(&sig, prm.cnr, c.prm.key)
 	if err != nil {
@@ -438,9 +438,9 @@ func (c *Client) ContainerDelete(ctx context.Context, prm PrmContainerDelete) (*
 	// don't get confused with stable marshaled protobuf container.ID structure
 	data := cidV2.GetValue()
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
-	err := sig.Calculate(neofsecdsa.SignerRFC6979(c.prm.key), data)
+	err := sig.Calculate(frostfsecdsa.SignerRFC6979(c.prm.key), data)
 	if err != nil {
 		return nil, fmt.Errorf("calculate signature: %w", err)
 	}
@@ -659,9 +659,9 @@ func (c *Client) ContainerSetEACL(ctx context.Context, prm PrmContainerSetEACL) 
 	// sign the eACL table
 	eaclV2 := prm.table.ToV2()
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
-	err := sig.Calculate(neofsecdsa.SignerRFC6979(c.prm.key), eaclV2.StableMarshal(nil))
+	err := sig.Calculate(frostfsecdsa.SignerRFC6979(c.prm.key), eaclV2.StableMarshal(nil))
 	if err != nil {
 		return nil, fmt.Errorf("calculate signature: %w", err)
 	}

@@ -1,7 +1,7 @@
 package netmap
 
 import (
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
 )
 
 func newFilter(name string, k, v string, op netmap.Operation, fs ...Filter) (f Filter) {

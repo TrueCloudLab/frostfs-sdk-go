@@ -5,16 +5,16 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 	"github.com/mr-tron/base58"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/hash"
 	"github.com/nspcc-dev/neo-go/pkg/encoding/address"
 	"github.com/nspcc-dev/neo-go/pkg/util"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
 )
 
 // ID identifies users of the NeoFS system.
 //
-// ID is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.OwnerID
+// ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.OwnerID
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration. Zero ID is not valid,

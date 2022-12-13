@@ -66,7 +66,7 @@ func (id *SplitID) SetUUID(v uuid.UUID) {
 	}
 }
 
-// ToV2 converts SplitID to a representation of SplitID in neofs-api v2.
+// ToV2 converts SplitID to a representation of SplitID in frostfs-api v2.
 //
 // Nil SplitID converts to nil.
 func (id *SplitID) ToV2() []byte {

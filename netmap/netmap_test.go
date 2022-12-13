@@ -3,9 +3,9 @@ package netmap_test
 import (
 	"testing"
 
-	v2netmap "github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
-	netmaptest "github.com/nspcc-dev/neofs-sdk-go/netmap/test"
+	v2netmap "github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	netmaptest "github.com/TrueCloudLab/frostfs-sdk-go/netmap/test"
 	"github.com/stretchr/testify/require"
 )
 

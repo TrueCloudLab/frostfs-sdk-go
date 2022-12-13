@@ -1,9 +1,9 @@
 package object
 
 import (
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-api-go/v2/tombstone"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/tombstone"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 )
 
 // Tombstone represents v2-compatible tombstone structure.

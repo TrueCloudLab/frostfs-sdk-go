@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	apistatus "github.com/nspcc-dev/neofs-sdk-go/client/status"
+	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
 )
 
 // unwraps err using errors.Unwrap and returns the result.

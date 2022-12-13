@@ -3,10 +3,10 @@ package subnet
 import (
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-api-go/v2/subnet"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/subnet"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
 // Info represents information about NeoFS subnet.

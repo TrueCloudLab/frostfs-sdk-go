@@ -6,21 +6,21 @@ import (
 	"testing"
 	"time"
 
+	v2container "github.com/TrueCloudLab/frostfs-api-go/v2/container"
+	v2netmap "github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	containertest "github.com/TrueCloudLab/frostfs-sdk-go/container/test"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	netmaptest "github.com/TrueCloudLab/frostfs-sdk-go/netmap/test"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	subnetidtest "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 	"github.com/google/uuid"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	v2container "github.com/nspcc-dev/neofs-api-go/v2/container"
-	v2netmap "github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-sdk-go/container"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	containertest "github.com/nspcc-dev/neofs-sdk-go/container/test"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	netmaptest "github.com/nspcc-dev/neofs-sdk-go/netmap/test"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
-	subnetidtest "github.com/nspcc-dev/neofs-sdk-go/subnet/id/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
 	"github.com/stretchr/testify/require"
 )
 
@@ -337,14 +337,14 @@ func TestCalculateSignature(t *testing.T) {
 
 	val := containertest.Container()
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	require.NoError(t, container.CalculateSignature(&sig, val, key.PrivateKey))
 
 	var msg refs.Signature
 	sig.WriteToV2(&msg)
 
-	var sig2 neofscrypto.Signature
+	var sig2 frostfscrypto.Signature
 	require.NoError(t, sig2.ReadFromV2(msg))
 
 	require.True(t, container.VerifySignature(sig2, val))

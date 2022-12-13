@@ -3,11 +3,11 @@ package subnet_test
 import (
 	"testing"
 
-	. "github.com/nspcc-dev/neofs-sdk-go/subnet"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
-	subnetidtest "github.com/nspcc-dev/neofs-sdk-go/subnet/id/test"
-	subnettest "github.com/nspcc-dev/neofs-sdk-go/subnet/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
+	. "github.com/TrueCloudLab/frostfs-sdk-go/subnet"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	subnetidtest "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id/test"
+	subnettest "github.com/TrueCloudLab/frostfs-sdk-go/subnet/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 	"github.com/stretchr/testify/require"
 )
 

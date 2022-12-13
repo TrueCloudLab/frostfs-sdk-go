@@ -9,11 +9,11 @@ working with Fixed8 balance precision:
 	dec.SetPrecision(8)
 
 Instances can be also used to process NeoFS API V2 protocol messages
-(see neo.fs.v2.accounting package in https://github.com/nspcc-dev/neofs-api).
+(see neo.fs.v2.accounting package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/accounting"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/accounting"
 
 	var msg accounting.Decimal
 	dec.WriteToV2(&msg)

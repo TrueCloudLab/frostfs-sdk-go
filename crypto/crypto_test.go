@@ -1,13 +1,13 @@
-package neofscrypto_test
+package frostfscrypto_test
 
 import (
 	"math/rand"
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,18 +18,18 @@ func TestSignature(t *testing.T) {
 	k, err := keys.NewPrivateKey()
 	require.NoError(t, err)
 
-	var s neofscrypto.Signature
+	var s frostfscrypto.Signature
 	var m refs.Signature
 
-	for _, f := range []func() neofscrypto.Signer{
-		func() neofscrypto.Signer {
-			return neofsecdsa.Signer(k.PrivateKey)
+	for _, f := range []func() frostfscrypto.Signer{
+		func() frostfscrypto.Signer {
+			return frostfsecdsa.Signer(k.PrivateKey)
 		},
-		func() neofscrypto.Signer {
-			return neofsecdsa.SignerRFC6979(k.PrivateKey)
+		func() frostfscrypto.Signer {
+			return frostfsecdsa.SignerRFC6979(k.PrivateKey)
 		},
-		func() neofscrypto.Signer {
-			return neofsecdsa.SignerWalletConnect(k.PrivateKey)
+		func() frostfscrypto.Signer {
+			return frostfsecdsa.SignerWalletConnect(k.PrivateKey)
 		},
 	} {
 		signer := f()

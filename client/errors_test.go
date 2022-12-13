@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-sdk-go/client"
-	apistatus "github.com/nspcc-dev/neofs-sdk-go/client/status"
+	"github.com/TrueCloudLab/frostfs-sdk-go/client"
+	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
 	"github.com/stretchr/testify/require"
 )
 

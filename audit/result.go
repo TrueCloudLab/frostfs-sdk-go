@@ -4,16 +4,16 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/audit"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/audit"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
 // Result represents report on the results of the data audit in NeoFS system.
 //
-// Result is mutually binary-compatible with github.com/nspcc-dev/neofs-api-go/v2/audit.DataAuditResult
+// Result is mutually binary-compatible with github.com/TrueCloudLab/frostfs-api-go/v2/audit.DataAuditResult
 // message. See Marshal / Unmarshal methods.
 //
 // Instances can be created using built-in var declaration.

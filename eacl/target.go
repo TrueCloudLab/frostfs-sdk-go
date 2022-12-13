@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"crypto/ecdsa"
 
+	v2acl "github.com/TrueCloudLab/frostfs-api-go/v2/acl"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	v2acl "github.com/nspcc-dev/neofs-api-go/v2/acl"
 )
 
 // Target is a group of request senders to match ContainerEACL. Defined by role enum

@@ -1,8 +1,8 @@
 package usertest
 
 import (
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
 )
 
 // ID returns random user.ID.

@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 )
 
 // Address represents global object identifier in NeoFS network. Each object
 // belongs to exactly one container and is uniquely addressed within the container.
 //
-// Address is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.Address
+// Address is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.Address
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

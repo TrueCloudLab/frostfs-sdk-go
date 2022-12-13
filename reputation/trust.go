@@ -4,16 +4,16 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-api-go/v2/reputation"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/reputation"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
 // Trust represents quantitative assessment of the trust of a participant in the
 // NeoFS reputation system.
 //
-// Trust is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/reputation.Trust
+// Trust is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.Trust
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.
@@ -103,7 +103,7 @@ func (x Trust) Value() float64 {
 // PeerToPeerTrust represents trust of one participant of the NeoFS reputation
 // system to another one.
 //
-// Trust is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/reputation.PeerToPeerTrust
+// Trust is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.PeerToPeerTrust
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.
@@ -211,7 +211,7 @@ func (x PeerToPeerTrust) Trust() (res Trust) {
 // GlobalTrust represents the final assessment of trust in the participant of
 // the NeoFS reputation system obtained taking into account all other participants.
 //
-// GlobalTrust is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/reputation.GlobalTrust
+// GlobalTrust is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.GlobalTrust
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // To submit GlobalTrust value in NeoFS zero instance SHOULD be declared,
@@ -366,8 +366,8 @@ func (x GlobalTrust) Trust() (res Trust) {
 // expected to be calculated as a final stage of GlobalTrust formation.
 //
 // See also VerifySignature.
-func (x *GlobalTrust) Sign(signer neofscrypto.Signer) error {
-	var sig neofscrypto.Signature
+func (x *GlobalTrust) Sign(signer frostfscrypto.Signer) error {
+	var sig frostfscrypto.Signature
 
 	err := sig.Calculate(signer, x.m.GetBody().StableMarshal(nil))
 	if err != nil {
@@ -393,7 +393,7 @@ func (x GlobalTrust) VerifySignature() bool {
 		return false
 	}
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	return sig.ReadFromV2(*sigV2) == nil && sig.Verify(x.m.GetBody().StableMarshal(nil))
 }

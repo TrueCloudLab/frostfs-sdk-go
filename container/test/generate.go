@@ -3,11 +3,11 @@ package containertest
 import (
 	"math/rand"
 
-	"github.com/nspcc-dev/neofs-sdk-go/container"
-	"github.com/nspcc-dev/neofs-sdk-go/container/acl"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	netmaptest "github.com/nspcc-dev/neofs-sdk-go/netmap/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container/acl"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	netmaptest "github.com/TrueCloudLab/frostfs-sdk-go/netmap/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 )
 
 // Container returns random container.Container.

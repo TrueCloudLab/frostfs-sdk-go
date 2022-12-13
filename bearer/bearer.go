@@ -5,18 +5,18 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/acl"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/acl"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
 // Token represents bearer token for object service operations.
 //
-// Token is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/acl.BearerToken
+// Token is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/acl.BearerToken
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.
@@ -255,9 +255,9 @@ func (b Token) AssertUser(id user.ID) bool {
 //
 // See also VerifySignature, Issuer.
 func (b *Token) Sign(key ecdsa.PrivateKey) error {
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
-	err := sig.Calculate(neofsecdsa.Signer(key), b.signedData())
+	err := sig.Calculate(frostfsecdsa.Signer(key), b.signedData())
 	if err != nil {
 		return err
 	}
@@ -278,7 +278,7 @@ func (b Token) VerifySignature() bool {
 		return false
 	}
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	// TODO: (#233) check owner<->key relation
 	return sig.ReadFromV2(b.sig) == nil && sig.Verify(b.signedData())
@@ -359,7 +359,7 @@ func ResolveIssuer(b Token) (usr user.ID) {
 	binKey := b.SigningKeyBytes()
 
 	if len(binKey) != 0 {
-		var key neofsecdsa.PublicKey
+		var key frostfsecdsa.PublicKey
 		if key.Decode(binKey) == nil {
 			user.IDFromKey(&usr, ecdsa.PublicKey(key))
 		}

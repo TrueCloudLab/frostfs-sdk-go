@@ -3,8 +3,8 @@ package netmap
 import (
 	"errors"
 
-	"github.com/nspcc-dev/hrw"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/hrw"
 )
 
 // context of a placement build process.

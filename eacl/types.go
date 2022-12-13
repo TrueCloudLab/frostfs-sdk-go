@@ -1,7 +1,7 @@
 package eacl
 
 import (
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 )
 
 // Header is an interface of string key-value header.

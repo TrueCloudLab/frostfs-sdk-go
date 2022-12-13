@@ -3,8 +3,8 @@ package netmap_test
 import (
 	"testing"
 
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
 	"github.com/stretchr/testify/require"
 )
 

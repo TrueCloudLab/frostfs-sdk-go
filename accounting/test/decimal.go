@@ -3,7 +3,7 @@ package accountingtest
 import (
 	"math/rand"
 
-	"github.com/nspcc-dev/neofs-sdk-go/accounting"
+	"github.com/TrueCloudLab/frostfs-sdk-go/accounting"
 )
 
 // Decimal returns random accounting.Decimal.

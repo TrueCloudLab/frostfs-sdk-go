@@ -8,14 +8,14 @@ import (
 	"testing"
 	"time"
 
+	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	apistatus "github.com/nspcc-dev/neofs-sdk-go/client/status"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/object"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
 )
@@ -100,7 +100,7 @@ func TestBuildPoolOneNodeFailed(t *testing.T) {
 	require.NoError(t, err)
 	t.Cleanup(clientPool.Close)
 
-	expectedAuthKey := neofsecdsa.PublicKey(clientKeys[1].PublicKey)
+	expectedAuthKey := frostfsecdsa.PublicKey(clientKeys[1].PublicKey)
 	condition := func() bool {
 		cp, err := clientPool.connection()
 		if err != nil {
@@ -142,7 +142,7 @@ func TestOneNode(t *testing.T) {
 	cp, err := pool.connection()
 	require.NoError(t, err)
 	st, _ := pool.cache.Get(formCacheKey(cp.address(), pool.key))
-	expectedAuthKey := neofsecdsa.PublicKey(key1.PublicKey)
+	expectedAuthKey := frostfsecdsa.PublicKey(key1.PublicKey)
 	require.True(t, st.AssertAuthKey(&expectedAuthKey))
 }
 
@@ -177,7 +177,7 @@ func TestTwoNodes(t *testing.T) {
 
 func assertAuthKeyForAny(st session.Object, clientKeys []*ecdsa.PrivateKey) bool {
 	for _, key := range clientKeys {
-		expectedAuthKey := neofsecdsa.PublicKey(key.PublicKey)
+		expectedAuthKey := frostfsecdsa.PublicKey(key.PublicKey)
 		if st.AssertAuthKey(&expectedAuthKey) {
 			return true
 		}
@@ -267,7 +267,7 @@ func TestTwoFailed(t *testing.T) {
 
 func TestSessionCache(t *testing.T) {
 	key := newPrivateKey(t)
-	expectedAuthKey := neofsecdsa.PublicKey(key.PublicKey)
+	expectedAuthKey := frostfsecdsa.PublicKey(key.PublicKey)
 
 	mockClientBuilder := func(addr string) client {
 		mockCli := newMockClient(addr, *key)
@@ -361,7 +361,7 @@ func TestPriority(t *testing.T) {
 	require.NoError(t, err)
 	t.Cleanup(pool.Close)
 
-	expectedAuthKey1 := neofsecdsa.PublicKey(clientKeys[0].PublicKey)
+	expectedAuthKey1 := frostfsecdsa.PublicKey(clientKeys[0].PublicKey)
 	firstNode := func() bool {
 		cp, err := pool.connection()
 		require.NoError(t, err)
@@ -369,7 +369,7 @@ func TestPriority(t *testing.T) {
 		return st.AssertAuthKey(&expectedAuthKey1)
 	}
 
-	expectedAuthKey2 := neofsecdsa.PublicKey(clientKeys[1].PublicKey)
+	expectedAuthKey2 := frostfsecdsa.PublicKey(clientKeys[1].PublicKey)
 	secondNode := func() bool {
 		cp, err := pool.connection()
 		require.NoError(t, err)
@@ -384,7 +384,7 @@ func TestPriority(t *testing.T) {
 
 func TestSessionCacheWithKey(t *testing.T) {
 	key := newPrivateKey(t)
-	expectedAuthKey := neofsecdsa.PublicKey(key.PublicKey)
+	expectedAuthKey := frostfsecdsa.PublicKey(key.PublicKey)
 
 	mockClientBuilder := func(addr string) client {
 		return newMockClient(addr, *key)

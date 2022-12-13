@@ -15,11 +15,11 @@ NetworkInfo type is dedicated to descriptive characterization of network state
 and settings.
 
 Instances can be also used to process NeoFS API V2 protocol messages
-(see neo.fs.v2.netmap package in https://github.com/nspcc-dev/neofs-api).
+(see neo.fs.v2.netmap package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/netmap"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
 
 	var msg netmap.NodeInfo
 	info.WriteToV2(&msg)

@@ -1,6 +1,6 @@
 package client
 
-import "github.com/nspcc-dev/neofs-api-go/v2/session"
+import "github.com/TrueCloudLab/frostfs-api-go/v2/session"
 
 // ResponseMetaInfo groups meta information about any NeoFS API response.
 type ResponseMetaInfo struct {

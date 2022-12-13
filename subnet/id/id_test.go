@@ -3,9 +3,9 @@ package subnetid_test
 import (
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
-	subnetidtest "github.com/nspcc-dev/neofs-sdk-go/subnet/id/test"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	subnetidtest "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id/test"
 	"github.com/stretchr/testify/require"
 )
 

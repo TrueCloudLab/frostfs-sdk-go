@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nspcc-dev/hrw"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/hrw"
 )
 
 // NodeInfo groups information about NeoFS storage node which is reflected
@@ -20,7 +20,7 @@ import (
 // about the nodes is available to all network participants to work with the network
 // map (mainly to comply with container storage policies).
 //
-// NodeInfo is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/netmap.NodeInfo
+// NodeInfo is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.NodeInfo
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.
@@ -181,7 +181,7 @@ func (x NodeInfo) PublicKey() []byte {
 
 // StringifyPublicKey returns HEX representation of PublicKey.
 func StringifyPublicKey(node NodeInfo) string {
-	return neofscrypto.StringifyKeyBinary(node.PublicKey())
+	return frostfscrypto.StringifyKeyBinary(node.PublicKey())
 }
 
 // SetNetworkEndpoints sets list to the announced node's network endpoints.

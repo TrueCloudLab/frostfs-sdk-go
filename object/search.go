@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"strconv"
 
-	v2object "github.com/nspcc-dev/neofs-api-go/v2/object"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	v2object "github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
 // SearchMatchType indicates match operation on specified header.

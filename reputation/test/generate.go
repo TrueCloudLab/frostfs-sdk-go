@@ -3,9 +3,9 @@ package reputationtest
 import (
 	"fmt"
 
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/reputation"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/reputation"
 )
 
 func PeerID() (v reputation.PeerID) {
@@ -49,7 +49,7 @@ func SignedGlobalTrust() reputation.GlobalTrust {
 		panic(fmt.Sprintf("unexpected error from key creator: %v", err))
 	}
 
-	err = gt.Sign(neofsecdsa.Signer(p.PrivateKey))
+	err = gt.Sign(frostfsecdsa.Signer(p.PrivateKey))
 	if err != nil {
 		panic(fmt.Sprintf("unexpected error from GlobalTrust.Sign: %v", err))
 	}

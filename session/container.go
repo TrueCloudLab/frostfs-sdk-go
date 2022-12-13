@@ -5,11 +5,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-api-go/v2/session"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
 // Container represents token of the NeoFS Container session. A session is opened
@@ -18,7 +18,7 @@ import (
 // limited validity period, and applies to a strictly defined set of operations.
 // See methods for details.
 //
-// Container is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/session.Token
+// Container is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/session.Token
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.
@@ -209,7 +209,7 @@ func (x Container) VerifySessionDataSignature(data, signature []byte) bool {
 	sigV2.SetScheme(refs.ECDSA_RFC6979_SHA256)
 	sigV2.SetSign(signature)
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	return sig.ReadFromV2(sigV2) == nil && sig.Verify(data)
 }

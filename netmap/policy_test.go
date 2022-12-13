@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/nspcc-dev/neofs-sdk-go/netmap"
-	netmaptest "github.com/nspcc-dev/neofs-sdk-go/netmap/test"
+	. "github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	netmaptest "github.com/TrueCloudLab/frostfs-sdk-go/netmap/test"
 	"github.com/stretchr/testify/require"
 )
 

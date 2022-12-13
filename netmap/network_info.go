@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"math"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
 	"github.com/nspcc-dev/neo-go/pkg/vm/stackitem"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
 )
 
 // NetworkInfo groups information about the NeoFS network state. Mainly used to
 // describe the current state of the network.
 //
-// NetworkInfo is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/netmap.NetworkInfo
+// NetworkInfo is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.NetworkInfo
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

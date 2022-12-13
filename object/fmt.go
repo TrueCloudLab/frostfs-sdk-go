@@ -7,10 +7,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-sdk-go/checksum"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-sdk-go/checksum"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 )
 
 var (
@@ -126,7 +126,7 @@ func (o *Object) VerifyIDSignature() bool {
 		return false
 	}
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	return sig.ReadFromV2(*sigV2) == nil && sig.Verify(idV2.StableMarshal(nil))
 }

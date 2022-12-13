@@ -5,14 +5,14 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/reputation"
 	"github.com/mr-tron/base58"
-	"github.com/nspcc-dev/neofs-api-go/v2/reputation"
 )
 
 // PeerID represents unique identifier of the peer participating in the NeoFS
 // reputation system.
 //
-// ID is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/reputation.PeerID
+// ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.PeerID
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

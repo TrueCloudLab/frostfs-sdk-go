@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/nspcc-dev/hrw"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/hrw"
 )
 
 // processSelectors processes selectors and returns error is any of them is invalid.

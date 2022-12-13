@@ -5,15 +5,15 @@ import (
 	"crypto/sha256"
 	"fmt"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
 	"github.com/mr-tron/base58"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
 )
 
 // ID represents NeoFS object identifier in a container.
 //
-// ID is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.ObjectID
+// ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.ObjectID
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.
@@ -117,15 +117,15 @@ func (id ID) String() string {
 }
 
 // CalculateIDSignature signs object id with provided key.
-func (id ID) CalculateIDSignature(key ecdsa.PrivateKey) (neofscrypto.Signature, error) {
+func (id ID) CalculateIDSignature(key ecdsa.PrivateKey) (frostfscrypto.Signature, error) {
 	data, err := id.Marshal()
 	if err != nil {
-		return neofscrypto.Signature{}, fmt.Errorf("marshal ID: %w", err)
+		return frostfscrypto.Signature{}, fmt.Errorf("marshal ID: %w", err)
 	}
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
-	return sig, sig.Calculate(neofsecdsa.Signer(key), data)
+	return sig, sig.Calculate(frostfsecdsa.Signer(key), data)
 }
 
 // Marshal marshals ID into a protobuf binary form.

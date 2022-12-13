@@ -4,15 +4,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/container"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/container"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 )
 
 // SizeEstimation groups information about estimation of the size of the data
 // stored in the NeoFS container.
 //
-// SizeEstimation is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/container.UsedSpaceAnnouncement
+// SizeEstimation is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/container.UsedSpaceAnnouncement
 // message. See ReadFromV2 / WriteToV2 methods.
 type SizeEstimation struct {
 	m container.UsedSpaceAnnouncement

@@ -7,9 +7,9 @@ import (
 	"errors"
 	"time"
 
-	v2accounting "github.com/nspcc-dev/neofs-api-go/v2/accounting"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
+	v2accounting "github.com/TrueCloudLab/frostfs-api-go/v2/accounting"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
 )
 
 // Client represents virtual connection to the NeoFS network to communicate
@@ -123,7 +123,7 @@ func (c *Client) Dial(prm PrmDial) error {
 
 // sets underlying provider of neoFSAPIServer. The method is used for testing as an approach
 // to skip Dial stage and override NeoFS API server. MUST NOT be used outside test code.
-// In real applications wrapper over github.com/nspcc-dev/neofs-api-go/v2/rpc/client
+// In real applications wrapper over github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client
 // is statically used.
 func (c *Client) setNeoFSAPIServer(server neoFSAPIServer) {
 	c.server = server

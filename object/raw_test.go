@@ -5,13 +5,13 @@ import (
 	"crypto/sha256"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-sdk-go/checksum"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-sdk-go/checksum"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	sessiontest "github.com/TrueCloudLab/frostfs-sdk-go/session/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 	"github.com/stretchr/testify/require"
 )
 

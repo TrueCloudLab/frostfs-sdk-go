@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-sdk-go/audit"
-	audittest "github.com/nspcc-dev/neofs-sdk-go/audit/test"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/audit"
+	audittest "github.com/TrueCloudLab/frostfs-sdk-go/audit/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
 	"github.com/stretchr/testify/require"
 )
 

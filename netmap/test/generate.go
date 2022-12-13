@@ -3,8 +3,8 @@ package netmaptest
 import (
 	"math/rand"
 
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
-	subnetidtest "github.com/nspcc-dev/neofs-sdk-go/subnet/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	subnetidtest "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id/test"
 )
 
 func filter(withInner bool) (x netmap.Filter) {

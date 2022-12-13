@@ -3,8 +3,8 @@ package object_test
 import (
 	"testing"
 
-	v2object "github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-sdk-go/object"
+	v2object "github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
 	"github.com/stretchr/testify/require"
 )
 

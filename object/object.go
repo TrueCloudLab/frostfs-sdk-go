@@ -4,16 +4,16 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	v2session "github.com/nspcc-dev/neofs-api-go/v2/session"
-	"github.com/nspcc-dev/neofs-sdk-go/checksum"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	v2session "github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	"github.com/TrueCloudLab/frostfs-sdk-go/checksum"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
 // Object represents in-memory structure of the NeoFS object.
@@ -110,20 +110,20 @@ func (o *Object) SetID(v oid.ID) {
 }
 
 // Signature returns signature of the object identifier.
-func (o *Object) Signature() *neofscrypto.Signature {
+func (o *Object) Signature() *frostfscrypto.Signature {
 	sigv2 := (*object.Object)(o).GetSignature()
 	if sigv2 == nil {
 		return nil
 	}
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 	sig.ReadFromV2(*sigv2) // FIXME(@cthulhu-rider): #226 handle error
 
 	return &sig
 }
 
 // SetSignature sets signature of the object identifier.
-func (o *Object) SetSignature(v *neofscrypto.Signature) {
+func (o *Object) SetSignature(v *frostfscrypto.Signature) {
 	var sigv2 *refs.Signature
 
 	if v != nil {

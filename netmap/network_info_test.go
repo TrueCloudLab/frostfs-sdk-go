@@ -5,8 +5,8 @@ import (
 	"math"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	. "github.com/nspcc-dev/neofs-sdk-go/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	. "github.com/TrueCloudLab/frostfs-sdk-go/netmap"
 	"github.com/stretchr/testify/require"
 )
 

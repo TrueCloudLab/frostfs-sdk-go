@@ -3,7 +3,7 @@ package eacl
 import (
 	"strconv"
 
-	v2acl "github.com/nspcc-dev/neofs-api-go/v2/acl"
+	v2acl "github.com/TrueCloudLab/frostfs-api-go/v2/acl"
 )
 
 // Filter defines check conditions if request header is matched or not. Matched

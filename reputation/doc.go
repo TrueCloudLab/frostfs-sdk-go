@@ -9,11 +9,11 @@ is designed as a global measure of trust in a network member. See the docs
 for each type for details.
 
 Instances can be also used to process NeoFS API V2 protocol messages
-(see neo.fs.v2.reputation package in https://github.com/nspcc-dev/neofs-api).
+(see neo.fs.v2.reputation package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/reputation"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/reputation"
 
 	var msg reputation.GlobalTrust
 	trust.WriteToV2(&msg)

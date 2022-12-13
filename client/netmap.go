@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	v2netmap "github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	rpcapi "github.com/nspcc-dev/neofs-api-go/v2/rpc"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
-	v2session "github.com/nspcc-dev/neofs-api-go/v2/session"
-	"github.com/nspcc-dev/neofs-api-go/v2/signature"
-	apistatus "github.com/nspcc-dev/neofs-sdk-go/client/status"
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	v2netmap "github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	rpcapi "github.com/TrueCloudLab/frostfs-api-go/v2/rpc"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
+	v2session "github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/signature"
+	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
 // PrmEndpointInfo groups parameters of EndpointInfo operation.

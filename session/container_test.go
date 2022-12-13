@@ -6,17 +6,17 @@ import (
 	"math/rand"
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	v2session "github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	sessiontest "github.com/TrueCloudLab/frostfs-sdk-go/session/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 	"github.com/google/uuid"
 	"github.com/nspcc-dev/neo-go/pkg/util/slice"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	v2session "github.com/nspcc-dev/neofs-api-go/v2/session"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
 	"github.com/stretchr/testify/require"
 )
 
@@ -56,7 +56,7 @@ func TestContainerProtocolV2(t *testing.T) {
 
 	// Session key
 	signer := randSigner()
-	authKey := neofsecdsa.PublicKey(signer.PublicKey)
+	authKey := frostfsecdsa.PublicKey(signer.PublicKey)
 	binAuthKey := make([]byte, authKey.MaxEncodedSize())
 	binAuthKey = binAuthKey[:authKey.Encode(binAuthKey)]
 	restoreAuthKey := func() {
@@ -553,15 +553,15 @@ func TestContainer_VerifyDataSignature(t *testing.T) {
 	data := make([]byte, 100)
 	rand.Read(data)
 
-	var sig neofscrypto.Signature
-	require.NoError(t, sig.Calculate(neofsecdsa.SignerRFC6979(signer), data))
+	var sig frostfscrypto.Signature
+	require.NoError(t, sig.Calculate(frostfsecdsa.SignerRFC6979(signer), data))
 
 	var sigV2 refs.Signature
 	sig.WriteToV2(&sigV2)
 
 	require.False(t, tok.VerifySessionDataSignature(data, sigV2.GetSign()))
 
-	tok.SetAuthKey((*neofsecdsa.PublicKeyRFC6979)(&signer.PublicKey))
+	tok.SetAuthKey((*frostfsecdsa.PublicKeyRFC6979)(&signer.PublicKey))
 	require.True(t, tok.VerifySessionDataSignature(data, sigV2.GetSign()))
 	require.False(t, tok.VerifySessionDataSignature(append(data, 1), sigV2.GetSign()))
 	require.False(t, tok.VerifySessionDataSignature(data, append(sigV2.GetSign(), 1)))

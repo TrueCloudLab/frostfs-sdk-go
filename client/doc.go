@@ -47,8 +47,8 @@ Consume custom service of the server:
 		rpc CustomRPC(CustomRPCRequest) returns (CustomRPCResponse);
 	}
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
-	import "github.com/nspcc-dev/neofs-api-go/v2/rpc/common"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/rpc/common"
 
 	req := new(CustomRPCRequest)
 	// ...
@@ -72,7 +72,7 @@ for the all operations are write-only and the results of the all operations are
 read-only. To be able to override client behavior (e.g. for tests), abstract it
 with an interface:
 
-	import "github.com/nspcc-dev/neofs-sdk-go/client"
+	import "github.com/TrueCloudLab/frostfs-sdk-go/client"
 
 	type NeoFSClient interface {
 		// Operations according to the application needs

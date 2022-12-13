@@ -3,7 +3,7 @@ package subnetidtest
 import (
 	"math/rand"
 
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
 )
 
 // ID generates and returns random subnetid.ID.

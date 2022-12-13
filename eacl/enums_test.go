@@ -3,8 +3,8 @@ package eacl_test
 import (
 	"testing"
 
-	v2acl "github.com/nspcc-dev/neofs-api-go/v2/acl"
-	"github.com/nspcc-dev/neofs-sdk-go/eacl"
+	v2acl "github.com/TrueCloudLab/frostfs-api-go/v2/acl"
+	"github.com/TrueCloudLab/frostfs-sdk-go/eacl"
 	"github.com/stretchr/testify/require"
 )
 

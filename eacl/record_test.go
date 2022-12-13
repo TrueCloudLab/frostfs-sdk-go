@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"testing"
 
+	v2acl "github.com/TrueCloudLab/frostfs-api-go/v2/acl"
+	checksumtest "github.com/TrueCloudLab/frostfs-sdk-go/checksum/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
+	versiontest "github.com/TrueCloudLab/frostfs-sdk-go/version/test"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	v2acl "github.com/nspcc-dev/neofs-api-go/v2/acl"
-	checksumtest "github.com/nspcc-dev/neofs-sdk-go/checksum/test"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/object"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
-	versiontest "github.com/nspcc-dev/neofs-sdk-go/version/test"
 	"github.com/stretchr/testify/require"
 )
 

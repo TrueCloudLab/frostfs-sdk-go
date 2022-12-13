@@ -24,11 +24,11 @@ signing the public part of the secret (public session key).
 The trusted member can perform operations on behalf of the trustee.
 
 Instances can be also used to process NeoFS API V2 protocol messages
-(see neo.fs.v2.accounting package in https://github.com/nspcc-dev/neofs-api).
+(see neo.fs.v2.accounting package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/session"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/session"
 
 	var msg session.Token
 	tok.WriteToV2(&msg)

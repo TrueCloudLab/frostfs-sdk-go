@@ -1,8 +1,8 @@
 package apistatus
 
 import (
-	"github.com/nspcc-dev/neofs-api-go/v2/container"
-	"github.com/nspcc-dev/neofs-api-go/v2/status"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/container"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
 // ContainerNotFound describes status of the failure because of the missing container.

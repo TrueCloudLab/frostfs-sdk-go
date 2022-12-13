@@ -1,4 +1,4 @@
-package neofsecdsa
+package frostfsecdsa
 
 import (
 	"crypto/ecdsa"
@@ -12,7 +12,7 @@ import (
 )
 
 // PublicKey is a wrapper over ecdsa.PublicKey used for NeoFS needs.
-// Provides neofscrypto.PublicKey interface.
+// Provides frostfscrypto.PublicKey interface.
 //
 // Instances MUST be initialized from ecdsa.PublicKey using type conversion.
 type PublicKey ecdsa.PublicKey
@@ -78,7 +78,7 @@ func (x PublicKey) Verify(data, signature []byte) bool {
 }
 
 // PublicKeyRFC6979 is a wrapper over ecdsa.PublicKey used for NeoFS needs.
-// Provides neofscrypto.PublicKey interface.
+// Provides frostfscrypto.PublicKey interface.
 //
 // Instances MUST be initialized from ecdsa.PublicKey using type conversion.
 type PublicKeyRFC6979 ecdsa.PublicKey

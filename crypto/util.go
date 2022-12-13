@@ -1,4 +1,4 @@
-package neofscrypto
+package frostfscrypto
 
 import "encoding/hex"
 

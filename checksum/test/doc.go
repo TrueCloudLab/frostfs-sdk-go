@@ -5,7 +5,7 @@ Note that importing the package into source files is highly discouraged.
 
 Random instance generation functions can be useful when testing expects any value, e.g.:
 
-	import checksumtest "github.com/nspcc-dev/neofs-sdk-go/checksum/test"
+	import checksumtest "github.com/TrueCloudLab/frostfs-sdk-go/checksum/test"
 
 	cs := checksumtest.Checksum()
 	// test the value

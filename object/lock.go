@@ -1,9 +1,9 @@
 package object
 
 import (
-	v2object "github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
+	v2object "github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 )
 
 // Lock represents record with locked objects. It is compatible with

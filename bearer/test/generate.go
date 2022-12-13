@@ -1,9 +1,9 @@
 package bearertest
 
 import (
-	"github.com/nspcc-dev/neofs-sdk-go/bearer"
-	eacltest "github.com/nspcc-dev/neofs-sdk-go/eacl/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/bearer"
+	eacltest "github.com/TrueCloudLab/frostfs-sdk-go/eacl/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 )
 
 // Token returns random bearer.Token.

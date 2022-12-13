@@ -3,7 +3,7 @@ package version
 import (
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 	"github.com/stretchr/testify/require"
 )
 

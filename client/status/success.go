@@ -1,7 +1,7 @@
 package apistatus
 
 import (
-	"github.com/nspcc-dev/neofs-api-go/v2/status"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
 // SuccessDefaultV2 represents Status instance of default success. Implements StatusV2.

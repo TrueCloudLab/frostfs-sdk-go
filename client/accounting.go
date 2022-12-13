@@ -3,12 +3,12 @@ package client
 import (
 	"context"
 
-	v2accounting "github.com/nspcc-dev/neofs-api-go/v2/accounting"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	rpcapi "github.com/nspcc-dev/neofs-api-go/v2/rpc"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
-	"github.com/nspcc-dev/neofs-sdk-go/accounting"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
+	v2accounting "github.com/TrueCloudLab/frostfs-api-go/v2/accounting"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	rpcapi "github.com/TrueCloudLab/frostfs-api-go/v2/rpc"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
+	"github.com/TrueCloudLab/frostfs-sdk-go/accounting"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
 // PrmBalanceGet groups parameters of BalanceGet operation.

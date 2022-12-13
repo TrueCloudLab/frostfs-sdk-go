@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 	"github.com/mr-tron/base58"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
 	"github.com/stretchr/testify/require"
 )
 

@@ -7,19 +7,19 @@ import (
 	"math/rand"
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	v2session "github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
+	sessiontest "github.com/TrueCloudLab/frostfs-sdk-go/session/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 	"github.com/google/uuid"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
 	"github.com/nspcc-dev/neo-go/pkg/util/slice"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	v2session "github.com/nspcc-dev/neofs-api-go/v2/session"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
-	sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
 	"github.com/stretchr/testify/require"
 )
 
@@ -32,9 +32,9 @@ func randSigner() ecdsa.PrivateKey {
 	return k.PrivateKey
 }
 
-func randPublicKey() neofscrypto.PublicKey {
+func randPublicKey() frostfscrypto.PublicKey {
 	k := randSigner().PublicKey
-	return (*neofsecdsa.PublicKey)(&k)
+	return (*frostfsecdsa.PublicKey)(&k)
 }
 
 func TestObjectProtocolV2(t *testing.T) {
@@ -73,7 +73,7 @@ func TestObjectProtocolV2(t *testing.T) {
 
 	// Session key
 	signer := randSigner()
-	authKey := neofsecdsa.PublicKey(signer.PublicKey)
+	authKey := frostfsecdsa.PublicKey(signer.PublicKey)
 	binAuthKey := make([]byte, authKey.MaxEncodedSize())
 	binAuthKey = binAuthKey[:authKey.Encode(binAuthKey)]
 	restoreAuthKey := func() {

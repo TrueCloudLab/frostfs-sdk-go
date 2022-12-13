@@ -12,11 +12,11 @@ StorageGroup type groups verification values for Data Audit sessions:
 	sg.ValidationDataSize() // total objects' payload size
 
 Instances can be also used to process NeoFS API V2 protocol messages
-(see neo.fs.v2.storagegroup package in https://github.com/nspcc-dev/neofs-api).
+(see neo.fs.v2.storagegroup package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/storagegroup"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/storagegroup"
 
 	var msg storagegroup.StorageGroup
 	sg.WriteToV2(&msg)

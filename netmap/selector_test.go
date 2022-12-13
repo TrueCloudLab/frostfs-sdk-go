@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/nspcc-dev/hrw"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/hrw"
 	"github.com/stretchr/testify/require"
 )
 

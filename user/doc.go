@@ -35,11 +35,11 @@ Encoding/decoding mechanisms are used to transfer identifiers:
 	err = id.DecodeString(s) // on receiver
 
 Instances can be also used to process NeoFS API protocol messages
-(see neo.fs.v2.refs package in https://github.com/nspcc-dev/neofs-api).
+(see neo.fs.v2.refs package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:
 
-	import "github.com/nspcc-dev/neofs-api-go/v2/refs"
+	import "github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 
 	var msg refs.OwnerID
 	id.WriteToV2(&msg)

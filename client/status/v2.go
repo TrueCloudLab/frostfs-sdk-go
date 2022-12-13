@@ -3,10 +3,10 @@ package apistatus
 import (
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/container"
-	"github.com/nspcc-dev/neofs-api-go/v2/object"
-	"github.com/nspcc-dev/neofs-api-go/v2/session"
-	"github.com/nspcc-dev/neofs-api-go/v2/status"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/container"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/object"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
 // StatusV2 defines a variety of Status instances compatible with NeoFS API V2 protocol.
@@ -15,7 +15,7 @@ import (
 type StatusV2 interface {
 	Status
 
-	// ToStatusV2 returns the status as github.com/nspcc-dev/neofs-api-go/v2/status.Status message structure.
+	// ToStatusV2 returns the status as github.com/TrueCloudLab/frostfs-api-go/v2/status.Status message structure.
 	ToStatusV2() *status.Status
 }
 

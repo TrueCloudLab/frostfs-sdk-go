@@ -1,17 +1,17 @@
-package neofsecdsa
+package frostfsecdsa
 
-import neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
+import frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
 
 func init() {
-	neofscrypto.RegisterScheme(neofscrypto.ECDSA_SHA512, func() neofscrypto.PublicKey {
+	frostfscrypto.RegisterScheme(frostfscrypto.ECDSA_SHA512, func() frostfscrypto.PublicKey {
 		return new(PublicKey)
 	})
 
-	neofscrypto.RegisterScheme(neofscrypto.ECDSA_DETERMINISTIC_SHA256, func() neofscrypto.PublicKey {
+	frostfscrypto.RegisterScheme(frostfscrypto.ECDSA_DETERMINISTIC_SHA256, func() frostfscrypto.PublicKey {
 		return new(PublicKeyRFC6979)
 	})
 
-	neofscrypto.RegisterScheme(neofscrypto.ECDSA_WALLETCONNECT, func() neofscrypto.PublicKey {
+	frostfscrypto.RegisterScheme(frostfscrypto.ECDSA_WALLETCONNECT, func() frostfscrypto.PublicKey {
 		return new(PublicKeyWalletConnect)
 	})
 }

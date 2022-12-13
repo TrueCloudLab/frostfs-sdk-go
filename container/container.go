@@ -8,18 +8,18 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/container"
+	v2netmap "github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-sdk-go/container/acl"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
+	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 	"github.com/google/uuid"
-	"github.com/nspcc-dev/neofs-api-go/v2/container"
-	v2netmap "github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-sdk-go/container/acl"
-	cid "github.com/nspcc-dev/neofs-sdk-go/container/id"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
-	subnetid "github.com/nspcc-dev/neofs-sdk-go/subnet/id"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
 )
 
 // Container represents descriptor of the NeoFS container. Container logically
@@ -37,7 +37,7 @@ import (
 // Instances for existing containers can be initialized using decoding methods
 // (e.g Unmarshal).
 //
-// Container is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/container.Container
+// Container is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/container.Container
 // message. See ReadFromV2 / WriteToV2 methods.
 type Container struct {
 	v2 container.Container
@@ -481,13 +481,13 @@ func ReadDomain(cnr Container) (res Domain) {
 // will most likely break the signature.
 //
 // See also VerifySignature.
-func CalculateSignature(dst *neofscrypto.Signature, cnr Container, signer ecdsa.PrivateKey) error {
-	return dst.Calculate(neofsecdsa.SignerRFC6979(signer), cnr.Marshal())
+func CalculateSignature(dst *frostfscrypto.Signature, cnr Container, signer ecdsa.PrivateKey) error {
+	return dst.Calculate(frostfsecdsa.SignerRFC6979(signer), cnr.Marshal())
 }
 
 // VerifySignature verifies Container signature calculated using CalculateSignature.
 // Result means signature correctness.
-func VerifySignature(sig neofscrypto.Signature, cnr Container) bool {
+func VerifySignature(sig frostfscrypto.Signature, cnr Container) bool {
 	return sig.Verify(cnr.Marshal())
 }
 

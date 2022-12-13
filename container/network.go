@@ -1,7 +1,7 @@
 package container
 
 import (
-	"github.com/nspcc-dev/neofs-sdk-go/netmap"
+	"github.com/TrueCloudLab/frostfs-sdk-go/netmap"
 )
 
 // ApplyNetworkConfig applies network configuration to the

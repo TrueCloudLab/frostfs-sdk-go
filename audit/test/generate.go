@@ -1,9 +1,9 @@
 package audittest
 
 import (
-	"github.com/nspcc-dev/neofs-sdk-go/audit"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/audit"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
 )
 
 // Result returns random audit.Result.

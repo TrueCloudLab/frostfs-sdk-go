@@ -5,12 +5,12 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
 	"github.com/google/uuid"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
 )
 
 var p ecdsa.PrivateKey
@@ -38,7 +38,7 @@ func Container() *session.Container {
 	tok.ForVerb(session.VerbContainerPut)
 	tok.ApplyOnlyTo(cidtest.ID())
 	tok.SetID(uuid.New())
-	tok.SetAuthKey((*neofsecdsa.PublicKey)(&priv.PublicKey))
+	tok.SetAuthKey((*frostfsecdsa.PublicKey)(&priv.PublicKey))
 	tok.SetExp(11)
 	tok.SetNbf(22)
 	tok.SetIat(33)
@@ -75,7 +75,7 @@ func Object() *session.Object {
 	tok.BindContainer(cidtest.ID())
 	tok.LimitByObjects(oidtest.ID(), oidtest.ID())
 	tok.SetID(uuid.New())
-	tok.SetAuthKey((*neofsecdsa.PublicKey)(&priv.PublicKey))
+	tok.SetAuthKey((*frostfsecdsa.PublicKey)(&priv.PublicKey))
 	tok.SetExp(11)
 	tok.SetNbf(22)
 	tok.SetIat(33)

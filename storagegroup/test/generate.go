@@ -1,10 +1,10 @@
 package storagegrouptest
 
 import (
-	checksumtest "github.com/nspcc-dev/neofs-sdk-go/checksum/test"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/storagegroup"
+	checksumtest "github.com/TrueCloudLab/frostfs-sdk-go/checksum/test"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/storagegroup"
 )
 
 // StorageGroup returns random storagegroup.StorageGroup.

@@ -6,12 +6,12 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	frostfscrypto "github.com/TrueCloudLab/frostfs-sdk-go/crypto"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 	"github.com/google/uuid"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-api-go/v2/session"
-	neofscrypto "github.com/nspcc-dev/neofs-sdk-go/crypto"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/user"
 )
 
 type commonData struct {
@@ -159,9 +159,9 @@ func (x *commonData) sign(key ecdsa.PrivateKey, w contextWriter) error {
 	user.IDFromKey(&x.issuer, key.PublicKey)
 	x.issuerSet = true
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
-	err := sig.Calculate(neofsecdsa.Signer(key), x.signedData(w))
+	err := sig.Calculate(frostfsecdsa.Signer(key), x.signedData(w))
 	if err != nil {
 		return err
 	}
@@ -177,7 +177,7 @@ func (x commonData) verifySignature(w contextWriter) bool {
 		return false
 	}
 
-	var sig neofscrypto.Signature
+	var sig frostfscrypto.Signature
 
 	// TODO: (#233) check owner<->key relation
 	return sig.ReadFromV2(x.sig) == nil && sig.Verify(x.signedData(w))
@@ -301,7 +301,7 @@ func (x commonData) ID() uuid.UUID {
 // SetAuthKey public key corresponding to the private key bound to the session.
 //
 // See also AssertAuthKey.
-func (x *commonData) SetAuthKey(key neofscrypto.PublicKey) {
+func (x *commonData) SetAuthKey(key frostfscrypto.PublicKey) {
 	x.authKey = make([]byte, key.MaxEncodedSize())
 	x.authKey = x.authKey[:key.Encode(x.authKey)]
 }
@@ -311,7 +311,7 @@ func (x *commonData) SetAuthKey(key neofscrypto.PublicKey) {
 // Zero session fails the check.
 //
 // See also SetAuthKey.
-func (x commonData) AssertAuthKey(key neofscrypto.PublicKey) bool {
+func (x commonData) AssertAuthKey(key frostfscrypto.PublicKey) bool {
 	bKey := make([]byte, key.MaxEncodedSize())
 	bKey = bKey[:key.Encode(bKey)]
 

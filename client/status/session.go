@@ -1,8 +1,8 @@
 package apistatus
 
 import (
-	"github.com/nspcc-dev/neofs-api-go/v2/session"
-	"github.com/nspcc-dev/neofs-api-go/v2/status"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
 // SessionTokenNotFound describes status of the failure because of the missing session token.

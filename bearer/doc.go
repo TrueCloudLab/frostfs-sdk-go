@@ -22,7 +22,7 @@ Bearer token must be signed by owner of the container.
 Provide signed token in JSON or binary format to the request sender. Request
 sender can attach this bearer token to the object service requests:
 
-	import sdkClient "github.com/nspcc-dev/neofs-sdk-go/client"
+	import sdkClient "github.com/TrueCloudLab/frostfs-sdk-go/client"
 
 	var headParams sdkClient.PrmObjectHead
 	headParams.WithBearerToken(bearerToken)

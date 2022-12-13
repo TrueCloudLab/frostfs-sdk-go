@@ -3,8 +3,8 @@ package accounting_test
 import (
 	"testing"
 
-	v2accounting "github.com/nspcc-dev/neofs-api-go/v2/accounting"
-	"github.com/nspcc-dev/neofs-sdk-go/accounting"
+	v2accounting "github.com/TrueCloudLab/frostfs-api-go/v2/accounting"
+	"github.com/TrueCloudLab/frostfs-sdk-go/accounting"
 	"github.com/stretchr/testify/require"
 )
 

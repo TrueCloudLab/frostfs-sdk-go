@@ -1,15 +1,15 @@
 package objecttest
 
 import (
+	checksumtest "github.com/TrueCloudLab/frostfs-sdk-go/checksum/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
+	oidtest "github.com/TrueCloudLab/frostfs-sdk-go/object/id/test"
+	sessiontest "github.com/TrueCloudLab/frostfs-sdk-go/session/test"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 	"github.com/google/uuid"
-	checksumtest "github.com/nspcc-dev/neofs-sdk-go/checksum/test"
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/object"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
-	oidtest "github.com/nspcc-dev/neofs-sdk-go/object/id/test"
-	sessiontest "github.com/nspcc-dev/neofs-sdk-go/session/test"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
 )
 
 // Range returns random object.Range.

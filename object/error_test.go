@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-sdk-go/object"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
 	"github.com/stretchr/testify/require"
 )
 

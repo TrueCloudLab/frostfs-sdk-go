@@ -3,10 +3,10 @@ package client
 import (
 	"context"
 
-	v2reputation "github.com/nspcc-dev/neofs-api-go/v2/reputation"
-	rpcapi "github.com/nspcc-dev/neofs-api-go/v2/rpc"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
-	"github.com/nspcc-dev/neofs-sdk-go/reputation"
+	v2reputation "github.com/TrueCloudLab/frostfs-api-go/v2/reputation"
+	rpcapi "github.com/TrueCloudLab/frostfs-api-go/v2/rpc"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
+	"github.com/TrueCloudLab/frostfs-sdk-go/reputation"
 )
 
 // PrmAnnounceLocalTrust groups parameters of AnnounceLocalTrust operation.

@@ -3,14 +3,14 @@ package netmap
 import (
 	"fmt"
 
-	"github.com/nspcc-dev/hrw"
-	"github.com/nspcc-dev/neofs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	"github.com/TrueCloudLab/hrw"
 )
 
 // NetMap represents NeoFS network map. It includes information about all
 // storage nodes registered in NeoFS the network.
 //
-// NetMap is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/netmap.NetMap
+// NetMap is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.NetMap
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

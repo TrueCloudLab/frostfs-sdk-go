@@ -4,8 +4,8 @@ import (
 	"strings"
 	"sync/atomic"
 
+	"github.com/TrueCloudLab/frostfs-sdk-go/session"
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/nspcc-dev/neofs-sdk-go/session"
 )
 
 type sessionCache struct {

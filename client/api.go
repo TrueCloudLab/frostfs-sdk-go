@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	v2netmap "github.com/nspcc-dev/neofs-api-go/v2/netmap"
-	rpcapi "github.com/nspcc-dev/neofs-api-go/v2/rpc"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
+	v2netmap "github.com/TrueCloudLab/frostfs-api-go/v2/netmap"
+	rpcapi "github.com/TrueCloudLab/frostfs-api-go/v2/rpc"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
 )
 
 // interface of NeoFS API server. Exists for test purposes only.

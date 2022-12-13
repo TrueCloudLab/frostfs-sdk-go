@@ -4,12 +4,12 @@ import (
 	"crypto/ecdsa"
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	"github.com/nspcc-dev/neofs-api-go/v2/rpc/client"
-	v2session "github.com/nspcc-dev/neofs-api-go/v2/session"
-	"github.com/nspcc-dev/neofs-api-go/v2/signature"
-	apistatus "github.com/nspcc-dev/neofs-sdk-go/client/status"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
+	v2session "github.com/TrueCloudLab/frostfs-api-go/v2/session"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/signature"
+	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
 // common interface of resulting structures with API status.
@@ -334,7 +334,7 @@ func (c *Client) initCallContext(ctx *contextCall) {
 	ctx.netMagic = c.prm.netMagic
 }
 
-// ExecRaw executes f with underlying github.com/nspcc-dev/neofs-api-go/v2/rpc/client.Client
+// ExecRaw executes f with underlying github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client.Client
 // instance. Communicate over the Protocol Buffers protocol in a more flexible way:
 // most often used to transmit data over a fixed version of the NeoFS protocol, as well
 // as to support custom services.
@@ -345,7 +345,7 @@ func (c *Client) initCallContext(ctx *contextCall) {
 // before closing the connection.
 //
 // See also Dial and Close.
-// See also github.com/nspcc-dev/neofs-api-go/v2/rpc/client package docs.
+// See also github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client package docs.
 func (c *Client) ExecRaw(f func(client *client.Client) error) error {
 	return f(&c.c)
 }

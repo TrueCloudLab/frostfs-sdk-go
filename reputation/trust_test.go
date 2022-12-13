@@ -3,13 +3,13 @@ package reputation_test
 import (
 	"testing"
 
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
+	v2reputation "github.com/TrueCloudLab/frostfs-api-go/v2/reputation"
+	frostfsecdsa "github.com/TrueCloudLab/frostfs-sdk-go/crypto/ecdsa"
+	"github.com/TrueCloudLab/frostfs-sdk-go/reputation"
+	reputationtest "github.com/TrueCloudLab/frostfs-sdk-go/reputation/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
-	v2reputation "github.com/nspcc-dev/neofs-api-go/v2/reputation"
-	neofsecdsa "github.com/nspcc-dev/neofs-sdk-go/crypto/ecdsa"
-	"github.com/nspcc-dev/neofs-sdk-go/reputation"
-	reputationtest "github.com/nspcc-dev/neofs-sdk-go/reputation/test"
-	"github.com/nspcc-dev/neofs-sdk-go/version"
 	"github.com/stretchr/testify/require"
 )
 
@@ -181,7 +181,7 @@ func TestGlobalTrust_Sign(t *testing.T) {
 
 	require.False(t, val.VerifySignature())
 
-	require.NoError(t, val.Sign(neofsecdsa.Signer(k.PrivateKey)))
+	require.NoError(t, val.Sign(frostfsecdsa.Signer(k.PrivateKey)))
 
 	var valV2 v2reputation.GlobalTrust
 	val.WriteToV2(&valV2)

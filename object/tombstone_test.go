@@ -5,8 +5,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/tombstone"
-	oid "github.com/nspcc-dev/neofs-sdk-go/object/id"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/tombstone"
+	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 	"github.com/stretchr/testify/require"
 )
 

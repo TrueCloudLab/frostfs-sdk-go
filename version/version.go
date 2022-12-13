@@ -3,12 +3,12 @@ package version
 import (
 	"fmt"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/refs"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 )
 
 // Version represents revision number in SemVer scheme.
 //
-// Version is mutually compatible with github.com/nspcc-dev/neofs-api-go/v2/refs.Version
+// Version is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.Version
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration.

@@ -3,9 +3,9 @@ package object_test
 import (
 	"testing"
 
-	cidtest "github.com/nspcc-dev/neofs-sdk-go/container/id/test"
-	"github.com/nspcc-dev/neofs-sdk-go/object"
-	usertest "github.com/nspcc-dev/neofs-sdk-go/user/test"
+	cidtest "github.com/TrueCloudLab/frostfs-sdk-go/container/id/test"
+	"github.com/TrueCloudLab/frostfs-sdk-go/object"
+	usertest "github.com/TrueCloudLab/frostfs-sdk-go/user/test"
 	"github.com/stretchr/testify/require"
 )
 

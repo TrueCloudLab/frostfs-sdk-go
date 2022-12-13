@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/nspcc-dev/neofs-api-go/v2/acl"
-	v2acl "github.com/nspcc-dev/neofs-api-go/v2/acl"
+	"github.com/TrueCloudLab/frostfs-api-go/v2/acl"
+	v2acl "github.com/TrueCloudLab/frostfs-api-go/v2/acl"
 	"github.com/stretchr/testify/require"
 )
 
