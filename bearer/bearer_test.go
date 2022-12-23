@@ -220,7 +220,7 @@ func TestToken_InvalidAt(t *testing.T) {
 	require.True(t, val.InvalidAt(1))
 	require.False(t, val.InvalidAt(2))
 	require.False(t, val.InvalidAt(3))
-	require.True(t, val.InvalidAt(4))
+	require.False(t, val.InvalidAt(4))
 	require.True(t, val.InvalidAt(5))
 }
 

@@ -219,10 +219,11 @@ func (x *commonData) unmarshalJSON(data []byte, r contextReader) error {
 	return x.readFromV2(m, false, r)
 }
 
-// SetExp sets "exp" (expiration time) claim which identifies the expiration time
-// (in NeoFS epochs) on or after which the session MUST NOT be accepted for
-// processing.  The processing of the "exp" claim requires that the current
-// epoch MUST be before the expiration epoch listed in the "exp" claim.
+// SetExp sets "exp" (expiration time) claim which identifies the expiration
+// time (in NeoFS epochs) after which the session MUST NOT be accepted for
+// processing. The processing of the "exp" claim requires that the current
+// epoch MUST be before or equal to the expiration epoch listed in the "exp"
+// claim.
 //
 // Naming is inspired by https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.4.
 //
@@ -258,7 +259,7 @@ func (x *commonData) SetIat(iat uint64) {
 }
 
 func (x commonData) expiredAt(epoch uint64) bool {
-	return !x.lifetimeSet || x.exp <= epoch
+	return !x.lifetimeSet || x.exp < epoch
 }
 
 // InvalidAt asserts "exp", "nbf" and "iat" claims.

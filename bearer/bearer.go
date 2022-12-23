@@ -136,9 +136,10 @@ func (b Token) WriteToV2(m *acl.BearerToken) {
 }
 
 // SetExp sets "exp" (expiration time) claim which identifies the
-// expiration time (in NeoFS epochs) on or after which the Token MUST NOT be
-// accepted for processing. The processing of the "exp" claim requires that the
-// current epoch MUST be before the expiration epoch listed in the "exp" claim.
+// expiration time (in NeoFS epochs) after which the Token MUST NOT be
+// accepted for processing. The processing of the "exp" claim requires
+// that the current epoch MUST be before or equal to the expiration epoch
+// listed in the "exp" claim.
 //
 // Naming is inspired by https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.4.
 //
@@ -179,7 +180,7 @@ func (b *Token) SetIat(iat uint64) {
 //
 // See also SetExp, SetNbf, SetIat.
 func (b Token) InvalidAt(epoch uint64) bool {
-	return !b.lifetimeSet || b.nbf > epoch || b.iat > epoch || b.exp <= epoch
+	return !b.lifetimeSet || b.nbf > epoch || b.iat > epoch || b.exp < epoch
 }
 
 // SetEACLTable sets eacl.Table that replaces the one from the issuer's
