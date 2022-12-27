@@ -11,7 +11,7 @@ import (
 	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 	"github.com/TrueCloudLab/frostfs-sdk-go/netmap/parser"
 	subnetid "github.com/TrueCloudLab/frostfs-sdk-go/subnet/id"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
 )
 
 // PlacementPolicy declares policy to store objects in the NeoFS container.

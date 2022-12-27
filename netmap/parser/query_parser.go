@@ -1,4 +1,4 @@
-// Code generated from Query.g4 by ANTLR 4.10.1. DO NOT EDIT.
+// Code generated from java-escape by ANTLR 4.11.1. DO NOT EDIT.
 
 package parser // Query
 
@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
 )
 
 // Suppress unused import errors
@@ -133,7 +133,7 @@ func NewQuery(input antlr.TokenStream) *Query {
 	this.RuleNames = staticData.ruleNames
 	this.LiteralNames = staticData.literalNames
 	this.SymbolicNames = staticData.symbolicNames
-	this.GrammarFileName = "Query.g4"
+	this.GrammarFileName = "java-escape"
 
 	return this
 }
@@ -2461,7 +2461,7 @@ func (p *Query) Keyword() (localctx IKeywordContext) {
 		p.SetState(119)
 		_la = p.GetTokenStream().LA(1)
 
-		if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QueryREP)|(1<<QueryIN)|(1<<QueryAS)|(1<<QuerySELECT)|(1<<QueryFROM)|(1<<QueryFILTER))) != 0) {
+		if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&1904) != 0) {
 			p.GetErrorHandler().RecoverInline(p)
 		} else {
 			p.GetErrorHandler().ReportMatch(p)

@@ -1,8 +1,8 @@
-// Code generated from Query.g4 by ANTLR 4.10.1. DO NOT EDIT.
+// Code generated from java-escape by ANTLR 4.11.1. DO NOT EDIT.
 
 package parser // Query
 
-import "github.com/antlr/antlr4/runtime/Go/antlr"
+import "github.com/antlr/antlr4/runtime/Go/antlr/v4"
 
 // A complete Visitor for a parse tree produced by Query.
 type QueryVisitor interface {
