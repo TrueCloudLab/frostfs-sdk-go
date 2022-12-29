@@ -1,5 +1,5 @@
 /*
-Package frostfsecdsa collects ECDSA primitives for NeoFS cryptography.
+Package frostfsecdsa collects ECDSA primitives for FrostFS cryptography.
 
 Signer and PublicKey support ECDSA signature algorithm with SHA-512 hashing.
 SignerRFC6979 and PublicKeyRFC6979 implement signature algorithm described in RFC 6979.

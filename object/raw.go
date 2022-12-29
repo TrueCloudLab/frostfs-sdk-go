@@ -4,7 +4,7 @@ import (
 	"github.com/TrueCloudLab/frostfs-api-go/v2/object"
 )
 
-// RawObject represents v2-compatible NeoFS object that provides
+// RawObject represents v2-compatible FrostFS object that provides
 // a convenient interface to fill in the fields of
 // an object in isolation from its internal structure.
 //

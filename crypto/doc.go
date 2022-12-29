@@ -1,7 +1,7 @@
 /*
-Package frostfscrypto collects NeoFS cryptographic primitives.
+Package frostfscrypto collects FrostFS cryptographic primitives.
 
-Signer type unifies entities for signing NeoFS data.
+Signer type unifies entities for signing FrostFS data.
 
 	// instantiate Signer
 	// select data to be signed
@@ -24,7 +24,7 @@ PublicKey allows to verify signatures.
 	isValid := sig.Verify(data)
 	// ...
 
-Signature can be also used to process NeoFS API V2 protocol messages
+Signature can be also used to process FrostFS API V2 protocol messages
 (see neo.fs.v2.refs package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:

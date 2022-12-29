@@ -14,9 +14,9 @@ import (
 	"github.com/TrueCloudLab/hrw"
 )
 
-// NodeInfo groups information about NeoFS storage node which is reflected
-// in the NeoFS network map. Storage nodes advertise this information when
-// registering with the NeoFS network. After successful registration, information
+// NodeInfo groups information about FrostFS storage node which is reflected
+// in the FrostFS network map. Storage nodes advertise this information when
+// registering with the FrostFS network. After successful registration, information
 // about the nodes is available to all network participants to work with the network
 // map (mainly to comply with container storage policies).
 //
@@ -30,7 +30,7 @@ type NodeInfo struct {
 
 // reads NodeInfo from netmap.NodeInfo message. If checkFieldPresence is set,
 // returns an error on absence of any protocol-required field. Verifies format of any
-// presented field according to NeoFS API V2 protocol.
+// presented field according to FrostFS API V2 protocol.
 func (x *NodeInfo) readFromV2(m netmap.NodeInfo, checkFieldPresence bool) error {
 	var err error
 
@@ -91,7 +91,7 @@ func (x *NodeInfo) readFromV2(m netmap.NodeInfo, checkFieldPresence bool) error 
 }
 
 // ReadFromV2 reads NodeInfo from the netmap.NodeInfo message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *NodeInfo) ReadFromV2(m netmap.NodeInfo) error {
@@ -106,7 +106,7 @@ func (x NodeInfo) WriteToV2(m *netmap.NodeInfo) {
 	*m = x.m
 }
 
-// Marshal encodes NodeInfo into a binary format of the NeoFS API protocol
+// Marshal encodes NodeInfo into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -117,7 +117,7 @@ func (x NodeInfo) Marshal() []byte {
 	return m.StableMarshal(nil)
 }
 
-// Unmarshal decodes NeoFS API protocol binary format into the NodeInfo
+// Unmarshal decodes FrostFS API protocol binary format into the NodeInfo
 // (Protocol Buffers with direct field order). Returns an error describing
 // a format violation.
 //
@@ -133,7 +133,7 @@ func (x *NodeInfo) Unmarshal(data []byte) error {
 	return x.readFromV2(m, false)
 }
 
-// MarshalJSON encodes NodeInfo into a JSON format of the NeoFS API protocol
+// MarshalJSON encodes NodeInfo into a JSON format of the FrostFS API protocol
 // (Protocol Buffers JSON).
 //
 // See also UnmarshalJSON.
@@ -144,7 +144,7 @@ func (x NodeInfo) MarshalJSON() ([]byte, error) {
 	return m.MarshalJSON()
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON format into the NodeInfo
+// UnmarshalJSON decodes FrostFS API protocol JSON format into the NodeInfo
 // (Protocol Buffers JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.
@@ -172,7 +172,7 @@ func (x *NodeInfo) SetPublicKey(key []byte) {
 // PublicKey returns value set using SetPublicKey.
 //
 // Zero NodeInfo has no public key, which is incorrect according to
-// NeoFS system requirements.
+// FrostFS system requirements.
 //
 // Return value MUST not be mutated, make a copy first.
 func (x NodeInfo) PublicKey() []byte {
@@ -186,7 +186,7 @@ func StringifyPublicKey(node NodeInfo) string {
 
 // SetNetworkEndpoints sets list to the announced node's network endpoints.
 // Node MUSt have at least one announced endpoint. List MUST be unique.
-// Endpoints are used for communication with the storage node within NeoFS
+// Endpoints are used for communication with the storage node within FrostFS
 // network. It is expected that node serves storage node services on these
 // endpoints (it also adds a wait on their network availability).
 //
@@ -209,7 +209,7 @@ func (x NodeInfo) NumberOfNetworkEndpoints() int {
 // MUST NOT be nil.
 //
 // Zero NodeInfo contains no endpoints which is incorrect according to
-// NeoFS system requirements.
+// FrostFS system requirements.
 //
 // See also SetNetworkEndpoints.
 func (x NodeInfo) IterateNetworkEndpoints(f func(string) bool) {
@@ -297,7 +297,7 @@ func (x NodeInfo) capacity() uint64 {
 const attrUNLOCODE = "UN-LOCODE"
 
 // SetLOCODE specifies node's geographic location in UN/LOCODE format. Each
-// storage node MUST declare it for entrance to the NeoFS network. Node MAY
+// storage node MUST declare it for entrance to the FrostFS network. Node MAY
 // declare the code of the nearest location as needed, for example, when it is
 // impossible to unambiguously attribute the node to any location from UN/LOCODE
 // database.
@@ -310,7 +310,7 @@ func (x *NodeInfo) SetLOCODE(locode string) {
 // LOCODE returns node's location code set using SetLOCODE.
 //
 // Zero NodeInfo has empty location code which is invalid according to
-// NeoFS API system requirement.
+// FrostFS API system requirement.
 func (x NodeInfo) LOCODE() string {
 	return x.Attribute(attrUNLOCODE)
 }

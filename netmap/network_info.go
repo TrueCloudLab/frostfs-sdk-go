@@ -11,7 +11,7 @@ import (
 	"github.com/nspcc-dev/neo-go/pkg/vm/stackitem"
 )
 
-// NetworkInfo groups information about the NeoFS network state. Mainly used to
+// NetworkInfo groups information about the FrostFS network state. Mainly used to
 // describe the current state of the network.
 //
 // NetworkInfo is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.NetworkInfo
@@ -24,7 +24,7 @@ type NetworkInfo struct {
 
 // reads NetworkInfo from netmap.NetworkInfo message. If checkFieldPresence is set,
 // returns an error on absence of any protocol-required field. Verifies format of any
-// presented field according to NeoFS API V2 protocol.
+// presented field according to FrostFS API V2 protocol.
 func (x *NetworkInfo) readFromV2(m netmap.NetworkInfo, checkFieldPresence bool) error {
 	c := m.GetNetworkConfig()
 	if checkFieldPresence && c == nil {
@@ -97,7 +97,7 @@ func (x *NetworkInfo) readFromV2(m netmap.NetworkInfo, checkFieldPresence bool) 
 }
 
 // ReadFromV2 reads NetworkInfo from the netmap.NetworkInfo message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *NetworkInfo) ReadFromV2(m netmap.NetworkInfo) error {
@@ -119,7 +119,7 @@ func (x NetworkInfo) CurrentEpoch() uint64 {
 	return x.m.GetCurrentEpoch()
 }
 
-// SetCurrentEpoch sets current epoch of the NeoFS network.
+// SetCurrentEpoch sets current epoch of the FrostFS network.
 func (x *NetworkInfo) SetCurrentEpoch(epoch uint64) {
 	x.m.SetCurrentEpoch(epoch)
 }
@@ -131,7 +131,7 @@ func (x NetworkInfo) MagicNumber() uint64 {
 	return x.m.GetMagicNumber()
 }
 
-// SetMagicNumber sets magic number of the NeoFS Sidechain.
+// SetMagicNumber sets magic number of the FrostFS Sidechain.
 //
 // See also MagicNumber.
 func (x *NetworkInfo) SetMagicNumber(epoch uint64) {
@@ -143,7 +143,7 @@ func (x NetworkInfo) MsPerBlock() int64 {
 	return x.m.GetMsPerBlock()
 }
 
-// SetMsPerBlock sets MillisecondsPerBlock network parameter of the NeoFS Sidechain.
+// SetMsPerBlock sets MillisecondsPerBlock network parameter of the FrostFS Sidechain.
 //
 // See also MsPerBlock.
 func (x *NetworkInfo) SetMsPerBlock(v int64) {
@@ -203,8 +203,8 @@ func (x NetworkInfo) configValue(name string) (res []byte) {
 	return
 }
 
-// SetRawNetworkParameter sets named NeoFS network parameter whose value is
-// transmitted but not interpreted by the NeoFS API protocol.
+// SetRawNetworkParameter sets named FrostFS network parameter whose value is
+// transmitted but not interpreted by the FrostFS API protocol.
 //
 // Argument MUST NOT be mutated, make a copy first.
 //
@@ -441,8 +441,8 @@ func (x NetworkInfo) NumberOfEigenTrustIterations() uint64 {
 
 const configEpochDuration = "EpochDuration"
 
-// SetEpochDuration sets NeoFS epoch duration measured in number of blocks of
-// the NeoFS Sidechain.
+// SetEpochDuration sets FrostFS epoch duration measured in number of blocks of
+// the FrostFS Sidechain.
 //
 // See also EpochDuration.
 func (x *NetworkInfo) SetEpochDuration(blocks uint64) {
@@ -492,7 +492,7 @@ func (x NetworkInfo) MaxObjectSize() uint64 {
 
 const configWithdrawalFee = "WithdrawFee"
 
-// SetWithdrawalFee sets fee for withdrawals from the NeoFS accounts that
+// SetWithdrawalFee sets fee for withdrawals from the FrostFS accounts that
 // account owners pay to each Alphabet node.
 //
 // See also WithdrawalFee.

@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-// Basic represents basic part of the NeoFS container's ACL. It includes
+// Basic represents basic part of the FrostFS container's ACL. It includes
 // common (pretty simple) access rules for operations inside the container.
-// See NeoFS Specification for details.
+// See FrostFS Specification for details.
 //
 // One can find some similarities with the traditional Unix permission, such as
 //
@@ -236,7 +236,7 @@ const (
 	NamePublicAppendExtended = "eacl-public-append"
 )
 
-// Frequently used Basic values. Bitmasks are taken from the NeoFS Specification.
+// Frequently used Basic values. Bitmasks are taken from the FrostFS Specification.
 const (
 	Private              = Basic(0x1C8C8CCC) // private
 	PrivateExtended      = Basic(0x0C8C8CCC) // eacl-private

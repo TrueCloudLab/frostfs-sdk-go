@@ -12,14 +12,14 @@ import (
 	"github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
 )
 
-// Client represents virtual connection to the NeoFS network to communicate
-// with NeoFS server using NeoFS API protocol. It is designed to provide
+// Client represents virtual connection to the FrostFS network to communicate
+// with FrostFS server using FrostFS API protocol. It is designed to provide
 // an abstraction interface from the protocol details of data transfer over
-// a network in NeoFS.
+// a network in FrostFS.
 //
 // Client can be created using simple Go variable declaration. Before starting
 // work with the Client, it SHOULD BE correctly initialized (see Init method).
-// Before executing the NeoFS operations using the Client, connection to the
+// Before executing the FrostFS operations using the Client, connection to the
 // server MUST BE correctly established (see Dial method and pay attention
 // to the mandatory parameters). Using the Client before connecting have
 // been established can lead to a panic. After the work, the Client SHOULD BE
@@ -28,7 +28,7 @@ import (
 // during the communication process step strongly discouraged as it leads to
 // undefined behavior.
 //
-// Each method which produces a NeoFS API call may return a server response.
+// Each method which produces a FrostFS API call may return a server response.
 // Status responses are returned in the result structure, and can be cast
 // to built-in error instance (or in the returned error if the client is
 // configured accordingly). Certain statuses can be checked using `apistatus`
@@ -48,7 +48,7 @@ type Client struct {
 
 	c client.Client
 
-	server neoFSAPIServer
+	server frostFSAPIServer
 }
 
 // Init brings the Client instance to its initial state.
@@ -61,7 +61,7 @@ func (c *Client) Init(prm PrmInit) {
 	c.prm = prm
 }
 
-// Dial establishes a connection to the server from the NeoFS network.
+// Dial establishes a connection to the server from the FrostFS network.
 // Returns an error describing failure reason. If failed, the Client
 // SHOULD NOT be used.
 //
@@ -103,7 +103,7 @@ func (c *Client) Dial(prm PrmDial) error {
 		client.WithRWTimeout(prm.streamTimeout),
 	)...)
 
-	c.setNeoFSAPIServer((*coreServer)(&c.c))
+	c.setFrostFSAPIServer((*coreServer)(&c.c))
 
 	if prm.parentCtx == nil {
 		prm.parentCtx = context.Background()
@@ -121,15 +121,15 @@ func (c *Client) Dial(prm PrmDial) error {
 	return nil
 }
 
-// sets underlying provider of neoFSAPIServer. The method is used for testing as an approach
-// to skip Dial stage and override NeoFS API server. MUST NOT be used outside test code.
+// sets underlying provider of frostFSAPIServer. The method is used for testing as an approach
+// to skip Dial stage and override FrostFS API server. MUST NOT be used outside test code.
 // In real applications wrapper over github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client
 // is statically used.
-func (c *Client) setNeoFSAPIServer(server neoFSAPIServer) {
+func (c *Client) setFrostFSAPIServer(server frostFSAPIServer) {
 	c.server = server
 }
 
-// Close closes underlying connection to the NeoFS server. Implements io.Closer.
+// Close closes underlying connection to the FrostFS server. Implements io.Closer.
 // MUST NOT be called before successful Dial. Can be called concurrently
 // with server operations processing on running goroutines: in this case
 // they are likely to fail due to a connection error.
@@ -146,7 +146,7 @@ func (c *Client) Close() error {
 //
 // See also Init.
 type PrmInit struct {
-	resolveNeoFSErrors bool
+	resolveFrostFSErrors bool
 
 	key ecdsa.PrivateKey
 
@@ -163,16 +163,16 @@ func (x *PrmInit) SetDefaultPrivateKey(key ecdsa.PrivateKey) {
 	x.key = key
 }
 
-// ResolveNeoFSFailures makes the Client to resolve failure statuses of the
-// NeoFS protocol into Go built-in errors. These errors are returned from
+// ResolveFrostFSFailures makes the Client to resolve failure statuses of the
+// FrostFS protocol into Go built-in errors. These errors are returned from
 // each protocol operation. By default, statuses aren't resolved and written
 // to the resulting structure (see corresponding Res* docs).
-func (x *PrmInit) ResolveNeoFSFailures() {
-	x.resolveNeoFSErrors = true
+func (x *PrmInit) ResolveFrostFSFailures() {
+	x.resolveFrostFSErrors = true
 }
 
 // SetResponseInfoCallback makes the Client to pass ResponseMetaInfo from each
-// NeoFS server response to f. Nil (default) means ignore response meta info.
+// FrostFS server response to f. Nil (default) means ignore response meta info.
 func (x *PrmInit) SetResponseInfoCallback(f func(ResponseMetaInfo) error) {
 	x.cbRespInfo = f
 }
@@ -194,7 +194,7 @@ type PrmDial struct {
 	parentCtx context.Context
 }
 
-// SetServerURI sets server URI in the NeoFS network.
+// SetServerURI sets server URI in the FrostFS network.
 // Required parameter.
 //
 // Format of the URI:
@@ -212,7 +212,7 @@ func (x *PrmDial) SetServerURI(endpoint string) {
 }
 
 // SetTLSConfig sets tls.Config to open TLS client connection
-// to the NeoFS server. Nil (default) means insecure connection.
+// to the FrostFS server. Nil (default) means insecure connection.
 //
 // See also SetServerURI.
 func (x *PrmDial) SetTLSConfig(tlsConfig *tls.Config) {

@@ -11,7 +11,7 @@ import (
 )
 
 // Trust represents quantitative assessment of the trust of a participant in the
-// NeoFS reputation system.
+// FrostFS reputation system.
 //
 // Trust is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.Trust
 // message. See ReadFromV2 / WriteToV2 methods.
@@ -22,7 +22,7 @@ type Trust struct {
 }
 
 // ReadFromV2 reads Trust from the reputation.Trust message. Returns an
-// error if the message is malformed according to the NeoFS API V2 protocol.
+// error if the message is malformed according to the FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *Trust) ReadFromV2(m reputation.Trust) error {
@@ -55,7 +55,7 @@ func (x Trust) WriteToV2(m *reputation.Trust) {
 	*m = x.m
 }
 
-// SetPeer specifies identifier of the participant of the NeoFS reputation system
+// SetPeer specifies identifier of the participant of the FrostFS reputation system
 // to which the Trust relates.
 //
 // See also Peer.
@@ -68,7 +68,7 @@ func (x *Trust) SetPeer(id PeerID) {
 
 // Peer returns peer identifier set using SetPeer.
 //
-// Zero Trust returns zero PeerID which is incorrect according to the NeoFS API
+// Zero Trust returns zero PeerID which is incorrect according to the FrostFS API
 // protocol.
 func (x Trust) Peer() (res PeerID) {
 	m := x.m.GetPeer()
@@ -100,7 +100,7 @@ func (x Trust) Value() float64 {
 	return x.m.GetValue()
 }
 
-// PeerToPeerTrust represents trust of one participant of the NeoFS reputation
+// PeerToPeerTrust represents trust of one participant of the FrostFS reputation
 // system to another one.
 //
 // Trust is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.PeerToPeerTrust
@@ -112,7 +112,7 @@ type PeerToPeerTrust struct {
 }
 
 // ReadFromV2 reads PeerToPeerTrust from the reputation.PeerToPeerTrust message.
-// Returns an error if the message is malformed according to the NeoFS API V2
+// Returns an error if the message is malformed according to the FrostFS API V2
 // protocol.
 //
 // See also WriteToV2.
@@ -155,7 +155,7 @@ func (x PeerToPeerTrust) WriteToV2(m *reputation.PeerToPeerTrust) {
 }
 
 // SetTrustingPeer specifies the peer from which trust comes in terms of the
-// NeoFS reputation system.
+// FrostFS reputation system.
 //
 // See also TrustingPeer.
 func (x *PeerToPeerTrust) SetTrustingPeer(id PeerID) {
@@ -168,7 +168,7 @@ func (x *PeerToPeerTrust) SetTrustingPeer(id PeerID) {
 // TrustingPeer returns peer set using SetTrustingPeer.
 //
 // Zero PeerToPeerTrust has no trusting peer which is incorrect according
-// to the NeoFS API protocol.
+// to the FrostFS API protocol.
 func (x PeerToPeerTrust) TrustingPeer() (res PeerID) {
 	m := x.m.GetTrustingPeer()
 	if m != nil {
@@ -182,7 +182,7 @@ func (x PeerToPeerTrust) TrustingPeer() (res PeerID) {
 }
 
 // SetTrust sets trust value of the trusting peer to another participant
-// of the NeoFS reputation system.
+// of the FrostFS reputation system.
 //
 // See also Trust.
 func (x *PeerToPeerTrust) SetTrust(t Trust) {
@@ -195,7 +195,7 @@ func (x *PeerToPeerTrust) SetTrust(t Trust) {
 // Trust returns trust set using SetTrust.
 //
 // Zero PeerToPeerTrust returns zero Trust which is incorect according to the
-// NeoFS API protocol.
+// FrostFS API protocol.
 func (x PeerToPeerTrust) Trust() (res Trust) {
 	m := x.m.GetTrust()
 	if m != nil {
@@ -209,19 +209,19 @@ func (x PeerToPeerTrust) Trust() (res Trust) {
 }
 
 // GlobalTrust represents the final assessment of trust in the participant of
-// the NeoFS reputation system obtained taking into account all other participants.
+// the FrostFS reputation system obtained taking into account all other participants.
 //
 // GlobalTrust is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.GlobalTrust
 // message. See ReadFromV2 / WriteToV2 methods.
 //
-// To submit GlobalTrust value in NeoFS zero instance SHOULD be declared,
+// To submit GlobalTrust value in FrostFS zero instance SHOULD be declared,
 // initialized using Init method and filled using dedicated methods.
 type GlobalTrust struct {
 	m reputation.GlobalTrust
 }
 
 // ReadFromV2 reads GlobalTrust from the reputation.GlobalTrust message.
-// Returns an error if the message is malformed according to the NeoFS API V2
+// Returns an error if the message is malformed according to the FrostFS API V2
 // protocol.
 //
 // See also WriteToV2.
@@ -276,7 +276,7 @@ func (x GlobalTrust) WriteToV2(m *reputation.GlobalTrust) {
 	*m = x.m
 }
 
-// Init initializes all internal data of the GlobalTrust required by NeoFS API
+// Init initializes all internal data of the GlobalTrust required by FrostFS API
 // protocol. Init MUST be called when creating a new global trust instance.
 // Init SHOULD NOT be called multiple times. Init SHOULD NOT be called if
 // the GlobalTrust instance is used for decoding only.
@@ -299,7 +299,7 @@ func (x *GlobalTrust) setBodyField(setter func(*reputation.GlobalTrustBody)) {
 	}
 }
 
-// SetManager sets identifier of the NeoFS reputation system's participant which
+// SetManager sets identifier of the FrostFS reputation system's participant which
 // performed trust estimation.
 //
 // See also Manager.
@@ -315,7 +315,7 @@ func (x *GlobalTrust) SetManager(id PeerID) {
 // Manager returns peer set using SetManager.
 //
 // Zero GlobalTrust has zero manager which is incorrect according to the
-// NeoFS API protocol.
+// FrostFS API protocol.
 func (x GlobalTrust) Manager() (res PeerID) {
 	m := x.m.GetBody().GetManager()
 	if m != nil {
@@ -344,7 +344,7 @@ func (x *GlobalTrust) SetTrust(trust Trust) {
 // Trust returns trust set using SetTrust.
 //
 // Zero GlobalTrust return zero Trust which is incorrect according to the
-// NeoFS API protocol.
+// FrostFS API protocol.
 func (x GlobalTrust) Trust() (res Trust) {
 	m := x.m.GetBody().GetTrust()
 	if m != nil {
@@ -398,7 +398,7 @@ func (x GlobalTrust) VerifySignature() bool {
 	return sig.ReadFromV2(*sigV2) == nil && sig.Verify(x.m.GetBody().StableMarshal(nil))
 }
 
-// Marshal encodes GlobalTrust into a binary format of the NeoFS API protocol
+// Marshal encodes GlobalTrust into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -406,7 +406,7 @@ func (x GlobalTrust) Marshal() []byte {
 	return x.m.StableMarshal(nil)
 }
 
-// Unmarshal decodes NeoFS API protocol binary format into the GlobalTrust
+// Unmarshal decodes FrostFS API protocol binary format into the GlobalTrust
 // (Protocol Buffers with direct field order). Returns an error describing
 // a format violation.
 //

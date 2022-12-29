@@ -2,7 +2,7 @@ package client
 
 import "github.com/TrueCloudLab/frostfs-api-go/v2/session"
 
-// ResponseMetaInfo groups meta information about any NeoFS API response.
+// ResponseMetaInfo groups meta information about any FrostFS API response.
 type ResponseMetaInfo struct {
 	key []byte
 
@@ -21,7 +21,7 @@ func (x ResponseMetaInfo) ResponderKey() []byte {
 	return x.key
 }
 
-// Epoch returns local NeoFS epoch of the server.
+// Epoch returns local FrostFS epoch of the server.
 func (x ResponseMetaInfo) Epoch() uint64 {
 	return x.epoch
 }

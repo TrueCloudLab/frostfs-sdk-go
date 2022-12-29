@@ -1,5 +1,5 @@
 /*
-Package client provides NeoFS API client implementation.
+Package client provides FrostFS API client implementation.
 
 The main component is Client type. It is a virtual connection to the network
 and provides methods for executing operations on the server.
@@ -16,7 +16,7 @@ Initialize client state:
 
 	c.Init(prm)
 
-Connect to the NeoFS server:
+Connect to the FrostFS server:
 
 	var prm client.PrmDial
 	prm.SetServerURI("localhost:8080")
@@ -26,7 +26,7 @@ Connect to the NeoFS server:
 	err := c.Dial(prm)
 	// ...
 
-Execute NeoFS operation on the server:
+Execute FrostFS operation on the server:
 
 	var prm client.PrmContainerPut
 	prm.SetContainer(cnr)
@@ -74,7 +74,7 @@ with an interface:
 
 	import "github.com/TrueCloudLab/frostfs-sdk-go/client"
 
-	type NeoFSClient interface {
+	type FrostFSClient interface {
 		// Operations according to the application needs
 		CreateContainer(context.Context, container.Container) error
 		// ...

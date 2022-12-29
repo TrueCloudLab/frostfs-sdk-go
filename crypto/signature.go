@@ -19,7 +19,7 @@ import (
 type Signature refs.Signature
 
 // ReadFromV2 reads Signature from the refs.Signature message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *Signature) ReadFromV2(m refs.Signature) error {

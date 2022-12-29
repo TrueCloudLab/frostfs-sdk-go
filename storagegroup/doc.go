@@ -1,6 +1,6 @@
 /*
 Package storagegroup provides features to work with information that is
-used for proof of storage in NeoFS system.
+used for proof of storage in FrostFS system.
 
 StorageGroup type groups verification values for Data Audit sessions:
 
@@ -11,7 +11,7 @@ StorageGroup type groups verification values for Data Audit sessions:
 	sg.ValidationDataHash() // hash for objects validation
 	sg.ValidationDataSize() // total objects' payload size
 
-Instances can be also used to process NeoFS API V2 protocol messages
+Instances can be also used to process FrostFS API V2 protocol messages
 (see neo.fs.v2.storagegroup package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:

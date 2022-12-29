@@ -213,7 +213,7 @@ func (f *SearchFilters) addReservedFilter(op SearchMatchType, keyTyp filterKeyTy
 }
 
 // addFlagFilters adds filters that works like flags: they don't need to have
-// specific match type or value. They processed by NeoFS nodes by the fact
+// specific match type or value. They processed by FrostFS nodes by the fact
 // of presence in search query. E.g.: PHY, ROOT.
 func (f *SearchFilters) addFlagFilter(keyTyp filterKeyType) {
 	f.addFilter(MatchUnknown, keyTyp, "", staticStringer(""))

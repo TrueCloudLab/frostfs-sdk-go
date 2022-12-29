@@ -12,7 +12,7 @@ import (
 	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
-// Container represents token of the NeoFS Container session. A session is opened
+// Container represents token of the FrostFS Container session. A session is opened
 // between any two sides of the system, and implements a mechanism for transferring
 // the power of attorney of actions to another network member. The session has a
 // limited validity period, and applies to a strictly defined set of operations.
@@ -64,7 +64,7 @@ func (x *Container) readFromV2(m session.Token, checkFieldPresence bool) error {
 }
 
 // ReadFromV2 reads Container from the session.Token message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *Container) ReadFromV2(m session.Token) error {
@@ -94,7 +94,7 @@ func (x Container) WriteToV2(m *session.Token) {
 	x.writeToV2(m, x.writeContext)
 }
 
-// Marshal encodes Container into a binary format of the NeoFS API protocol
+// Marshal encodes Container into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -102,7 +102,7 @@ func (x Container) Marshal() []byte {
 	return x.marshal(x.writeContext)
 }
 
-// Unmarshal decodes NeoFS API protocol binary format into the Container
+// Unmarshal decodes FrostFS API protocol binary format into the Container
 // (Protocol Buffers with direct field order). Returns an error describing
 // a format violation.
 //
@@ -111,7 +111,7 @@ func (x *Container) Unmarshal(data []byte) error {
 	return x.unmarshal(data, x.readContext)
 }
 
-// MarshalJSON encodes Container into a JSON format of the NeoFS API protocol
+// MarshalJSON encodes Container into a JSON format of the FrostFS API protocol
 // (Protocol Buffers JSON).
 //
 // See also UnmarshalJSON.
@@ -119,7 +119,7 @@ func (x Container) MarshalJSON() ([]byte, error) {
 	return x.marshalJSON(x.writeContext)
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON format into the Container
+// UnmarshalJSON decodes FrostFS API protocol JSON format into the Container
 // (Protocol Buffers JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.

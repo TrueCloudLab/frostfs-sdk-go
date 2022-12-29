@@ -28,13 +28,13 @@ func assertStatusErr(tb testing.TB, res interface{ Status() apistatus.Status }) 
 	require.Equal(tb, statusErr.Message(), res.Status().(*apistatus.ServerInternal).Message())
 }
 
-func newClient(server neoFSAPIServer) *Client {
+func newClient(server frostFSAPIServer) *Client {
 	var prm PrmInit
 	prm.SetDefaultPrivateKey(*key)
 
 	var c Client
 	c.Init(prm)
-	c.setNeoFSAPIServer(server)
+	c.setFrostFSAPIServer(server)
 
 	return &c
 }

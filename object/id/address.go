@@ -9,7 +9,7 @@ import (
 	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 )
 
-// Address represents global object identifier in NeoFS network. Each object
+// Address represents global object identifier in FrostFS network. Each object
 // belongs to exactly one container and is uniquely addressed within the container.
 //
 // Address is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.Address
@@ -23,7 +23,7 @@ type Address struct {
 }
 
 // ReadFromV2 reads Address from the refs.Address message. Returns an error if
-// the message is malformed according to the NeoFS API V2 protocol.
+// the message is malformed according to the FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *Address) ReadFromV2(m refs.Address) error {
@@ -65,7 +65,7 @@ func (x Address) WriteToV2(m *refs.Address) {
 	m.SetContainerID(&cnr)
 }
 
-// MarshalJSON encodes Address into a JSON format of the NeoFS API protocol
+// MarshalJSON encodes Address into a JSON format of the FrostFS API protocol
 // (Protocol Buffers JSON).
 //
 // See also UnmarshalJSON.
@@ -76,7 +76,7 @@ func (x Address) MarshalJSON() ([]byte, error) {
 	return m.MarshalJSON()
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON format into the Address
+// UnmarshalJSON decodes FrostFS API protocol JSON format into the Address
 // (Protocol Buffers JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.
@@ -91,9 +91,9 @@ func (x *Address) UnmarshalJSON(data []byte) error {
 	return x.ReadFromV2(m)
 }
 
-// Container returns unique identifier of the NeoFS object container.
+// Container returns unique identifier of the FrostFS object container.
 //
-// Zero Address has zero container ID, which is incorrect according to NeoFS
+// Zero Address has zero container ID, which is incorrect according to FrostFS
 // API protocol.
 //
 // See also SetContainer.
@@ -101,7 +101,7 @@ func (x Address) Container() cid.ID {
 	return x.cnr
 }
 
-// SetContainer sets unique identifier of the NeoFS object container.
+// SetContainer sets unique identifier of the FrostFS object container.
 //
 // See also Container.
 func (x *Address) SetContainer(id cid.ID) {
@@ -111,7 +111,7 @@ func (x *Address) SetContainer(id cid.ID) {
 // Object returns unique identifier of the object in the container
 // identified by Container().
 //
-// Zero Address has zero object ID, which is incorrect according to NeoFS
+// Zero Address has zero object ID, which is incorrect according to FrostFS
 // API protocol.
 //
 // See also SetObject.
@@ -130,7 +130,7 @@ func (x *Address) SetObject(id ID) {
 // delimiter of container and object IDs in Address protocol string.
 const idDelimiter = "/"
 
-// EncodeToString encodes Address into NeoFS API protocol string: concatenation
+// EncodeToString encodes Address into FrostFS API protocol string: concatenation
 // of the string-encoded container and object IDs delimited by a slash.
 //
 // See also DecodeString.
@@ -138,7 +138,7 @@ func (x Address) EncodeToString() string {
 	return x.cnr.EncodeToString() + "/" + x.obj.EncodeToString()
 }
 
-// DecodeString decodes string into Address according to NeoFS API protocol. Returns
+// DecodeString decodes string into Address according to FrostFS API protocol. Returns
 // an error if s is malformed.
 //
 // See also DecodeString.
@@ -165,7 +165,7 @@ func (x *Address) DecodeString(s string) error {
 //
 // String is designed to be human-readable, and its format MAY differ between
 // SDK versions. String MAY return same result as EncodeToString. String MUST NOT
-// be used to encode Address into NeoFS protocol string.
+// be used to encode Address into FrostFS protocol string.
 func (x Address) String() string {
 	return x.EncodeToString()
 }

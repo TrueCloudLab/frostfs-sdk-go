@@ -10,7 +10,7 @@ import (
 )
 
 // SizeEstimation groups information about estimation of the size of the data
-// stored in the NeoFS container.
+// stored in the FrostFS container.
 //
 // SizeEstimation is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/container.UsedSpaceAnnouncement
 // message. See ReadFromV2 / WriteToV2 methods.
@@ -19,7 +19,7 @@ type SizeEstimation struct {
 }
 
 // ReadFromV2 reads SizeEstimation from the container.UsedSpaceAnnouncement message.
-// Checks if the message conforms to NeoFS API V2 protocol.
+// Checks if the message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *SizeEstimation) ReadFromV2(m container.UsedSpaceAnnouncement) error {
@@ -63,7 +63,7 @@ func (x SizeEstimation) Epoch() uint64 {
 }
 
 // SetContainer specifies the container for which the amount of data is estimated.
-// Required by the NeoFS API protocol.
+// Required by the FrostFS API protocol.
 //
 // See also Container.
 func (x *SizeEstimation) SetContainer(cnr cid.ID) {
@@ -76,7 +76,7 @@ func (x *SizeEstimation) SetContainer(cnr cid.ID) {
 // Container returns container set using SetContainer.
 //
 // Zero SizeEstimation is not bound to any container (returns zero) which is
-// incorrect according to NeoFS API protocol.
+// incorrect according to FrostFS API protocol.
 func (x SizeEstimation) Container() (res cid.ID) {
 	m := x.m.GetContainerID()
 	if m != nil {

@@ -1,7 +1,7 @@
 /*
-Package container provides functionality related to the NeoFS containers.
+Package container provides functionality related to the FrostFS containers.
 
-The base type is Container. To create new container in the NeoFS network
+The base type is Container. To create new container in the FrostFS network
 Container instance should be initialized
 
 	var cnr Container
@@ -10,7 +10,7 @@ Container instance should be initialized
 
 	// encode cnr and send
 
-After the container is persisted in the NeoFS network, applications can process
+After the container is persisted in the FrostFS network, applications can process
 it using the instance of Container types
 
 	// recv binary container
@@ -22,7 +22,7 @@ it using the instance of Container types
 
 	// process the container data
 
-Instances can be also used to process NeoFS API V2 protocol messages
+Instances can be also used to process FrostFS API V2 protocol messages
 (see neo.fs.v2.container package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:

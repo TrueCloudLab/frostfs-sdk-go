@@ -94,7 +94,7 @@ type ResObjectSearch struct {
 	statusRes
 }
 
-// ObjectListReader is designed to read list of object identifiers from NeoFS system.
+// ObjectListReader is designed to read list of object identifiers from FrostFS system.
 //
 // Must be initialized using Client.ObjectSearch, any other usage is unsafe.
 type ObjectListReader struct {
@@ -194,7 +194,7 @@ func (x *ObjectListReader) Iterate(f func(oid.ID) bool) error {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as Go built-in error.
-// If Client is tuned to resolve NeoFS API statuses, then NeoFS failures
+// If Client is tuned to resolve FrostFS API statuses, then FrostFS failures
 // codes are returned as error.
 //
 // Return statuses:
@@ -212,7 +212,7 @@ func (x *ObjectListReader) Close() (*ResObjectSearch, error) {
 	return &x.res, nil
 }
 
-// ObjectSearchInit initiates object selection through a remote server using NeoFS API protocol.
+// ObjectSearchInit initiates object selection through a remote server using FrostFS API protocol.
 //
 // The call only opens the transmission channel, explicit fetching of matched objects
 // is done using the ObjectListReader. Exactly one return value is non-nil.

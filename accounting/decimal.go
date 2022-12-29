@@ -15,7 +15,7 @@ import "github.com/TrueCloudLab/frostfs-api-go/v2/accounting"
 type Decimal accounting.Decimal
 
 // ReadFromV2 reads Decimal from the accounting.Decimal message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (d *Decimal) ReadFromV2(m accounting.Decimal) error {

@@ -18,13 +18,13 @@ type PrmAnnounceLocalTrust struct {
 	trusts []reputation.Trust
 }
 
-// SetEpoch sets number of NeoFS epoch in which the trust was assessed.
+// SetEpoch sets number of FrostFS epoch in which the trust was assessed.
 // Required parameter, must not be zero.
 func (x *PrmAnnounceLocalTrust) SetEpoch(epoch uint64) {
 	x.epoch = epoch
 }
 
-// SetValues sets values describing trust of the client to the NeoFS network participants.
+// SetValues sets values describing trust of the client to the FrostFS network participants.
 // Required parameter. Must not be empty.
 //
 // Must not be mutated before the end of the operation.
@@ -37,12 +37,12 @@ type ResAnnounceLocalTrust struct {
 	statusRes
 }
 
-// AnnounceLocalTrust sends client's trust values to the NeoFS network participants.
+// AnnounceLocalTrust sends client's trust values to the FrostFS network participants.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmAnnounceLocalTrust docs).
@@ -113,7 +113,7 @@ type PrmAnnounceIntermediateTrust struct {
 	trust    reputation.PeerToPeerTrust
 }
 
-// SetEpoch sets number of NeoFS epoch with which client's calculation algorithm is initialized.
+// SetEpoch sets number of FrostFS epoch with which client's calculation algorithm is initialized.
 // Required parameter, must not be zero.
 func (x *PrmAnnounceIntermediateTrust) SetEpoch(epoch uint64) {
 	x.epoch = epoch
@@ -137,13 +137,13 @@ type ResAnnounceIntermediateTrust struct {
 	statusRes
 }
 
-// AnnounceIntermediateTrust sends global trust values calculated for the specified NeoFS network participants
+// AnnounceIntermediateTrust sends global trust values calculated for the specified FrostFS network participants
 // at some stage of client's calculation algorithm.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmAnnounceIntermediateTrust docs).

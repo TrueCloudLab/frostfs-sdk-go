@@ -6,7 +6,7 @@ import (
 	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 )
 
-// DNS looks up NeoFS names using system DNS.
+// DNS looks up FrostFS names using system DNS.
 //
 // See also net package.
 type DNS struct{}

@@ -1,5 +1,5 @@
 # frostfs-sdk-go
-Go implementation of NeoFS SDK. It contains high-level version-independent wrappers
+Go implementation of FrostFS SDK. It contains high-level version-independent wrappers
 for structures from [frostfs-api-go](https://github.com/TrueCloudLab/frostfs-api-go) as well as
 helper functions for simplifying node/dApp implementations.
 
@@ -10,39 +10,39 @@ Contains fixed-point `Decimal` type for performing balance calculations.
 
 ### eacl
 Contains Extended ACL types for fine-grained access control.
-There is also a reference implementation of checking algorithm which is used in NeoFS node.
+There is also a reference implementation of checking algorithm which is used in FrostFS node.
 
 ### checksum
 Contains `Checksum` type encapsulating checksum as well as it's kind.
 Currently Sha256 and [Tillich-Zemor hashsum](https://github.com/TrueCloudLab/tzhash) are in use.
 
 ### owner
-`owner.ID` type represents single account interacting with NeoFS. In v2 version of protocol
+`owner.ID` type represents single account interacting with FrostFS. In v2 version of protocol
 it is just raw bytes behing [base58-encoded address](https://docs.neo.org/docs/en-us/basic/concept/wallets.html#address)
 in Neo blockchain. Note that for historical reasons it contains
 version prefix and checksum in addition to script-hash.
 
 ### token
-Contains Bearer token type with several NeoFS-specific methods.
+Contains Bearer token type with several FrostFS-specific methods.
 
 ### ns
-In NeoFS there are 2 types of name resolution: DNS and NNS. NNS stands for Neo Name Service
+In FrostFS there are 2 types of name resolution: DNS and NNS. NNS stands for Neo Name Service
 is just a [contract](https://github.com/TrueCloudLab/frostfs-contract) deployed on a Neo blockchain.
 Basically, NNS is just a DNS-on-chain which can be used for resolving container nice-names as well
 as any other name in dApps. See our [CoreDNS plugin](https://github.com/nspcc-dev/coredns/tree/master/plugin/nns)
 for the example of how NNS can be integrated in DNS.
 
 ### session
-To help lightweight clients interact with NeoFS without sacrificing trust, NeoFS has a concept
+To help lightweight clients interact with FrostFS without sacrificing trust, FrostFS has a concept
 of session token. It is signed by client and allows any node with which a session is established
 to perform certain actions on behalf of the user.
 
 ### client
-Contains client for working with NeoFS.
+Contains client for working with FrostFS.
 ```go
 var prmInit client.PrmInit
 prmInit.SetDefaultPrivateKey(key) // private key for request signing
-prmInit.ResolveNeoFSFailures() // enable erroneous status parsing
+prmInit.ResolveFrostFSFailures() // enable erroneous status parsing
 
 var c client.Client
 c.Init(prmInit)
@@ -70,15 +70,15 @@ fmt.Printf("Balance for %s: %v\n", acc, res.Amount())
 ```
 
 #### Response status
-In NeoFS every operation can fail on multiple levels, so a single `error` doesn't suffice,
+In FrostFS every operation can fail on multiple levels, so a single `error` doesn't suffice,
 e.g. consider a case when object was put on 4 out of 5 replicas. Thus, all request execution
 details are contained in `Status` returned from every RPC call. dApp can inspect them
 if needed and perform any desired action. In the case above we may want to report
 these details to the user as well as retry an operation, possibly with different parameters.
 Status wire-format is extendable and each node can report any set of details it wants.
 The set of reserved status codes can be found in
-[NeoFS API](https://github.com/TrueCloudLab/frostfs-api/blob/master/status/types.proto). There is also
-a `client.PrmInit.ResolveNeoFSFailures()` to seamlessly convert erroneous statuses into Go error type.
+[FrostFS API](https://github.com/TrueCloudLab/frostfs-api/blob/master/status/types.proto). There is also
+a `client.PrmInit.ResolveFrostFSFailures()` to seamlessly convert erroneous statuses into Go error type.
 
 ### policy
 Contains helpers allowing conversion of placing policy from/to JSON representation
@@ -107,7 +107,7 @@ import (
 )
 
 func placementNodes(addr *object.Address, p *netmap.PlacementPolicy, frostfsNodes []netmap.NodeInfo) {
-    // Convert list of nodes in NeoFS API format to the intermediate representation.
+    // Convert list of nodes in FrostFS API format to the intermediate representation.
     nodes := netmap.NodesFromInfo(nodes)
 
     // Create new netmap (errors are skipped for the sake of clarity). 
@@ -122,13 +122,13 @@ func placementNodes(addr *object.Address, p *netmap.PlacementPolicy, frostfsNode
 ```
 
 ### pool
-Simple pool for managing connections to NeoFS nodes.
+Simple pool for managing connections to FrostFS nodes.
 
 ### acl, checksum, version, signature
 Contain simple API wrappers.
 
 ### logger
-Wrapper over `zap.Logger` which is used across NeoFS codebase.
+Wrapper over `zap.Logger` which is used across FrostFS codebase.
 
 ### util
 Utilities for working with signature-related code.

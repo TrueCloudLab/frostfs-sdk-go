@@ -33,7 +33,7 @@ func (t *Tombstone) ToV2() *tombstone.Tombstone {
 	return (*tombstone.Tombstone)(t)
 }
 
-// ExpirationEpoch returns the last NeoFS epoch
+// ExpirationEpoch returns the last FrostFS epoch
 // number of the tombstone lifetime.
 //
 // See also SetExpirationEpoch.
@@ -41,7 +41,7 @@ func (t *Tombstone) ExpirationEpoch() uint64 {
 	return (*tombstone.Tombstone)(t).GetExpirationEpoch()
 }
 
-// SetExpirationEpoch sets the last NeoFS epoch
+// SetExpirationEpoch sets the last FrostFS epoch
 // number of the tombstone lifetime.
 //
 // See also ExpirationEpoch.

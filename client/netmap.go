@@ -28,12 +28,12 @@ type ResEndpointInfo struct {
 	ni netmap.NodeInfo
 }
 
-// LatestVersion returns latest NeoFS API protocol's version in use.
+// LatestVersion returns latest FrostFS API protocol's version in use.
 func (x ResEndpointInfo) LatestVersion() version.Version {
 	return x.version
 }
 
-// NodeInfo returns information about the NeoFS node served on the remote endpoint.
+// NodeInfo returns information about the FrostFS node served on the remote endpoint.
 func (x ResEndpointInfo) NodeInfo() netmap.NodeInfo {
 	return x.ni
 }
@@ -43,8 +43,8 @@ func (x ResEndpointInfo) NodeInfo() netmap.NodeInfo {
 // Method can be used as a health check to see if node is alive and responds to requests.
 //
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmEndpointInfo docs).
@@ -132,16 +132,16 @@ type ResNetworkInfo struct {
 	info netmap.NetworkInfo
 }
 
-// Info returns structured information about the NeoFS network.
+// Info returns structured information about the FrostFS network.
 func (x ResNetworkInfo) Info() netmap.NetworkInfo {
 	return x.info
 }
 
-// NetworkInfo requests information about the NeoFS network of which the remote server is a part.
+// NetworkInfo requests information about the FrostFS network of which the remote server is a part.
 //
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmNetworkInfo docs).
@@ -220,8 +220,8 @@ func (x ResNetMapSnapshot) NetMap() netmap.NetMap {
 // NetMapSnapshot requests current network view of the remote server.
 //
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Context is required and MUST NOT be nil. It is used for network communication.

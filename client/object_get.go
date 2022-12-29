@@ -72,7 +72,7 @@ func (x *prmObjectRead) WithBearerToken(t bearer.Token) {
 	x.meta.SetBearerToken(&v2token)
 }
 
-// FromContainer specifies NeoFS container of the object.
+// FromContainer specifies FrostFS container of the object.
 // Required parameter.
 func (x *prmObjectRead) FromContainer(id cid.ID) {
 	var cnrV2 v2refs.ContainerID
@@ -100,7 +100,7 @@ type ResObjectGet struct {
 	statusRes
 }
 
-// ObjectReader is designed to read one object from NeoFS system.
+// ObjectReader is designed to read one object from FrostFS system.
 //
 // Must be initialized using Client.ObjectGetInit, any other
 // usage is unsafe.
@@ -251,7 +251,7 @@ func (x *ObjectReader) close(ignoreEOF bool) (*ResObjectGet, error) {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as Go built-in error.
-// If Client is tuned to resolve NeoFS API statuses, then NeoFS failures
+// If Client is tuned to resolve FrostFS API statuses, then FrostFS failures
 // codes are returned as error.
 //
 // Return errors:
@@ -291,7 +291,7 @@ func (x *ObjectReader) Read(p []byte) (int, error) {
 	return n, nil
 }
 
-// ObjectGetInit initiates reading an object through a remote server using NeoFS API protocol.
+// ObjectGetInit initiates reading an object through a remote server using FrostFS API protocol.
 //
 // The call only opens the transmission channel, explicit fetching is done using the ObjectReader.
 // Exactly one return value is non-nil. Resulting reader must be finally closed.
@@ -392,12 +392,12 @@ func (x *ResObjectHead) ReadHeader(dst *object.Object) bool {
 	return true
 }
 
-// ObjectHead reads object header through a remote server using NeoFS API protocol.
+// ObjectHead reads object header through a remote server using FrostFS API protocol.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`,
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmObjectHead docs).
@@ -505,7 +505,7 @@ type ResObjectRange struct {
 }
 
 // ObjectRangeReader is designed to read payload range of one object
-// from NeoFS system.
+// from FrostFS system.
 //
 // Must be initialized using Client.ObjectRangeInit, any other
 // usage is unsafe.
@@ -616,7 +616,7 @@ func (x *ObjectRangeReader) close(ignoreEOF bool) (*ResObjectRange, error) {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as Go built-in error.
-// If Client is tuned to resolve NeoFS API statuses, then NeoFS failures
+// If Client is tuned to resolve FrostFS API statuses, then FrostFS failures
 // codes are returned as error.
 //
 // Return errors:
@@ -658,7 +658,7 @@ func (x *ObjectRangeReader) Read(p []byte) (int, error) {
 }
 
 // ObjectRangeInit initiates reading an object's payload range through a remote
-// server using NeoFS API protocol.
+// server using FrostFS API protocol.
 //
 // The call only opens the transmission channel, explicit fetching is done using the ObjectRangeReader.
 // Exactly one return value is non-nil. Resulting reader must be finally closed.

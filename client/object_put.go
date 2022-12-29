@@ -44,7 +44,7 @@ func (x ResObjectPut) StoredObjectID() oid.ID {
 	return x.obj
 }
 
-// ObjectWriter is designed to write one object to NeoFS system.
+// ObjectWriter is designed to write one object to FrostFS system.
 //
 // Must be initialized using Client.ObjectPutInit, any other
 // usage is unsafe.
@@ -181,7 +181,7 @@ func (x *ObjectWriter) WritePayloadChunk(chunk []byte) bool {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as Go built-in error.
-// If Client is tuned to resolve NeoFS API statuses, then NeoFS failures
+// If Client is tuned to resolve FrostFS API statuses, then FrostFS failures
 // codes are returned as error.
 //
 // Return statuses:
@@ -230,7 +230,7 @@ func (x *ObjectWriter) Close() (*ResObjectPut, error) {
 	return &x.res, nil
 }
 
-// ObjectPutInit initiates writing an object through a remote server using NeoFS API protocol.
+// ObjectPutInit initiates writing an object through a remote server using FrostFS API protocol.
 //
 // The call only opens the transmission channel, explicit recording is done using the ObjectWriter.
 // Exactly one return value is non-nil. Resulting writer must be finally closed.

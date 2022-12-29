@@ -38,7 +38,7 @@ const (
 )
 
 // ReadFromV2 reads Checksum from the refs.Checksum message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (c *Checksum) ReadFromV2(m refs.Checksum) error {

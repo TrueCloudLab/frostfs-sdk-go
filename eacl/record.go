@@ -38,12 +38,12 @@ func (r Record) Filters() []Filter {
 	return r.filters
 }
 
-// Operation returns NeoFS request verb to match.
+// Operation returns FrostFS request verb to match.
 func (r Record) Operation() Operation {
 	return r.operation
 }
 
-// SetOperation sets NeoFS request verb to match.
+// SetOperation sets FrostFS request verb to match.
 func (r *Record) SetOperation(operation Operation) {
 	r.operation = operation
 }

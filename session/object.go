@@ -11,7 +11,7 @@ import (
 	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 )
 
-// Object represents token of the NeoFS Object session. A session is opened
+// Object represents token of the FrostFS Object session. A session is opened
 // between any two sides of the system, and implements a mechanism for transferring
 // the power of attorney of actions to another network member. The session has a
 // limited validity period, and applies to a strictly defined set of operations.
@@ -74,7 +74,7 @@ func (x *Object) readFromV2(m session.Token, checkFieldPresence bool) error {
 }
 
 // ReadFromV2 reads Object from the session.Token message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *Object) ReadFromV2(m session.Token) error {
@@ -117,7 +117,7 @@ func (x Object) WriteToV2(m *session.Token) {
 	x.writeToV2(m, x.writeContext)
 }
 
-// Marshal encodes Object into a binary format of the NeoFS API protocol
+// Marshal encodes Object into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -128,7 +128,7 @@ func (x Object) Marshal() []byte {
 	return x.marshal(x.writeContext)
 }
 
-// Unmarshal decodes NeoFS API protocol binary format into the Object
+// Unmarshal decodes FrostFS API protocol binary format into the Object
 // (Protocol Buffers with direct field order). Returns an error describing
 // a format violation.
 //
@@ -137,7 +137,7 @@ func (x *Object) Unmarshal(data []byte) error {
 	return x.unmarshal(data, x.readContext)
 }
 
-// MarshalJSON encodes Object into a JSON format of the NeoFS API protocol
+// MarshalJSON encodes Object into a JSON format of the FrostFS API protocol
 // (Protocol Buffers JSON).
 //
 // See also UnmarshalJSON.
@@ -145,7 +145,7 @@ func (x Object) MarshalJSON() ([]byte, error) {
 	return x.marshalJSON(x.writeContext)
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON format into the Object
+// UnmarshalJSON decodes FrostFS API protocol JSON format into the Object
 // (Protocol Buffers JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.
@@ -188,7 +188,7 @@ func (x *Object) BindContainer(cnr cid.ID) {
 // AssertContainer checks if Object session bound to a given container.
 //
 // Zero Object isn't bound to any container which is incorrect according to
-// NeoFS API protocol.
+// FrostFS API protocol.
 //
 // See also BindContainer.
 func (x Object) AssertContainer(cnr cid.ID) bool {

@@ -13,7 +13,7 @@ import (
 	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 )
 
-// StorageGroup represents storage group of the NeoFS objects.
+// StorageGroup represents storage group of the FrostFS objects.
 //
 // StorageGroup is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/storagegroup.StorageGroup
 // message. See ReadFromMessageV2 / WriteToMessageV2 methods.
@@ -69,7 +69,7 @@ func (sg *StorageGroup) readFromV2(m storagegroup.StorageGroup, checkFieldPresen
 }
 
 // ReadFromV2 reads StorageGroup from the storagegroup.StorageGroup message.
-// Checks if the message conforms to NeoFS API V2 protocol.
+// Checks if the message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (sg *StorageGroup) ReadFromV2(m storagegroup.StorageGroup) error {
@@ -132,7 +132,7 @@ func (sg *StorageGroup) SetValidationDataHash(hash checksum.Checksum) {
 	(*storagegroup.StorageGroup)(sg).SetValidationHash(&v2)
 }
 
-// ExpirationEpoch returns last NeoFS epoch number
+// ExpirationEpoch returns last FrostFS epoch number
 // of the storage group lifetime.
 //
 // Zero StorageGroup has 0 expiration epoch.
@@ -143,7 +143,7 @@ func (sg StorageGroup) ExpirationEpoch() uint64 {
 	return v2.GetExpirationEpoch()
 }
 
-// SetExpirationEpoch sets last NeoFS epoch number
+// SetExpirationEpoch sets last FrostFS epoch number
 // of the storage group lifetime.
 //
 // See also ExpirationEpoch.

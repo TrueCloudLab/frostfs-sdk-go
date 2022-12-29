@@ -11,7 +11,7 @@ import (
 	"github.com/mr-tron/base58"
 )
 
-// ID represents NeoFS object identifier in a container.
+// ID represents FrostFS object identifier in a container.
 //
 // ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.ObjectID
 // message. See ReadFromV2 / WriteToV2 methods.
@@ -24,7 +24,7 @@ import (
 type ID [sha256.Size]byte
 
 // ReadFromV2 reads ID from the refs.ObjectID message. Returns an error if
-// the message is malformed according to the NeoFS API V2 protocol.
+// the message is malformed according to the FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (id *ID) ReadFromV2(m refs.ObjectID) error {
@@ -85,7 +85,7 @@ func (id ID) Equals(id2 ID) bool {
 	return id == id2
 }
 
-// EncodeToString encodes ID into NeoFS API protocol string.
+// EncodeToString encodes ID into FrostFS API protocol string.
 //
 // Zero ID is base58 encoding of 32 zeros.
 //
@@ -94,7 +94,7 @@ func (id ID) EncodeToString() string {
 	return base58.Encode(id[:])
 }
 
-// DecodeString decodes string into ID according to NeoFS API protocol. Returns
+// DecodeString decodes string into ID according to FrostFS API protocol. Returns
 // an error if s is malformed.
 //
 // See also DecodeString.
@@ -111,7 +111,7 @@ func (id *ID) DecodeString(s string) error {
 //
 // String is designed to be human-readable, and its format MAY differ between
 // SDK versions. String MAY return same result as EncodeToString. String MUST NOT
-// be used to encode ID into NeoFS protocol string.
+// be used to encode ID into FrostFS protocol string.
 func (id ID) String() string {
 	return id.EncodeToString()
 }

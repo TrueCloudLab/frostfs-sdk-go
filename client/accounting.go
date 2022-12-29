@@ -19,7 +19,7 @@ type PrmBalanceGet struct {
 	account    user.ID
 }
 
-// SetAccount sets identifier of the NeoFS account for which the balance is requested.
+// SetAccount sets identifier of the FrostFS account for which the balance is requested.
 // Required parameter.
 func (x *PrmBalanceGet) SetAccount(id user.ID) {
 	x.account = id
@@ -33,17 +33,17 @@ type ResBalanceGet struct {
 	amount accounting.Decimal
 }
 
-// Amount returns current amount of funds on the NeoFS account as decimal number.
+// Amount returns current amount of funds on the FrostFS account as decimal number.
 func (x ResBalanceGet) Amount() accounting.Decimal {
 	return x.amount
 }
 
-// BalanceGet requests current balance of the NeoFS account.
+// BalanceGet requests current balance of the FrostFS account.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`,
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmBalanceGet docs).

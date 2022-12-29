@@ -9,7 +9,7 @@ import (
 	"github.com/TrueCloudLab/frostfs-api-go/v2/status"
 )
 
-// StatusV2 defines a variety of Status instances compatible with NeoFS API V2 protocol.
+// StatusV2 defines a variety of Status instances compatible with FrostFS API V2 protocol.
 //
 // Note: it is not recommended to use this type directly, it is intended for documentation of the library functionality.
 type StatusV2 interface {

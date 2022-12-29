@@ -9,7 +9,7 @@ import (
 	"github.com/mr-tron/base58"
 )
 
-// PeerID represents unique identifier of the peer participating in the NeoFS
+// PeerID represents unique identifier of the peer participating in the FrostFS
 // reputation system.
 //
 // ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/reputation.PeerID
@@ -21,7 +21,7 @@ type PeerID struct {
 }
 
 // ReadFromV2 reads PeerID from the reputation.PeerID message. Returns an
-// error if the message is malformed according to the NeoFS API V2 protocol.
+// error if the message is malformed according to the FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *PeerID) ReadFromV2(m reputation.PeerID) error {
@@ -44,7 +44,7 @@ func (x PeerID) WriteToV2(m *reputation.PeerID) {
 }
 
 // SetPublicKey sets PeerID as a binary-encoded public key which authenticates
-// the participant of the NeoFS reputation system.
+// the participant of the FrostFS reputation system.
 //
 // Argument MUST NOT be mutated, make a copy first.
 //
@@ -55,7 +55,7 @@ func (x *PeerID) SetPublicKey(key []byte) {
 
 // PublicKey return public key set using SetPublicKey.
 //
-// Zero PeerID has zero key which is incorrect according to NeoFS API
+// Zero PeerID has zero key which is incorrect according to FrostFS API
 // protocol.
 //
 // Return value MUST NOT be mutated, make a copy first.
@@ -69,7 +69,7 @@ func ComparePeerKey(peer PeerID, key []byte) bool {
 	return bytes.Equal(peer.PublicKey(), key)
 }
 
-// EncodeToString encodes ID into NeoFS API protocol string.
+// EncodeToString encodes ID into FrostFS API protocol string.
 //
 // Zero PeerID is base58 encoding of PeerIDSize zeros.
 //
@@ -78,7 +78,7 @@ func (x PeerID) EncodeToString() string {
 	return base58.Encode(x.m.GetPublicKey())
 }
 
-// DecodeString decodes string into PeerID according to NeoFS API protocol.
+// DecodeString decodes string into PeerID according to FrostFS API protocol.
 // Returns an error if s is malformed.
 //
 // See also DecodeString.
@@ -97,7 +97,7 @@ func (x *PeerID) DecodeString(s string) error {
 //
 // String is designed to be human-readable, and its format MAY differ between
 // SDK versions. String MAY return same result as EncodeToString. String MUST NOT
-// be used to encode ID into NeoFS protocol string.
+// be used to encode ID into FrostFS protocol string.
 func (x PeerID) String() string {
 	return x.EncodeToString()
 }

@@ -21,7 +21,7 @@ type Version refs.Version
 const sdkMjr, sdkMnr = 2, 13
 
 // Current returns Version instance that initialized to the
-// latest supported NeoFS API revision number in SDK.
+// latest supported FrostFS API revision number in SDK.
 func Current() (v Version) {
 	v.SetMajor(sdkMjr)
 	v.SetMinor(sdkMnr)
@@ -57,7 +57,7 @@ func (v Version) WriteToV2(m *refs.Version) {
 }
 
 // ReadFromV2 reads Version from the refs.Version message. Checks if the message
-// conforms to NeoFS API V2 protocol.
+// conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (v *Version) ReadFromV2(m refs.Version) error {

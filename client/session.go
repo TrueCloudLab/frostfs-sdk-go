@@ -46,7 +46,7 @@ func (x *ResSessionCreate) setID(id []byte) {
 	x.id = id
 }
 
-// ID returns identifier of the opened session in a binary NeoFS API protocol format.
+// ID returns identifier of the opened session in a binary FrostFS API protocol format.
 //
 // Client doesn't retain value so modification is safe.
 func (x ResSessionCreate) ID() []byte {
@@ -57,7 +57,7 @@ func (x *ResSessionCreate) setSessionKey(key []byte) {
 	x.sessionKey = key
 }
 
-// PublicKey returns public key of the opened session in a binary NeoFS API protocol format.
+// PublicKey returns public key of the opened session in a binary FrostFS API protocol format.
 func (x ResSessionCreate) PublicKey() []byte {
 	return x.sessionKey
 }
@@ -68,8 +68,8 @@ func (x ResSessionCreate) PublicKey() []byte {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmSessionCreate docs).

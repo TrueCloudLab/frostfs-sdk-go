@@ -34,7 +34,7 @@ type contextReader func(session.TokenContext, bool) error
 
 // reads commonData and custom context from the session.Token message.
 // If checkFieldPresence is set, returns an error on absence of any protocol-required
-// field. Verifies format of any presented field according to NeoFS API V2 protocol.
+// field. Verifies format of any presented field according to FrostFS API V2 protocol.
 // Calls contextReader if session context is set. Passes checkFieldPresence into contextReader.
 func (x *commonData) readFromV2(m session.Token, checkFieldPresence bool, r contextReader) error {
 	var err error
@@ -220,7 +220,7 @@ func (x *commonData) unmarshalJSON(data []byte, r contextReader) error {
 }
 
 // SetExp sets "exp" (expiration time) claim which identifies the expiration
-// time (in NeoFS epochs) after which the session MUST NOT be accepted for
+// time (in FrostFS epochs) after which the session MUST NOT be accepted for
 // processing. The processing of the "exp" claim requires that the current
 // epoch MUST be before or equal to the expiration epoch listed in the "exp"
 // claim.
@@ -233,7 +233,7 @@ func (x *commonData) SetExp(exp uint64) {
 	x.lifetimeSet = true
 }
 
-// SetNbf sets "nbf" (not before) claim which identifies the time (in NeoFS
+// SetNbf sets "nbf" (not before) claim which identifies the time (in FrostFS
 // epochs) before which the session MUST NOT be accepted for processing.
 // The processing of the "nbf" claim requires that the current date/time MUST be
 // after or equal to the not-before date/time listed in the "nbf" claim.
@@ -246,7 +246,7 @@ func (x *commonData) SetNbf(nbf uint64) {
 	x.lifetimeSet = true
 }
 
-// SetIat sets "iat" (issued at) claim which identifies the time (in NeoFS
+// SetIat sets "iat" (issued at) claim which identifies the time (in FrostFS
 // epochs) at which the session was issued. This claim can be used to
 // determine the age of the session.
 //

@@ -30,7 +30,7 @@ type PrmContainerPut struct {
 	session    session.Container
 }
 
-// SetContainer sets structured information about new NeoFS container.
+// SetContainer sets structured information about new FrostFS container.
 // Required parameter.
 func (x *PrmContainerPut) SetContainer(cnr container.Container) {
 	x.cnr = cnr
@@ -64,12 +64,12 @@ func (x ResContainerPut) ID() cid.ID {
 	return x.id
 }
 
-// ContainerPut sends request to save container in NeoFS.
+// ContainerPut sends request to save container in FrostFS.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Operation is asynchronous and no guaranteed even in the absence of errors.
@@ -196,12 +196,12 @@ func (x ResContainerGet) Container() container.Container {
 	return x.cnr
 }
 
-// ContainerGet reads NeoFS container by ID.
+// ContainerGet reads FrostFS container by ID.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmContainerGet docs).
@@ -275,7 +275,7 @@ type PrmContainerList struct {
 	ownerID  user.ID
 }
 
-// SetAccount sets identifier of the NeoFS account to list the containers.
+// SetAccount sets identifier of the FrostFS account to list the containers.
 // Required parameter.
 func (x *PrmContainerList) SetAccount(id user.ID) {
 	x.ownerID = id
@@ -300,8 +300,8 @@ func (x ResContainerList) Containers() []cid.ID {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmContainerList docs).
@@ -377,7 +377,7 @@ type PrmContainerDelete struct {
 	tok    session.Container
 }
 
-// SetContainer sets identifier of the NeoFS container to be removed.
+// SetContainer sets identifier of the FrostFS container to be removed.
 // Required parameter.
 func (x *PrmContainerDelete) SetContainer(id cid.ID) {
 	x.id = id
@@ -400,12 +400,12 @@ type ResContainerDelete struct {
 	statusRes
 }
 
-// ContainerDelete sends request to remove the NeoFS container.
+// ContainerDelete sends request to remove the FrostFS container.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Operation is asynchronous and no guaranteed even in the absence of errors.
@@ -501,7 +501,7 @@ type PrmContainerEACL struct {
 	id    cid.ID
 }
 
-// SetContainer sets identifier of the NeoFS container to read the eACL table.
+// SetContainer sets identifier of the FrostFS container to read the eACL table.
 // Required parameter.
 func (x *PrmContainerEACL) SetContainer(id cid.ID) {
 	x.id = id
@@ -520,12 +520,12 @@ func (x ResContainerEACL) Table() eacl.Table {
 	return x.table
 }
 
-// ContainerEACL reads eACL table of the NeoFS container.
+// ContainerEACL reads eACL table of the FrostFS container.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmContainerEACL docs).
@@ -629,12 +629,12 @@ type ResContainerSetEACL struct {
 	statusRes
 }
 
-// ContainerSetEACL sends request to update eACL table of the NeoFS container.
+// ContainerSetEACL sends request to update eACL table of the FrostFS container.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Operation is asynchronous and no guaranteed even in the absence of errors.
@@ -738,8 +738,8 @@ type ResAnnounceSpace struct {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`.
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Operation is asynchronous and no guaranteed even in the absence of errors.
@@ -761,13 +761,13 @@ func (c *Client) ContainerAnnounceUsedSpace(ctx context.Context, prm PrmAnnounce
 		panic("missing announcements")
 	}
 
-	// convert list of SDK announcement structures into NeoFS-API v2 list
+	// convert list of SDK announcement structures into FrostFS-API v2 list
 	v2announce := make([]v2container.UsedSpaceAnnouncement, len(prm.announcements))
 	for i := range prm.announcements {
 		prm.announcements[i].WriteToV2(&v2announce[i])
 	}
 
-	// prepare body of the NeoFS-API v2 request and request itself
+	// prepare body of the FrostFS-API v2 request and request itself
 	reqBody := new(v2container.AnnounceUsedSpaceRequestBody)
 	reqBody.SetAnnouncements(v2announce)
 

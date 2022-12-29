@@ -45,7 +45,7 @@ func RegisterScheme(scheme Scheme, f func() PublicKey) {
 }
 
 // Signer is an interface of entities that can be used for signing operations
-// in NeoFS. Unites secret and public parts. For example, an ECDSA private key
+// in FrostFS. Unites secret and public parts. For example, an ECDSA private key
 // or external auth service.
 //
 // See also PublicKey.
@@ -63,7 +63,7 @@ type Signer interface {
 }
 
 // PublicKey represents a public key using fixed signature scheme supported by
-// NeoFS.
+// FrostFS.
 //
 // See also Signer.
 type PublicKey interface {

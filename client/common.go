@@ -36,7 +36,7 @@ func (x statusRes) Status() apistatus.Status {
 
 // groups meta parameters shared between all Client operations.
 type prmCommonMeta struct {
-	// NeoFS request X-Headers
+	// FrostFS request X-Headers
 	xHeaders []string
 }
 
@@ -100,7 +100,7 @@ type contextCall struct {
 	// if set, protocol errors will be expanded into a final error
 	resolveAPIFailures bool
 
-	// NeoFS network magic
+	// FrostFS network magic
 	netMagic uint64
 
 	// Meta parameters
@@ -256,7 +256,7 @@ func (c *Client) processResponse(resp responseV2) (apistatus.Status, error) {
 	}
 
 	st := apistatus.FromStatusV2(resp.GetMetaHeader().GetStatus())
-	if c.prm.resolveNeoFSErrors {
+	if c.prm.resolveFrostFSErrors {
 		return st, apistatus.ErrFromStatus(st)
 	}
 	return st, nil
@@ -329,14 +329,14 @@ func (x *contextCall) processCall() bool {
 // initializes static cross-call parameters inherited from client.
 func (c *Client) initCallContext(ctx *contextCall) {
 	ctx.key = c.prm.key
-	ctx.resolveAPIFailures = c.prm.resolveNeoFSErrors
+	ctx.resolveAPIFailures = c.prm.resolveFrostFSErrors
 	ctx.callbackResp = c.prm.cbRespInfo
 	ctx.netMagic = c.prm.netMagic
 }
 
 // ExecRaw executes f with underlying github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client.Client
 // instance. Communicate over the Protocol Buffers protocol in a more flexible way:
-// most often used to transmit data over a fixed version of the NeoFS protocol, as well
+// most often used to transmit data over a fixed version of the FrostFS protocol, as well
 // as to support custom services.
 //
 // The f must not manipulate the client connection passed into it.

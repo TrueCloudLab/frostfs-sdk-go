@@ -1,5 +1,5 @@
 /*
-Package audit provides features to process data audit in NeoFS system.
+Package audit provides features to process data audit in FrostFS system.
 
 Result type groups values which can be gathered during data audit process:
 

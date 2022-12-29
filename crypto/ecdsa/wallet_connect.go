@@ -38,7 +38,7 @@ func (x SignerWalletConnect) Public() frostfscrypto.PublicKey {
 	return (*PublicKeyWalletConnect)(&x.PublicKey)
 }
 
-// PublicKeyWalletConnect is a wrapper over ecdsa.PublicKey used for NeoFS needs.
+// PublicKeyWalletConnect is a wrapper over ecdsa.PublicKey used for FrostFS needs.
 // Provides frostfscrypto.PublicKey interface.
 //
 // Instances MUST be initialized from ecdsa.PublicKey using type conversion.

@@ -14,9 +14,9 @@ import (
 	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
 )
 
-// PlacementPolicy declares policy to store objects in the NeoFS container.
+// PlacementPolicy declares policy to store objects in the FrostFS container.
 // Within itself, PlacementPolicy represents a set of rules to select a subset
-// of nodes from NeoFS network map - node-candidates for object storage.
+// of nodes from FrostFS network map - node-candidates for object storage.
 //
 // PlacementPolicy is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.PlacementPolicy
 // message. See ReadFromV2 / WriteToV2 methods.
@@ -57,7 +57,7 @@ func (p *PlacementPolicy) readFromV2(m netmap.PlacementPolicy, checkFieldPresenc
 	return nil
 }
 
-// Marshal encodes PlacementPolicy into a binary format of the NeoFS API
+// Marshal encodes PlacementPolicy into a binary format of the FrostFS API
 // protocol (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -68,7 +68,7 @@ func (p PlacementPolicy) Marshal() []byte {
 	return m.StableMarshal(nil)
 }
 
-// Unmarshal decodes NeoFS API protocol binary format into the PlacementPolicy
+// Unmarshal decodes FrostFS API protocol binary format into the PlacementPolicy
 // (Protocol Buffers with direct field order). Returns an error describing
 // a format violation.
 //
@@ -84,7 +84,7 @@ func (p *PlacementPolicy) Unmarshal(data []byte) error {
 	return p.readFromV2(m, false)
 }
 
-// MarshalJSON encodes PlacementPolicy into a JSON format of the NeoFS API
+// MarshalJSON encodes PlacementPolicy into a JSON format of the FrostFS API
 // protocol (Protocol Buffers JSON).
 //
 // See also UnmarshalJSON.
@@ -95,7 +95,7 @@ func (p PlacementPolicy) MarshalJSON() ([]byte, error) {
 	return m.MarshalJSON()
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON format into the PlacementPolicy
+// UnmarshalJSON decodes FrostFS API protocol JSON format into the PlacementPolicy
 // (Protocol Buffers JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.
@@ -111,7 +111,7 @@ func (p *PlacementPolicy) UnmarshalJSON(data []byte) error {
 }
 
 // ReadFromV2 reads PlacementPolicy from the netmap.PlacementPolicy message.
-// Checks if the message conforms to NeoFS API V2 protocol.
+// Checks if the message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (p *PlacementPolicy) ReadFromV2(m netmap.PlacementPolicy) error {
@@ -188,7 +188,7 @@ func (p *PlacementPolicy) AddReplicas(rs ...ReplicaDescriptor) {
 // NumberOfReplicas returns number of replica descriptors set using AddReplicas.
 //
 // Zero PlacementPolicy has no replicas which is incorrect according to the
-// NeoFS API protocol.
+// FrostFS API protocol.
 func (p PlacementPolicy) NumberOfReplicas() int {
 	return len(p.replicas)
 }
@@ -202,7 +202,7 @@ func (p PlacementPolicy) ReplicaNumberByIndex(i int) uint32 {
 }
 
 // SetContainerBackupFactor sets container backup factor: it controls how deep
-// NeoFS will search for nodes alternatives to include into container's nodes subset.
+// FrostFS will search for nodes alternatives to include into container's nodes subset.
 //
 // Zero PlacementPolicy has zero container backup factor.
 func (p *PlacementPolicy) SetContainerBackupFactor(f uint32) {

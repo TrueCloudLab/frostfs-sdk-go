@@ -18,7 +18,7 @@ import (
 	"github.com/nspcc-dev/neo-go/pkg/vm/stackitem"
 )
 
-// NNS looks up NeoFS names using Neo Name Service.
+// NNS looks up FrostFS names using Neo Name Service.
 //
 // Instances are created with a variable declaration. Before work, the connection
 // to the NNS server MUST be established using Dial method.

@@ -16,22 +16,22 @@ import (
 	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
-// Object represents in-memory structure of the NeoFS object.
-// Type is compatible with NeoFS API V2 protocol.
+// Object represents in-memory structure of the FrostFS object.
+// Type is compatible with FrostFS API V2 protocol.
 //
 // Instance can be created depending on scenario:
 //   - InitCreation (an object to be placed in container);
 //   - New (blank instance, usually needed for decoding);
-//   - NewFromV2 (when working under NeoFS API V2 protocol).
+//   - NewFromV2 (when working under FrostFS API V2 protocol).
 type Object object.Object
 
 // RequiredFields contains the minimum set of object data that must be set
-// by the NeoFS user at the stage of creation.
+// by the FrostFS user at the stage of creation.
 type RequiredFields struct {
-	// Identifier of the NeoFS container associated with the object.
+	// Identifier of the FrostFS container associated with the object.
 	Container cid.ID
 
-	// Object owner's user ID in the NeoFS system.
+	// Object owner's user ID in the FrostFS system.
 	Owner user.ID
 }
 

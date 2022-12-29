@@ -9,7 +9,7 @@ import (
 	"github.com/TrueCloudLab/frostfs-sdk-go/user"
 )
 
-// Info represents information about NeoFS subnet.
+// Info represents information about FrostFS subnet.
 //
 // Instances can be created using built-in var declaration.
 type Info struct {
@@ -18,7 +18,7 @@ type Info struct {
 	owner user.ID
 }
 
-// Marshal encodes Info into a binary format of the NeoFS API protocol
+// Marshal encodes Info into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -91,7 +91,7 @@ func (x *Info) SetOwner(id user.ID) {
 // Owner returns subnet owner set using SetOwner.
 //
 // Zero Info has no owner which is incorrect according to the
-// NeoFS API protocol.
+// FrostFS API protocol.
 func (x Info) Owner() user.ID {
 	return x.owner
 }

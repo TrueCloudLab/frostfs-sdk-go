@@ -69,7 +69,7 @@ func (x *PrmObjectHash) WithBearerToken(t bearer.Token) {
 	x.meta.SetBearerToken(&v2token)
 }
 
-// FromContainer specifies NeoFS container of the object.
+// FromContainer specifies FrostFS container of the object.
 // Required parameter.
 func (x *PrmObjectHash) FromContainer(id cid.ID) {
 	var cidV2 v2refs.ContainerID
@@ -143,15 +143,15 @@ func (x ResObjectHash) Checksums() [][]byte {
 }
 
 // ObjectHash requests checksum of the range list of the object payload using
-// NeoFS API protocol.
+// FrostFS API protocol.
 //
 // Returns a list of checksums in raw form: the format of hashes and their number
 // is left for the caller to check. Client preserves the order of the server's response.
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`,
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmObjectHash docs).

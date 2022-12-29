@@ -7,7 +7,7 @@ import (
 )
 
 // Lock represents record with locked objects. It is compatible with
-// NeoFS API V2 protocol.
+// FrostFS API V2 protocol.
 //
 // Lock instance can be written to the Object, see WriteLock/ReadLock.
 type Lock v2object.Lock
@@ -62,12 +62,12 @@ func (x *Lock) WriteMembers(ids []oid.ID) {
 	(*v2object.Lock)(x).SetMembers(members)
 }
 
-// Marshal encodes the Lock into a NeoFS protocol binary format.
+// Marshal encodes the Lock into a FrostFS protocol binary format.
 func (x Lock) Marshal() []byte {
 	return (*v2object.Lock)(&x).StableMarshal(nil)
 }
 
-// Unmarshal decodes the Lock from its NeoFS protocol binary representation.
+// Unmarshal decodes the Lock from its FrostFS protocol binary representation.
 func (x *Lock) Unmarshal(data []byte) error {
 	return (*v2object.Lock)(x).Unmarshal(data)
 }

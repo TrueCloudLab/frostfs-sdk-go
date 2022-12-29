@@ -7,8 +7,8 @@ import (
 	"github.com/TrueCloudLab/hrw"
 )
 
-// NetMap represents NeoFS network map. It includes information about all
-// storage nodes registered in NeoFS the network.
+// NetMap represents FrostFS network map. It includes information about all
+// storage nodes registered in FrostFS the network.
 //
 // NetMap is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/netmap.NetMap
 // message. See ReadFromV2 / WriteToV2 methods.
@@ -21,7 +21,7 @@ type NetMap struct {
 }
 
 // ReadFromV2 reads NetMap from the netmap.NetMap message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (m *NetMap) ReadFromV2(msg netmap.NetMap) error {
@@ -66,7 +66,7 @@ func (m NetMap) WriteToV2(msg *netmap.NetMap) {
 	msg.SetEpoch(m.epoch)
 }
 
-// SetNodes sets information list about all storage nodes from the NeoFS network.
+// SetNodes sets information list about all storage nodes from the FrostFS network.
 //
 // Argument MUST NOT be mutated, make a copy first.
 //

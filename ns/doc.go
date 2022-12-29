@@ -1,7 +1,7 @@
 /*
-Package ns provides functionality of NeoFS name system.
+Package ns provides functionality of FrostFS name system.
 
-DNS type is designed to resolve NeoFS-related names using Domain Name System:
+DNS type is designed to resolve FrostFS-related names using Domain Name System:
 
 	const containerName = "some-container"
 
@@ -10,7 +10,7 @@ DNS type is designed to resolve NeoFS-related names using Domain Name System:
 	containerID, err := dns.ResolveContainerName(containerName)
 	// ...
 
-NNS type is designed to resolve NeoFS-related names using Neo Name Service:
+NNS type is designed to resolve FrostFS-related names using Neo Name Service:
 
 	var nns NNS
 

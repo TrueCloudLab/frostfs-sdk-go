@@ -55,7 +55,7 @@ func (x *PrmObjectDelete) WithBearerToken(t bearer.Token) {
 	x.meta.SetBearerToken(&v2token)
 }
 
-// FromContainer specifies NeoFS container of the object.
+// FromContainer specifies FrostFS container of the object.
 // Required parameter.
 func (x *PrmObjectDelete) FromContainer(id cid.ID) {
 	var cidV2 v2refs.ContainerID
@@ -100,7 +100,7 @@ func (x ResObjectDelete) Tombstone() oid.ID {
 	return x.tomb
 }
 
-// ObjectDelete marks an object for deletion from the container using NeoFS API protocol.
+// ObjectDelete marks an object for deletion from the container using FrostFS API protocol.
 // As a marker, a special unit called a tombstone is placed in the container.
 // It confirms the user's intent to delete the object, and is itself a container object.
 // Explicit deletion is done asynchronously, and is generally not guaranteed.
@@ -110,8 +110,8 @@ func (x ResObjectDelete) Tombstone() oid.ID {
 //
 // Exactly one return value is non-nil. By default, server status is returned in res structure.
 // Any client's internal or transport errors are returned as `error`,
-// If PrmInit.ResolveNeoFSFailures has been called, unsuccessful
-// NeoFS status codes are returned as `error`, otherwise, are included
+// If PrmInit.ResolveFrostFSFailures has been called, unsuccessful
+// FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
 // Immediately panics if parameters are set incorrectly (see PrmObjectDelete docs).

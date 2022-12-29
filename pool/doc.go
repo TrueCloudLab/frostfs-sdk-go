@@ -1,5 +1,5 @@
 /*
-Package pool provides a wrapper for several NeoFS API clients.
+Package pool provides a wrapper for several FrostFS API clients.
 
 The main component is Pool type. It is a virtual connection to the network
 and provides methods for executing operations on the server. It also supports
@@ -20,12 +20,12 @@ This InitParameters will make pool use 192.168.130.71 node while it is healthy. 
 	p, err := pool.NewPool(prm)
 	// ...
 
-Connect to the NeoFS server:
+Connect to the FrostFS server:
 
 	err := p.Dial(ctx)
 	// ...
 
-Execute NeoFS operation on the server:
+Execute FrostFS operation on the server:
 
 	var prm pool.PrmContainerPut
 	prm.SetContainer(cnr)
@@ -34,7 +34,7 @@ Execute NeoFS operation on the server:
 	res, err := p.PutContainer(context.Background(), prm)
 	// ...
 
-Execute NeoFS operation on the server and check error:
+Execute FrostFS operation on the server and check error:
 
 	var prm pool.PrmObjectHead
 	prm.SetAddress(addr)

@@ -11,7 +11,7 @@ import (
 	"github.com/TrueCloudLab/frostfs-sdk-go/version"
 )
 
-// Result represents report on the results of the data audit in NeoFS system.
+// Result represents report on the results of the data audit in FrostFS system.
 //
 // Result is mutually binary-compatible with github.com/TrueCloudLab/frostfs-api-go/v2/audit.DataAuditResult
 // message. See Marshal / Unmarshal methods.
@@ -23,7 +23,7 @@ type Result struct {
 	v2 audit.DataAuditResult
 }
 
-// Marshal encodes Result into a canonical NeoFS binary format (Protocol Buffers
+// Marshal encodes Result into a canonical FrostFS binary format (Protocol Buffers
 // with direct field order).
 //
 // Writes version.Current() protocol version into the resulting message if Result
@@ -43,7 +43,7 @@ func (r *Result) Marshal() []byte {
 
 var errCIDNotSet = errors.New("container ID is not set")
 
-// Unmarshal decodes Result from its canonical NeoFS binary format (Protocol Buffers
+// Unmarshal decodes Result from its canonical FrostFS binary format (Protocol Buffers
 // with direct field order). Returns an error describing a format violation.
 //
 // See also Marshal.
@@ -91,7 +91,7 @@ func (r *Result) Unmarshal(data []byte) error {
 	return nil
 }
 
-// Epoch returns NeoFS epoch when the data associated with the Result was audited.
+// Epoch returns FrostFS epoch when the data associated with the Result was audited.
 //
 // Zero Result has zero epoch.
 //
@@ -100,7 +100,7 @@ func (r Result) Epoch() uint64 {
 	return r.v2.GetAuditEpoch()
 }
 
-// ForEpoch specifies NeoFS epoch when the data associated with the Result was audited.
+// ForEpoch specifies FrostFS epoch when the data associated with the Result was audited.
 //
 // See also Epoch.
 func (r *Result) ForEpoch(epoch uint64) {
@@ -136,8 +136,8 @@ func (r *Result) ForContainer(cnr cid.ID) {
 	r.v2.SetContainerID(&cidV2)
 }
 
-// AuditorKey returns public key of the auditing NeoFS Inner Ring node in
-// a NeoFS binary key format.
+// AuditorKey returns public key of the auditing FrostFS Inner Ring node in
+// a FrostFS binary key format.
 //
 // Zero Result has nil key. Return value MUST NOT be mutated: to do this,
 // first make a copy.
@@ -147,8 +147,8 @@ func (r Result) AuditorKey() []byte {
 	return r.v2.GetPublicKey()
 }
 
-// SetAuditorKey specifies public key of the auditing NeoFS Inner Ring node in
-// a NeoFS binary key format.
+// SetAuditorKey specifies public key of the auditing FrostFS Inner Ring node in
+// a FrostFS binary key format.
 //
 // Argument MUST NOT be mutated at least until the end of using the Result.
 //

@@ -1,6 +1,6 @@
 package apistatus
 
-// Status defines a variety of NeoFS API status returns.
+// Status defines a variety of FrostFS API status returns.
 //
 // All statuses are split into two disjoint subsets: successful and failed, and:
 //   - statuses that implement the build-in error interface are considered failed statuses;
@@ -14,7 +14,7 @@ package apistatus
 // IsSuccessful function should be used (try to avoid nil comparison).
 // It should be noted that using direct typecasting is not a compatible approach.
 //
-// To transport statuses using the NeoFS API V2 protocol, see StatusV2 interface and FromStatusV2 and ToStatusV2 functions.
+// To transport statuses using the FrostFS API V2 protocol, see StatusV2 interface and FromStatusV2 and ToStatusV2 functions.
 type Status interface{}
 
 // ErrFromStatus converts Status instance to error if it is failed. Returns nil on successful Status.

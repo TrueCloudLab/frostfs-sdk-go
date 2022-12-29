@@ -1,10 +1,10 @@
 /*
-Package version provides functionality for NeoFS versioning.
+Package version provides functionality for FrostFS versioning.
 
-NeoFS uses NeoFS API versioning scheme. It uses major and minor version of
+FrostFS uses FrostFS API versioning scheme. It uses major and minor version of
 the API.
 
-In most of the cases it will be enough to use the latest supported NeoFS API
+In most of the cases it will be enough to use the latest supported FrostFS API
 version in SDK:
 
 	ver := version.Current()

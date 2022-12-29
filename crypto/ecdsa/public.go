@@ -11,7 +11,7 @@ import (
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
 )
 
-// PublicKey is a wrapper over ecdsa.PublicKey used for NeoFS needs.
+// PublicKey is a wrapper over ecdsa.PublicKey used for FrostFS needs.
 // Provides frostfscrypto.PublicKey interface.
 //
 // Instances MUST be initialized from ecdsa.PublicKey using type conversion.
@@ -77,7 +77,7 @@ func (x PublicKey) Verify(data, signature []byte) bool {
 	return r != nil && s != nil && ecdsa.Verify((*ecdsa.PublicKey)(&x), h[:], r, s)
 }
 
-// PublicKeyRFC6979 is a wrapper over ecdsa.PublicKey used for NeoFS needs.
+// PublicKeyRFC6979 is a wrapper over ecdsa.PublicKey used for FrostFS needs.
 // Provides frostfscrypto.PublicKey interface.
 //
 // Instances MUST be initialized from ecdsa.PublicKey using type conversion.

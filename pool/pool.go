@@ -33,7 +33,7 @@ import (
 	"go.uber.org/zap"
 )
 
-// client represents virtual connection to the single NeoFS network endpoint from which Pool is formed.
+// client represents virtual connection to the single FrostFS network endpoint from which Pool is formed.
 // This interface is expected to have exactly one production implementation - clientWrapper.
 // Others are expected to be for test purposes only.
 type client interface {
@@ -233,7 +233,7 @@ type wrapperPrm struct {
 	poolRequestInfoCallback func(RequestInfo)
 }
 
-// setAddress sets endpoint to connect in NeoFS network.
+// setAddress sets endpoint to connect in FrostFS network.
 func (x *wrapperPrm) setAddress(address string) {
 	x.address = address
 }
@@ -287,7 +287,7 @@ func newWrapper(prm wrapperPrm) *clientWrapper {
 	return res
 }
 
-// dial establishes a connection to the server from the NeoFS network.
+// dial establishes a connection to the server from the FrostFS network.
 // Returns an error describing failure reason. If failed, the client
 // SHOULD NOT be used.
 func (c *clientWrapper) dial(ctx context.Context) error {
@@ -605,7 +605,7 @@ func (c *clientWrapper) networkInfo(ctx context.Context, _ prmNetworkInfo) (netm
 	return res.Info(), nil
 }
 
-// objectPut writes object to NeoFS.
+// objectPut writes object to FrostFS.
 func (c *clientWrapper) objectPut(ctx context.Context, prm PrmObjectPut) (oid.ID, error) {
 	cl, err := c.getClient()
 	if err != nil {
@@ -1139,7 +1139,7 @@ func (x *NodeParam) SetWeight(weight float64) {
 	x.weight = weight
 }
 
-// WaitParams contains parameters used in polling is a something applied on NeoFS network.
+// WaitParams contains parameters used in polling is a something applied on FrostFS network.
 type WaitParams struct {
 	timeout      time.Duration
 	pollInterval time.Duration
@@ -1255,7 +1255,7 @@ type PrmObjectDelete struct {
 	addr oid.Address
 }
 
-// SetAddress specifies NeoFS address of the object.
+// SetAddress specifies FrostFS address of the object.
 func (x *PrmObjectDelete) SetAddress(addr oid.Address) {
 	x.addr = addr
 }
@@ -1267,7 +1267,7 @@ type PrmObjectGet struct {
 	addr oid.Address
 }
 
-// SetAddress specifies NeoFS address of the object.
+// SetAddress specifies FrostFS address of the object.
 func (x *PrmObjectGet) SetAddress(addr oid.Address) {
 	x.addr = addr
 }
@@ -1280,7 +1280,7 @@ type PrmObjectHead struct {
 	raw  bool
 }
 
-// SetAddress specifies NeoFS address of the object.
+// SetAddress specifies FrostFS address of the object.
 func (x *PrmObjectHead) SetAddress(addr oid.Address) {
 	x.addr = addr
 }
@@ -1298,7 +1298,7 @@ type PrmObjectRange struct {
 	off, ln uint64
 }
 
-// SetAddress specifies NeoFS address of the object.
+// SetAddress specifies FrostFS address of the object.
 func (x *PrmObjectRange) SetAddress(addr oid.Address) {
 	x.addr = addr
 }
@@ -1379,7 +1379,7 @@ type PrmContainerList struct {
 	ownerID user.ID
 }
 
-// SetOwnerID specifies identifier of the NeoFS account to list the containers.
+// SetOwnerID specifies identifier of the FrostFS account to list the containers.
 func (x *PrmContainerList) SetOwnerID(ownerID user.ID) {
 	x.ownerID = ownerID
 }
@@ -1395,7 +1395,7 @@ type PrmContainerDelete struct {
 	waitParamsSet bool
 }
 
-// SetContainerID specifies identifier of the NeoFS container to be removed.
+// SetContainerID specifies identifier of the FrostFS container to be removed.
 func (x *PrmContainerDelete) SetContainerID(cnrID cid.ID) {
 	x.cnrID = cnrID
 }
@@ -1420,7 +1420,7 @@ type PrmContainerEACL struct {
 	cnrID cid.ID
 }
 
-// SetContainerID specifies identifier of the NeoFS container to read the eACL table.
+// SetContainerID specifies identifier of the FrostFS container to read the eACL table.
 func (x *PrmContainerEACL) SetContainerID(cnrID cid.ID) {
 	x.cnrID = cnrID
 }
@@ -1467,7 +1467,7 @@ type PrmBalanceGet struct {
 	account user.ID
 }
 
-// SetAccount specifies identifier of the NeoFS account for which the balance is requested.
+// SetAccount specifies identifier of the FrostFS account for which the balance is requested.
 func (x *PrmBalanceGet) SetAccount(id user.ID) {
 	x.account = id
 }
@@ -1478,7 +1478,7 @@ type prmCreateSession struct {
 	key ecdsa.PrivateKey
 }
 
-// setExp sets number of the last NeoFS epoch in the lifetime of the session after which it will be expired.
+// setExp sets number of the last FrostFS epoch in the lifetime of the session after which it will be expired.
 func (x *prmCreateSession) setExp(exp uint64) {
 	x.exp = exp
 }
@@ -1502,13 +1502,13 @@ type resCreateSession struct {
 	sessionKey []byte
 }
 
-// Pool represents virtual connection to the NeoFS network to communicate
-// with multiple NeoFS servers without thinking about switching between servers
+// Pool represents virtual connection to the FrostFS network to communicate
+// with multiple FrostFS servers without thinking about switching between servers
 // due to load balancing proportions or their unavailability.
 // It is designed to provide a convenient abstraction from the multiple sdkClient.client types.
 //
 // Pool can be created and initialized using NewPool function.
-// Before executing the NeoFS operations using the Pool, connection to the
+// Before executing the FrostFS operations using the Pool, connection to the
 // servers MUST BE correctly established (see Dial method).
 // Using the Pool before connecting have been established can lead to a panic.
 // After the work, the Pool SHOULD BE closed (see Close method): it frees internal
@@ -1516,7 +1516,7 @@ type resCreateSession struct {
 // Calling Dial/Close methods during the communication process step strongly discouraged
 // as it leads to undefined behavior.
 //
-// Each method which produces a NeoFS API call may return an error.
+// Each method which produces a FrostFS API call may return an error.
 // Status of underlying server response is casted to built-in error instance.
 // Certain statuses can be checked using `sdkClient` and standard `errors` packages.
 // Note that package provides some helper functions to work with status returns
@@ -1586,7 +1586,7 @@ func NewPool(options InitParameters) (*Pool, error) {
 	return pool, nil
 }
 
-// Dial establishes a connection to the servers from the NeoFS network.
+// Dial establishes a connection to the servers from the FrostFS network.
 // It also starts a routine that checks the health of the nodes and
 // updates the weights of the nodes for balancing.
 // Returns an error describing failure reason.
@@ -1690,7 +1690,7 @@ func fillDefaultInitParams(params *InitParameters, cache *sessionCache) {
 
 func adjustNodeParams(nodeParams []NodeParam) ([]*nodesParam, error) {
 	if len(nodeParams) == 0 {
-		return nil, errors.New("no NeoFS peers configured")
+		return nil, errors.New("no FrostFS peers configured")
 	}
 
 	nodesParamsMap := make(map[int]*nodesParam)
@@ -2013,7 +2013,7 @@ func (p *Pool) fillAppropriateKey(prm *prmCommon) {
 	}
 }
 
-// PutObject writes an object through a remote server using NeoFS API protocol.
+// PutObject writes an object through a remote server using FrostFS API protocol.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) PutObject(ctx context.Context, prm PrmObjectPut) (oid.ID, error) {
@@ -2051,7 +2051,7 @@ func (p *Pool) PutObject(ctx context.Context, prm PrmObjectPut) (oid.ID, error) 
 	return id, nil
 }
 
-// DeleteObject marks an object for deletion from the container using NeoFS API protocol.
+// DeleteObject marks an object for deletion from the container using FrostFS API protocol.
 // As a marker, a special unit called a tombstone is placed in the container.
 // It confirms the user's intent to delete the object, and is itself a container object.
 // Explicit deletion is done asynchronously, and is generally not guaranteed.
@@ -2116,14 +2116,14 @@ func (x *objectReadCloser) Close() error {
 	return err
 }
 
-// ResGetObject is designed to provide object header nad read one object payload from NeoFS system.
+// ResGetObject is designed to provide object header nad read one object payload from FrostFS system.
 type ResGetObject struct {
 	Header object.Object
 
 	Payload io.ReadCloser
 }
 
-// GetObject reads object header and initiates reading an object payload through a remote server using NeoFS API protocol.
+// GetObject reads object header and initiates reading an object payload through a remote server using FrostFS API protocol.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) GetObject(ctx context.Context, prm PrmObjectGet) (ResGetObject, error) {
@@ -2151,7 +2151,7 @@ func (p *Pool) GetObject(ctx context.Context, prm PrmObjectGet) (ResGetObject, e
 	})
 }
 
-// HeadObject reads object header through a remote server using NeoFS API protocol.
+// HeadObject reads object header through a remote server using FrostFS API protocol.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) HeadObject(ctx context.Context, prm PrmObjectHead) (object.Object, error) {
@@ -2181,7 +2181,7 @@ func (p *Pool) HeadObject(ctx context.Context, prm PrmObjectHead) (object.Object
 }
 
 // ResObjectRange is designed to read payload range of one object
-// from NeoFS system.
+// from FrostFS system.
 //
 // Must be initialized using Pool.ObjectRange, any other
 // usage is unsafe.
@@ -2206,7 +2206,7 @@ func (x *ResObjectRange) Close() error {
 }
 
 // ObjectRange initiates reading an object's payload range through a remote
-// server using NeoFS API protocol.
+// server using FrostFS API protocol.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) ObjectRange(ctx context.Context, prm PrmObjectRange) (ResObjectRange, error) {
@@ -2234,7 +2234,7 @@ func (p *Pool) ObjectRange(ctx context.Context, prm PrmObjectRange) (ResObjectRa
 	})
 }
 
-// ResObjectSearch is designed to read list of object identifiers from NeoFS system.
+// ResObjectSearch is designed to read list of object identifiers from FrostFS system.
 //
 // Must be initialized using Pool.SearchObjects, any other usage is unsafe.
 type ResObjectSearch struct {
@@ -2270,7 +2270,7 @@ func (x *ResObjectSearch) Close() {
 	_, _ = x.r.Close()
 }
 
-// SearchObjects initiates object selection through a remote server using NeoFS API protocol.
+// SearchObjects initiates object selection through a remote server using FrostFS API protocol.
 //
 // The call only opens the transmission channel, explicit fetching of matched objects
 // is done using the ResObjectSearch. Resulting reader must be finally closed.
@@ -2302,7 +2302,7 @@ func (p *Pool) SearchObjects(ctx context.Context, prm PrmObjectSearch) (ResObjec
 	})
 }
 
-// PutContainer sends request to save container in NeoFS and waits for the operation to complete.
+// PutContainer sends request to save container in FrostFS and waits for the operation to complete.
 //
 // Waiting parameters can be specified using SetWaitParams. If not called, defaults are used:
 //
@@ -2321,7 +2321,7 @@ func (p *Pool) PutContainer(ctx context.Context, prm PrmContainerPut) (cid.ID, e
 	return cp.containerPut(ctx, prm)
 }
 
-// GetContainer reads NeoFS container by ID.
+// GetContainer reads FrostFS container by ID.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) GetContainer(ctx context.Context, prm PrmContainerGet) (container.Container, error) {
@@ -2343,7 +2343,7 @@ func (p *Pool) ListContainers(ctx context.Context, prm PrmContainerList) ([]cid.
 	return cp.containerList(ctx, prm)
 }
 
-// DeleteContainer sends request to remove the NeoFS container and waits for the operation to complete.
+// DeleteContainer sends request to remove the FrostFS container and waits for the operation to complete.
 //
 // Waiting parameters can be specified using SetWaitParams. If not called, defaults are used:
 //
@@ -2360,7 +2360,7 @@ func (p *Pool) DeleteContainer(ctx context.Context, prm PrmContainerDelete) erro
 	return cp.containerDelete(ctx, prm)
 }
 
-// GetEACL reads eACL table of the NeoFS container.
+// GetEACL reads eACL table of the FrostFS container.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) GetEACL(ctx context.Context, prm PrmContainerEACL) (eacl.Table, error) {
@@ -2372,7 +2372,7 @@ func (p *Pool) GetEACL(ctx context.Context, prm PrmContainerEACL) (eacl.Table, e
 	return cp.containerEACL(ctx, prm)
 }
 
-// SetEACL sends request to update eACL table of the NeoFS container and waits for the operation to complete.
+// SetEACL sends request to update eACL table of the FrostFS container and waits for the operation to complete.
 //
 // Waiting parameters can be specified using SetWaitParams. If not called, defaults are used:
 //
@@ -2389,7 +2389,7 @@ func (p *Pool) SetEACL(ctx context.Context, prm PrmContainerSetEACL) error {
 	return cp.containerSetEACL(ctx, prm)
 }
 
-// Balance requests current balance of the NeoFS account.
+// Balance requests current balance of the FrostFS account.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) Balance(ctx context.Context, prm PrmBalanceGet) (accounting.Decimal, error) {
@@ -2422,7 +2422,7 @@ func (p Pool) Statistic() Statistic {
 	return stat
 }
 
-// waitForContainerPresence waits until the container is found on the NeoFS network.
+// waitForContainerPresence waits until the container is found on the FrostFS network.
 func waitForContainerPresence(ctx context.Context, cli client, cnrID cid.ID, waitParams *WaitParams) error {
 	var prm PrmContainerGet
 	prm.SetContainerID(cnrID)
@@ -2433,7 +2433,7 @@ func waitForContainerPresence(ctx context.Context, cli client, cnrID cid.ID, wai
 	})
 }
 
-// waitForEACLPresence waits until the container eacl is applied on the NeoFS network.
+// waitForEACLPresence waits until the container eacl is applied on the FrostFS network.
 func waitForEACLPresence(ctx context.Context, cli client, cnrID *cid.ID, table *eacl.Table, waitParams *WaitParams) error {
 	var prm PrmContainerEACL
 	if cnrID != nil {
@@ -2449,7 +2449,7 @@ func waitForEACLPresence(ctx context.Context, cli client, cnrID *cid.ID, table *
 	})
 }
 
-// waitForContainerRemoved waits until the container is removed from the NeoFS network.
+// waitForContainerRemoved waits until the container is removed from the FrostFS network.
 func waitForContainerRemoved(ctx context.Context, cli client, cnrID *cid.ID, waitParams *WaitParams) error {
 	var prm PrmContainerGet
 	if cnrID != nil {
@@ -2485,7 +2485,7 @@ func waitFor(ctx context.Context, params *WaitParams, condition func(context.Con
 	}
 }
 
-// NetworkInfo requests information about the NeoFS network of which the remote server is a part.
+// NetworkInfo requests information about the FrostFS network of which the remote server is a part.
 //
 // Main return value MUST NOT be processed on an erroneous return.
 func (p *Pool) NetworkInfo(ctx context.Context) (netmap.NetworkInfo, error) {

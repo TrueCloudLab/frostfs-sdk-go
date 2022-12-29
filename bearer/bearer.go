@@ -136,7 +136,7 @@ func (b Token) WriteToV2(m *acl.BearerToken) {
 }
 
 // SetExp sets "exp" (expiration time) claim which identifies the
-// expiration time (in NeoFS epochs) after which the Token MUST NOT be
+// expiration time (in FrostFS epochs) after which the Token MUST NOT be
 // accepted for processing. The processing of the "exp" claim requires
 // that the current epoch MUST be before or equal to the expiration epoch
 // listed in the "exp" claim.
@@ -150,7 +150,7 @@ func (b *Token) SetExp(exp uint64) {
 }
 
 // SetNbf sets "nbf" (not before) claim which identifies the time (in
-// NeoFS epochs) before which the Token MUST NOT be accepted for processing. The
+// FrostFS epochs) before which the Token MUST NOT be accepted for processing. The
 // processing of the "nbf" claim requires that the current epoch MUST be
 // after or equal to the not-before epoch listed in the "nbf" claim.
 //
@@ -162,7 +162,7 @@ func (b *Token) SetNbf(nbf uint64) {
 	b.lifetimeSet = true
 }
 
-// SetIat sets "iat" (issued at) claim which identifies the time (in NeoFS
+// SetIat sets "iat" (issued at) claim which identifies the time (in FrostFS
 // epochs) at which the Token was issued. This claim can be used to determine
 // the age of the Token.
 //
@@ -189,7 +189,7 @@ func (b Token) InvalidAt(epoch uint64) bool {
 // within any issuer's container.
 //
 // SetEACLTable MUST be called if Token is going to be transmitted over
-// NeoFS API V2 protocol.
+// FrostFS API V2 protocol.
 //
 // See also EACLTable, AssertContainer.
 func (b *Token) SetEACLTable(table eacl.Table) {
@@ -249,7 +249,7 @@ func (b Token) AssertUser(id user.ID) bool {
 // Returns signature calculation errors.
 //
 // Sign MUST be called if Token is going to be transmitted over
-// NeoFS API V2 protocol.
+// FrostFS API V2 protocol.
 //
 // Note that any Token mutation is likely to break the signature, so it is
 // expected to be calculated as a final stage of Token formation.
@@ -285,7 +285,7 @@ func (b Token) VerifySignature() bool {
 	return sig.ReadFromV2(b.sig) == nil && sig.Verify(b.signedData())
 }
 
-// Marshal encodes Token into a binary format of the NeoFS API protocol
+// Marshal encodes Token into a binary format of the FrostFS API protocol
 // (Protocol Buffers V3 with direct field order).
 //
 // See also Unmarshal.
@@ -296,7 +296,7 @@ func (b Token) Marshal() []byte {
 	return m.StableMarshal(nil)
 }
 
-// Unmarshal decodes NeoFS API protocol binary data into the Token
+// Unmarshal decodes FrostFS API protocol binary data into the Token
 // (Protocol Buffers V3 with direct field order). Returns an error describing
 // a format violation.
 //
@@ -312,7 +312,7 @@ func (b *Token) Unmarshal(data []byte) error {
 	return b.readFromV2(m, false)
 }
 
-// MarshalJSON encodes Token into a JSON format of the NeoFS API protocol
+// MarshalJSON encodes Token into a JSON format of the FrostFS API protocol
 // (Protocol Buffers V3 JSON).
 //
 // See also UnmarshalJSON.
@@ -323,7 +323,7 @@ func (b Token) MarshalJSON() ([]byte, error) {
 	return m.MarshalJSON()
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON data into the Token
+// UnmarshalJSON decodes FrostFS API protocol JSON data into the Token
 // (Protocol Buffers V3 JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.
@@ -339,7 +339,7 @@ func (b *Token) UnmarshalJSON(data []byte) error {
 }
 
 // SigningKeyBytes returns issuer's public key in a binary format of
-// NeoFS API protocol.
+// FrostFS API protocol.
 //
 // Unsigned Token has empty key.
 //

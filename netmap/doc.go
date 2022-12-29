@@ -1,10 +1,10 @@
 /*
 Package netmap provides functionality for working with information about the
-NeoFS network, primarily a layer of storage nodes.
+FrostFS network, primarily a layer of storage nodes.
 
-The package concentrates all the characteristics of NeoFS networks.
+The package concentrates all the characteristics of FrostFS networks.
 
-NetMap represents NeoFS network map - one of the main technologies used to
+NetMap represents FrostFS network map - one of the main technologies used to
 store data in the system. It is composed of information about all storage nodes
 (NodeInfo type) in a particular network. NetMap methods allow you to impose
 container storage policies (PlacementPolicy type) on a fixed composition of
@@ -14,7 +14,7 @@ container creator.
 NetworkInfo type is dedicated to descriptive characterization of network state
 and settings.
 
-Instances can be also used to process NeoFS API V2 protocol messages
+Instances can be also used to process FrostFS API V2 protocol messages
 (see neo.fs.v2.netmap package in https://github.com/TrueCloudLab/frostfs-api).
 
 On client side:

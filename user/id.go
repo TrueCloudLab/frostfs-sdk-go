@@ -12,7 +12,7 @@ import (
 	"github.com/nspcc-dev/neo-go/pkg/util"
 )
 
-// ID identifies users of the NeoFS system.
+// ID identifies users of the FrostFS system.
 //
 // ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.OwnerID
 // message. See ReadFromV2 / WriteToV2 methods.
@@ -25,7 +25,7 @@ type ID struct {
 }
 
 // ReadFromV2 reads ID from the refs.OwnerID message. Returns an error if
-// the message is malformed according to the NeoFS API V2 protocol.
+// the message is malformed according to the FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *ID) ReadFromV2(m refs.OwnerID) error {
@@ -68,7 +68,7 @@ func (x *ID) SetScriptHash(scriptHash util.Uint160) {
 	copy(x.w[21:], hash.Checksum(x.w[:21]))
 }
 
-// WalletBytes returns NeoFS user ID as Neo3 wallet address in a binary format.
+// WalletBytes returns FrostFS user ID as Neo3 wallet address in a binary format.
 //
 // Return value MUST NOT be mutated: to do this, first make a copy.
 //
@@ -77,14 +77,14 @@ func (x ID) WalletBytes() []byte {
 	return x.w
 }
 
-// EncodeToString encodes ID into NeoFS API V2 protocol string.
+// EncodeToString encodes ID into FrostFS API V2 protocol string.
 //
 // See also DecodeString.
 func (x ID) EncodeToString() string {
 	return base58.Encode(x.w)
 }
 
-// DecodeString decodes NeoFS API V2 protocol string. Returns an error
+// DecodeString decodes FrostFS API V2 protocol string. Returns an error
 // if s is malformed.
 //
 // DecodeString always changes the ID.
@@ -105,7 +105,7 @@ func (x *ID) DecodeString(s string) error {
 //
 // String is designed to be human-readable, and its format MAY differ between
 // SDK versions. String MAY return same result as EncodeToString. String MUST NOT
-// be used to encode ID into NeoFS protocol string.
+// be used to encode ID into FrostFS protocol string.
 func (x ID) String() string {
 	return x.EncodeToString()
 }

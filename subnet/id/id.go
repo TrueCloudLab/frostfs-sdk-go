@@ -7,19 +7,19 @@ import (
 	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
 )
 
-// ID represents unique identifier of the subnet in the NeoFS network.
+// ID represents unique identifier of the subnet in the FrostFS network.
 //
 // ID is mutually compatible with github.com/TrueCloudLab/frostfs-api-go/v2/refs.SubnetID
 // message. See ReadFromV2 / WriteToV2 methods.
 //
 // Instances can be created using built-in var declaration. Zero value is
-// equivalent to identifier of the zero subnet (whole NeoFS network).
+// equivalent to identifier of the zero subnet (whole FrostFS network).
 type ID struct {
 	m refs.SubnetID
 }
 
 // ReadFromV2 reads ID from the refs.SubnetID message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *ID) ReadFromV2(msg refs.SubnetID) error {
@@ -43,7 +43,7 @@ func (x ID) Equals(x2 ID) bool {
 	return x.m.GetValue() == x2.m.GetValue()
 }
 
-// EncodeToString encodes ID into NeoFS API protocol string (base10 encoding).
+// EncodeToString encodes ID into FrostFS API protocol string (base10 encoding).
 //
 // See also DecodeString.
 func (x ID) EncodeToString() string {
@@ -67,12 +67,12 @@ func (x *ID) DecodeString(s string) error {
 //
 // String is designed to be human-readable, and its format MAY differ between
 // SDK versions. String MAY return same result as EncodeToString. String MUST NOT
-// be used to encode ID into NeoFS protocol string.
+// be used to encode ID into FrostFS protocol string.
 func (x ID) String() string {
 	return "#" + strconv.FormatUint(uint64(x.m.GetValue()), 10)
 }
 
-// Marshal encodes ID into a binary format of the NeoFS API protocol
+// Marshal encodes ID into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.

@@ -22,17 +22,17 @@ import (
 	"github.com/google/uuid"
 )
 
-// Container represents descriptor of the NeoFS container. Container logically
-// stores NeoFS objects. Container is one of the basic and at the same time
-// necessary data storage units in the NeoFS. Container includes data about the
+// Container represents descriptor of the FrostFS container. Container logically
+// stores FrostFS objects. Container is one of the basic and at the same time
+// necessary data storage units in the FrostFS. Container includes data about the
 // owner, rules for placing objects and other information necessary for the
 // system functioning.
 //
 // Container type instances can represent different container states in the
-// system, depending on the context. To create new container in NeoFS zero
+// system, depending on the context. To create new container in FrostFS zero
 // instance SHOULD be declared, initialized using Init method and filled using
-// dedicated methods. Once container is saved in the NeoFS network, it can't be
-// changed: containers stored in the system are immutable, and NeoFS is a CAS
+// dedicated methods. Once container is saved in the FrostFS network, it can't be
+// changed: containers stored in the system are immutable, and FrostFS is a CAS
 // of containers that are identified by a fixed length value (see cid.ID type).
 // Instances for existing containers can be initialized using decoding methods
 // (e.g Unmarshal).
@@ -137,7 +137,7 @@ func (x *Container) readFromV2(m container.Container, checkFieldPresence bool) e
 }
 
 // ReadFromV2 reads Container from the container.Container message. Checks if the
-// message conforms to NeoFS API V2 protocol.
+// message conforms to FrostFS API V2 protocol.
 //
 // See also WriteToV2.
 func (x *Container) ReadFromV2(m container.Container) error {
@@ -152,7 +152,7 @@ func (x Container) WriteToV2(m *container.Container) {
 	*m = x.v2
 }
 
-// Marshal encodes Container into a binary format of the NeoFS API protocol
+// Marshal encodes Container into a binary format of the FrostFS API protocol
 // (Protocol Buffers with direct field order).
 //
 // See also Unmarshal.
@@ -160,7 +160,7 @@ func (x Container) Marshal() []byte {
 	return x.v2.StableMarshal(nil)
 }
 
-// Unmarshal decodes NeoFS API protocol binary format into the Container
+// Unmarshal decodes FrostFS API protocol binary format into the Container
 // (Protocol Buffers with direct field order). Returns an error describing
 // a format violation.
 //
@@ -176,7 +176,7 @@ func (x *Container) Unmarshal(data []byte) error {
 	return x.readFromV2(m, false)
 }
 
-// MarshalJSON encodes Container into a JSON format of the NeoFS API protocol
+// MarshalJSON encodes Container into a JSON format of the FrostFS API protocol
 // (Protocol Buffers JSON).
 //
 // See also UnmarshalJSON.
@@ -184,7 +184,7 @@ func (x Container) MarshalJSON() ([]byte, error) {
 	return x.v2.MarshalJSON()
 }
 
-// UnmarshalJSON decodes NeoFS API protocol JSON format into the Container
+// UnmarshalJSON decodes FrostFS API protocol JSON format into the Container
 // (Protocol Buffers JSON). Returns an error describing a format violation.
 //
 // See also MarshalJSON.
@@ -192,7 +192,7 @@ func (x *Container) UnmarshalJSON(data []byte) error {
 	return x.v2.UnmarshalJSON(data)
 }
 
-// Init initializes all internal data of the Container required by NeoFS API
+// Init initializes all internal data of the Container required by FrostFS API
 // protocol. Init MUST be called when creating a new container. Init SHOULD NOT
 // be called multiple times. Init SHOULD NOT be called if the Container instance
 // is used for decoding only.
@@ -212,7 +212,7 @@ func (x *Container) Init() {
 
 // SetOwner specifies the owner of the Container. Each Container has exactly
 // one owner, so SetOwner MUST be called for instances to be saved in the
-// NeoFS.
+// FrostFS.
 //
 // See also Owner.
 func (x *Container) SetOwner(owner user.ID) {
@@ -224,7 +224,7 @@ func (x *Container) SetOwner(owner user.ID) {
 
 // Owner returns owner of the Container set using SetOwner.
 //
-// Zero Container has no owner which is incorrect according to NeoFS API
+// Zero Container has no owner which is incorrect according to FrostFS API
 // protocol.
 func (x Container) Owner() (res user.ID) {
 	m := x.v2.GetOwnerID()
@@ -256,7 +256,7 @@ func (x Container) BasicACL() (res acl.Basic) {
 }
 
 // SetPlacementPolicy sets placement policy for the objects within the Container.
-// NeoFS storage layer strives to follow the specified policy.
+// FrostFS storage layer strives to follow the specified policy.
 //
 // See also PlacementPolicy.
 func (x *Container) SetPlacementPolicy(policy netmap.PlacementPolicy) {
@@ -269,7 +269,7 @@ func (x *Container) SetPlacementPolicy(policy netmap.PlacementPolicy) {
 // PlacementPolicy returns placement policy set using SetPlacementPolicy.
 //
 // Zero Container has no placement policy which is incorrect according to
-// NeoFS API protocol.
+// FrostFS API protocol.
 func (x Container) PlacementPolicy() (res netmap.PlacementPolicy) {
 	m := x.v2.GetPlacementPolicy()
 	if m != nil {
@@ -284,7 +284,7 @@ func (x Container) PlacementPolicy() (res netmap.PlacementPolicy) {
 
 // SetAttribute sets Container attribute value by key. Both key and value
 // MUST NOT be empty. Attributes set by the creator (owner) are most commonly
-// ignored by the NeoFS system and used for application layer. Some attributes
+// ignored by the FrostFS system and used for application layer. Some attributes
 // are so-called system or well-known attributes: they are reserved for system
 // needs. System attributes SHOULD NOT be modified using SetAttribute, use
 // corresponding methods/functions. List of the reserved keys is documented
@@ -383,7 +383,7 @@ func CreatedAt(cnr Container) time.Time {
 	return time.Unix(sec, 0)
 }
 
-// SetSubnet places the Container on the specified NeoFS subnet. If called,
+// SetSubnet places the Container on the specified FrostFS subnet. If called,
 // container nodes will only be selected from the given subnet, otherwise from
 // the entire network.
 func SetSubnet(cnr *Container, subNet subnetid.ID) {
@@ -423,7 +423,7 @@ func IsHomomorphicHashingDisabled(cnr Container) bool {
 }
 
 // Domain represents information about container domain registered in the NNS
-// contract deployed in the NeoFS network.
+// contract deployed in the FrostFS network.
 type Domain struct {
 	name, zone string
 }
@@ -477,7 +477,7 @@ func ReadDomain(cnr Container) (res Domain) {
 // CalculateSignature calculates signature of the Container using provided signer
 // and writes it into dst. Signature instance MUST NOT be nil. CalculateSignature
 // is expected to be called after all the Container data is filled and before
-// saving the Container in the NeoFS network. Note that мany subsequent change
+// saving the Container in the FrostFS network. Note that мany subsequent change
 // will most likely break the signature.
 //
 // See also VerifySignature.
@@ -492,7 +492,7 @@ func VerifySignature(sig frostfscrypto.Signature, cnr Container) bool {
 }
 
 // CalculateIDFromBinary calculates identifier of the binary-encoded container
-// in CAS of the NeoFS containers and writes it into dst. ID instance MUST NOT
+// in CAS of the FrostFS containers and writes it into dst. ID instance MUST NOT
 // be nil.
 //
 // See also CalculateID, AssertID.
@@ -509,7 +509,7 @@ func CalculateID(dst *cid.ID, cnr Container) {
 }
 
 // AssertID checks if the given Container matches its identifier in CAS of the
-// NeoFS containers.
+// FrostFS containers.
 //
 // See also CalculateID.
 func AssertID(id cid.ID, cnr Container) bool {
