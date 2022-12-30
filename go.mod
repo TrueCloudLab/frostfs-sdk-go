@@ -9,7 +9,7 @@ require (
 	github.com/TrueCloudLab/tzhash v1.7.0
 	github.com/antlr/antlr4/runtime/Go/antlr/v4 v4.0.0-20221202181307-76fa05c21b12
 	github.com/google/uuid v1.3.0
-	github.com/hashicorp/golang-lru v0.6.0
+	github.com/hashicorp/golang-lru/v2 v2.0.1
 	github.com/mr-tron/base58 v1.2.0
 	github.com/nspcc-dev/neo-go v0.100.1
 	github.com/stretchr/testify v1.8.1
@@ -24,6 +24,7 @@ require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/hashicorp/golang-lru v0.6.0 // indirect
 	github.com/nspcc-dev/go-ordered-json v0.0.0-20220111165707-25110be27d22 // indirect
 	github.com/nspcc-dev/neo-go/pkg/interop v0.0.0-20221202075445-cb5c18dc73eb // indirect
 	github.com/nspcc-dev/rfc6979 v0.2.0 // indirect
