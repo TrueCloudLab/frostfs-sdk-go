@@ -1556,7 +1556,7 @@ const (
 	defaultSessionTokenExpirationDuration = 100 // in blocks
 	defaultErrorThreshold                 = 100
 
-	defaultRebalanceInterval  = 25 * time.Second
+	defaultRebalanceInterval  = 15 * time.Second
 	defaultHealthcheckTimeout = 4 * time.Second
 	defaultDialTimeout        = 5 * time.Second
 	defaultStreamTimeout      = 10 * time.Second
