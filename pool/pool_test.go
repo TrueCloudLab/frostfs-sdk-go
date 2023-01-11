@@ -514,7 +514,7 @@ func TestWaitPresence(t *testing.T) {
 }
 
 func TestStatusMonitor(t *testing.T) {
-	monitor := newClientStatusMonitor("", 10)
+	monitor := newClientStatusMonitor(zap.NewExample(), "", 10)
 	monitor.errorThreshold = 3
 
 	count := 10
@@ -527,7 +527,7 @@ func TestStatusMonitor(t *testing.T) {
 }
 
 func TestHandleError(t *testing.T) {
-	monitor := newClientStatusMonitor("", 10)
+	monitor := newClientStatusMonitor(zap.NewExample(), "", 10)
 
 	for i, tc := range []struct {
 		status        apistatus.Status

@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"errors"
+	"go.uber.org/zap"
 
 	sessionv2 "github.com/TrueCloudLab/frostfs-api-go/v2/session"
 	"github.com/TrueCloudLab/frostfs-sdk-go/accounting"
@@ -33,7 +34,7 @@ type mockClient struct {
 func newMockClient(addr string, key ecdsa.PrivateKey) *mockClient {
 	return &mockClient{
 		key:                 key,
-		clientStatusMonitor: newClientStatusMonitor(addr, 10),
+		clientStatusMonitor: newClientStatusMonitor(zap.NewExample(), addr, 10),
 	}
 }
 

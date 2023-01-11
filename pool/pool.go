@@ -31,6 +31,7 @@ import (
 	"github.com/nspcc-dev/neo-go/pkg/crypto/keys"
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 // client represents virtual connection to the single FrostFS network endpoint from which Pool is formed.
@@ -101,6 +102,7 @@ var errPoolClientUnhealthy = errors.New("pool client unhealthy")
 
 // clientStatusMonitor count error rate and other statistics for connection.
 type clientStatusMonitor struct {
+	logger         *zap.Logger
 	addr           string
 	healthy        *atomic.Bool
 	errorThreshold uint32
@@ -186,13 +188,14 @@ func (m MethodIndex) String() string {
 	}
 }
 
-func newClientStatusMonitor(addr string, errorThreshold uint32) clientStatusMonitor {
+func newClientStatusMonitor(logger *zap.Logger, addr string, errorThreshold uint32) clientStatusMonitor {
 	methods := make([]*methodStatus, methodLast)
 	for i := methodBalanceGet; i < methodLast; i++ {
 		methods[i] = &methodStatus{name: i.String()}
 	}
 
 	return clientStatusMonitor{
+		logger:         logger,
 		addr:           addr,
 		healthy:        atomic.NewBool(true),
 		errorThreshold: errorThreshold,
@@ -224,6 +227,7 @@ type clientWrapper struct {
 
 // wrapperPrm is params to create clientWrapper.
 type wrapperPrm struct {
+	logger                  *zap.Logger
 	address                 string
 	key                     ecdsa.PrivateKey
 	dialTimeout             time.Duration
@@ -280,7 +284,7 @@ func newWrapper(prm wrapperPrm) *clientWrapper {
 
 	res := &clientWrapper{
 		client:              &cl,
-		clientStatusMonitor: newClientStatusMonitor(prm.address, prm.errorThreshold),
+		clientStatusMonitor: newClientStatusMonitor(prm.logger, prm.address, prm.errorThreshold),
 		prm:                 prm,
 	}
 
@@ -940,12 +944,19 @@ func (c *clientStatusMonitor) address() string {
 
 func (c *clientStatusMonitor) incErrorRate() {
 	c.mu.Lock()
-	defer c.mu.Unlock()
 	c.currentErrorCount++
 	c.overallErrorCount++
-	if c.currentErrorCount >= c.errorThreshold {
+
+	thresholdReached := c.currentErrorCount >= c.errorThreshold
+	if thresholdReached {
 		c.setUnhealthy()
 		c.currentErrorCount = 0
+	}
+	c.mu.Unlock()
+
+	if thresholdReached && c.logger != nil {
+		c.logger.Warn("error threshold reached",
+			zap.String("address", c.addr), zap.Uint32("threshold", c.errorThreshold))
 	}
 }
 
@@ -1603,9 +1614,7 @@ func (p *Pool) Dial(ctx context.Context) error {
 		for j, addr := range params.addresses {
 			clients[j] = p.clientBuilder(addr)
 			if err := clients[j].dial(ctx); err != nil {
-				if p.logger != nil {
-					p.logger.Warn("failed to build client", zap.String("address", addr), zap.Error(err))
-				}
+				p.log(zap.WarnLevel, "failed to build client", zap.String("address", addr), zap.Error(err))
 				continue
 			}
 
@@ -1613,10 +1622,8 @@ func (p *Pool) Dial(ctx context.Context) error {
 			err := initSessionForDuration(ctx, &st, clients[j], p.rebalanceParams.sessionExpirationDuration, *p.key)
 			if err != nil {
 				clients[j].setUnhealthy()
-				if p.logger != nil {
-					p.logger.Warn("failed to create frostfs session token for client",
-						zap.String("address", addr), zap.Error(err))
-				}
+				p.log(zap.WarnLevel, "failed to create frostfs session token for client",
+					zap.String("address", addr), zap.Error(err))
 				continue
 			}
 
@@ -1643,6 +1650,21 @@ func (p *Pool) Dial(ctx context.Context) error {
 
 	go p.startRebalance(ctx)
 	return nil
+}
+
+func (p *Pool) log(level zapcore.Level, msg string, fields ...zap.Field) {
+	if p.logger == nil {
+		return
+	}
+
+	switch level {
+	case zap.DebugLevel:
+		p.logger.Debug(msg, fields...)
+	case zap.WarnLevel:
+		p.logger.Warn(msg, fields...)
+	case zap.ErrorLevel:
+		p.logger.Error(msg, fields...)
+	}
 }
 
 func fillDefaultInitParams(params *InitParameters, cache *sessionCache) {
@@ -1778,6 +1800,8 @@ func (p *Pool) updateInnerNodesHealth(ctx context.Context, i int, bufferWeights 
 			}
 
 			if changed {
+				p.log(zap.DebugLevel, "health has changed",
+					zap.String("address", cli.address()), zap.Bool("healthy", healthy))
 				healthyChanged.Store(true)
 			}
 		}(j, cli)
