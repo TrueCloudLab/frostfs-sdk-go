@@ -995,7 +995,14 @@ func (c *clientWrapper) incRequests(elapsed time.Duration, method MethodIndex) {
 
 func (c *clientStatusMonitor) handleError(st apistatus.Status, err error) error {
 	if err != nil {
-		c.incErrorRate()
+		// non-status logic error that could be returned
+		// from the SDK client; should not be considered
+		// as a connection error
+		var siErr *object.SplitInfoError
+		if !errors.As(err, &siErr) {
+			c.incErrorRate()
+		}
+
 		return err
 	}
 
