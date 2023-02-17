@@ -28,7 +28,6 @@ FILTER City EQ SPB AND SSD EQ true OR City EQ SPB AND Rating GE 5 AS SPBSSD`,
 	var p PlacementPolicy
 
 	for _, testCase := range testCases {
-
 		require.NoError(t, p.DecodeString(testCase))
 
 		var b strings.Builder

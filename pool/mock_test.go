@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"errors"
+
 	"go.uber.org/zap"
 
 	sessionv2 "github.com/TrueCloudLab/frostfs-api-go/v2/session"

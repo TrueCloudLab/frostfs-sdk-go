@@ -1664,14 +1664,7 @@ func (p *Pool) log(level zapcore.Level, msg string, fields ...zap.Field) {
 		return
 	}
 
-	switch level {
-	case zap.DebugLevel:
-		p.logger.Debug(msg, fields...)
-	case zap.WarnLevel:
-		p.logger.Warn(msg, fields...)
-	case zap.ErrorLevel:
-		p.logger.Error(msg, fields...)
-	}
+	p.logger.Log(level, msg, fields...)
 }
 
 func fillDefaultInitParams(params *InitParameters, cache *sessionCache) {
