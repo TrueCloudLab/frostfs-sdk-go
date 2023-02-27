@@ -2,6 +2,7 @@ package client
 
 import (
 	"crypto/ecdsa"
+	"errors"
 	"fmt"
 
 	"github.com/TrueCloudLab/frostfs-api-go/v2/refs"
@@ -70,11 +71,21 @@ func writeXHeadersToMeta(xHeaders []string, h *v2session.RequestMetaHeader) {
 	h.SetXHeaders(hs)
 }
 
-// panic messages.
-const (
-	panicMsgMissingContext   = "missing context"
-	panicMsgMissingContainer = "missing container"
-	panicMsgMissingObject    = "missing object"
+// error messages.
+var (
+	errorMissingContext       = errors.New("missing context")
+	errorMissingContainer     = errors.New("missing container")
+	errorMissingObject        = errors.New("missing object")
+	errorAccountNotSet        = errors.New("account not set")
+	errorServerAddrUnset      = errors.New("server address is unset or empty")
+	errorNonPositiveTimeout   = errors.New("non-positive timeout")
+	errorEACLTableNotSet      = errors.New("eACL table not set")
+	errorMissingAnnouncements = errors.New("missing announcements")
+	errorZeroRangeLength      = errors.New("zero range length")
+	errorMissingRanges        = errors.New("missing ranges")
+	errorZeroEpoch            = errors.New("zero epoch")
+	errorMissingTrusts        = errors.New("missing trusts")
+	errorTrustNotSet          = errors.New("current trust value not set")
 )
 
 // groups all the details required to send a single request and process a response to it.

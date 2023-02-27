@@ -72,7 +72,7 @@ func (x ResSessionCreate) PublicKey() []byte {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmSessionCreate docs).
+// Returns an error if parameters are set incorrectly (see PrmSessionCreate docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -80,7 +80,7 @@ func (x ResSessionCreate) PublicKey() []byte {
 func (c *Client) SessionCreate(ctx context.Context, prm PrmSessionCreate) (*ResSessionCreate, error) {
 	// check context
 	if ctx == nil {
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	}
 
 	ownerKey := c.prm.key.PublicKey

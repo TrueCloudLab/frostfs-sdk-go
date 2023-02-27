@@ -45,7 +45,7 @@ type ResAnnounceLocalTrust struct {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmAnnounceLocalTrust docs).
+// Returns an error if parameters are set incorrectly (see PrmAnnounceLocalTrust docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -54,11 +54,11 @@ func (c *Client) AnnounceLocalTrust(ctx context.Context, prm PrmAnnounceLocalTru
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.epoch == 0:
-		panic("zero epoch")
+		return nil, errorZeroEpoch
 	case len(prm.trusts) == 0:
-		panic("missing trusts")
+		return nil, errorMissingTrusts
 	}
 
 	// form request body
@@ -146,7 +146,7 @@ type ResAnnounceIntermediateTrust struct {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmAnnounceIntermediateTrust docs).
+// Returns an error if parameters are set incorrectly (see PrmAnnounceIntermediateTrust docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -155,11 +155,11 @@ func (c *Client) AnnounceIntermediateTrust(ctx context.Context, prm PrmAnnounceI
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.epoch == 0:
-		panic("zero epoch")
+		return nil, errorZeroEpoch
 	case !prm.trustSet:
-		panic("current trust value not set")
+		return nil, errorTrustNotSet
 	}
 
 	var trust v2reputation.PeerToPeerTrust

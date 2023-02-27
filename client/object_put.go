@@ -235,11 +235,12 @@ func (x *ObjectWriter) Close() (*ResObjectPut, error) {
 // The call only opens the transmission channel, explicit recording is done using the ObjectWriter.
 // Exactly one return value is non-nil. Resulting writer must be finally closed.
 //
+// Returns an error if parameters are set incorrectly.
 // Context is required and must not be nil. It is used for network communication.
 func (c *Client) ObjectPutInit(ctx context.Context, prm PrmObjectPutInit) (*ObjectWriter, error) {
 	// check parameters
 	if ctx == nil {
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	}
 
 	var w ObjectWriter

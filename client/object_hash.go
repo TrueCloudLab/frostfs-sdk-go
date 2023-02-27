@@ -154,7 +154,7 @@ func (x ResObjectHash) Checksums() [][]byte {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmObjectHash docs).
+// Returns an error if parameters are set incorrectly (see PrmObjectHash docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -167,13 +167,13 @@ func (x ResObjectHash) Checksums() [][]byte {
 func (c *Client) ObjectHash(ctx context.Context, prm PrmObjectHash) (*ResObjectHash, error) {
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.addr.GetContainerID() == nil:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	case prm.addr.GetObjectID() == nil:
-		panic(panicMsgMissingObject)
+		return nil, errorMissingObject
 	case len(prm.body.GetRanges()) == 0:
-		panic("missing ranges")
+		return nil, errorMissingRanges
 	}
 
 	prm.body.SetAddress(&prm.addr)

@@ -77,7 +77,7 @@ func (x ResContainerPut) ID() cid.ID {
 //
 // Success can be verified by reading by identifier (see ResContainerPut.ID).
 //
-// Immediately panics if parameters are set incorrectly (see PrmContainerPut docs).
+// Returns an error if parameters are set incorrectly (see PrmContainerPut docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -86,9 +86,9 @@ func (c *Client) ContainerPut(ctx context.Context, prm PrmContainerPut) (*ResCon
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.cnrSet:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	}
 
 	// TODO: check private key is set before forming the request
@@ -204,7 +204,7 @@ func (x ResContainerGet) Container() container.Container {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmContainerGet docs).
+// Returns an error if parameters are set incorrectly (see PrmContainerGet docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -213,9 +213,9 @@ func (x ResContainerGet) Container() container.Container {
 func (c *Client) ContainerGet(ctx context.Context, prm PrmContainerGet) (*ResContainerGet, error) {
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.idSet:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	}
 
 	var cidV2 refs.ContainerID
@@ -304,7 +304,7 @@ func (x ResContainerList) Containers() []cid.ID {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmContainerList docs).
+// Returns an error if parameters are set incorrectly (see PrmContainerList docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -313,9 +313,9 @@ func (c *Client) ContainerList(ctx context.Context, prm PrmContainerList) (*ResC
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.ownerSet:
-		panic("account not set")
+		return nil, errorAccountNotSet
 	}
 
 	// form request body
@@ -413,7 +413,7 @@ type ResContainerDelete struct {
 //
 // Success can be verified by reading by identifier (see GetContainer).
 //
-// Immediately panics if parameters are set incorrectly (see PrmContainerDelete docs).
+// Returns an error if parameters are set incorrectly (see PrmContainerDelete docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Exactly one return value is non-nil. Server status return is returned in ResContainerDelete.
@@ -425,9 +425,9 @@ func (c *Client) ContainerDelete(ctx context.Context, prm PrmContainerDelete) (*
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.idSet:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	}
 
 	// sign container ID
@@ -528,7 +528,7 @@ func (x ResContainerEACL) Table() eacl.Table {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmContainerEACL docs).
+// Returns an error if parameters are set incorrectly (see PrmContainerEACL docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -539,9 +539,9 @@ func (c *Client) ContainerEACL(ctx context.Context, prm PrmContainerEACL) (*ResC
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.idSet:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	}
 
 	var cidV2 refs.ContainerID
@@ -642,7 +642,7 @@ type ResContainerSetEACL struct {
 //
 // Success can be verified by reading by identifier (see EACL).
 //
-// Immediately panics if parameters are set incorrectly (see PrmContainerSetEACL docs).
+// Returns an error if parameters are set incorrectly (see PrmContainerSetEACL docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -651,9 +651,9 @@ func (c *Client) ContainerSetEACL(ctx context.Context, prm PrmContainerSetEACL) 
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.tableSet:
-		panic("eACL table not set")
+		return nil, errorEACLTableNotSet
 	}
 
 	// sign the eACL table
@@ -747,7 +747,7 @@ type ResAnnounceSpace struct {
 //
 // At this moment success can not be checked.
 //
-// Immediately panics if parameters are set incorrectly (see PrmAnnounceSpace docs).
+// Returns an error if parameters are set incorrectly (see PrmAnnounceSpace docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -756,9 +756,9 @@ func (c *Client) ContainerAnnounceUsedSpace(ctx context.Context, prm PrmAnnounce
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case len(prm.announcements) == 0:
-		panic("missing announcements")
+		return nil, errorMissingAnnouncements
 	}
 
 	// convert list of SDK announcement structures into FrostFS-API v2 list

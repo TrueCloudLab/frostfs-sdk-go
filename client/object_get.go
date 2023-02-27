@@ -296,17 +296,17 @@ func (x *ObjectReader) Read(p []byte) (int, error) {
 // The call only opens the transmission channel, explicit fetching is done using the ObjectReader.
 // Exactly one return value is non-nil. Resulting reader must be finally closed.
 //
-// Immediately panics if parameters are set incorrectly (see PrmObjectGet docs).
+// Returns an error if parameters are set incorrectly (see PrmObjectGet docs).
 // Context is required and must not be nil. It is used for network communication.
 func (c *Client) ObjectGetInit(ctx context.Context, prm PrmObjectGet) (*ObjectReader, error) {
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.addr.GetContainerID() == nil:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	case prm.addr.GetObjectID() == nil:
-		panic(panicMsgMissingObject)
+		return nil, errorMissingObject
 	}
 
 	// form request body
@@ -400,7 +400,7 @@ func (x *ResObjectHead) ReadHeader(dst *object.Object) bool {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmObjectHead docs).
+// Returns an error if parameters are set incorrectly (see PrmObjectHead docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return errors:
@@ -417,11 +417,11 @@ func (x *ResObjectHead) ReadHeader(dst *object.Object) bool {
 func (c *Client) ObjectHead(ctx context.Context, prm PrmObjectHead) (*ResObjectHead, error) {
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.addr.GetContainerID() == nil:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	case prm.addr.GetObjectID() == nil:
-		panic(panicMsgMissingObject)
+		return nil, errorMissingObject
 	}
 
 	var body v2object.HeadRequestBody
@@ -663,19 +663,19 @@ func (x *ObjectRangeReader) Read(p []byte) (int, error) {
 // The call only opens the transmission channel, explicit fetching is done using the ObjectRangeReader.
 // Exactly one return value is non-nil. Resulting reader must be finally closed.
 //
-// Immediately panics if parameters are set incorrectly (see PrmObjectRange docs).
+// Returns an error if parameters are set incorrectly (see PrmObjectRange docs).
 // Context is required and must not be nil. It is used for network communication.
 func (c *Client) ObjectRangeInit(ctx context.Context, prm PrmObjectRange) (*ObjectRangeReader, error) {
 	// check parameters
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.addr.GetContainerID() == nil:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	case prm.addr.GetObjectID() == nil:
-		panic(panicMsgMissingObject)
+		return nil, errorMissingObject
 	case prm.rng.GetLength() == 0:
-		panic("zero range length")
+		return nil, errorZeroRangeLength
 	}
 
 	// form request body

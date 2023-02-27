@@ -46,7 +46,7 @@ func (x ResBalanceGet) Amount() accounting.Decimal {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmBalanceGet docs).
+// Returns an error if parameters are set incorrectly (see PrmBalanceGet docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -54,9 +54,9 @@ func (x ResBalanceGet) Amount() accounting.Decimal {
 func (c *Client) BalanceGet(ctx context.Context, prm PrmBalanceGet) (*ResBalanceGet, error) {
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case !prm.accountSet:
-		panic("account not set")
+		return nil, errorAccountNotSet
 	}
 
 	// form request body

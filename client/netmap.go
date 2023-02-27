@@ -47,7 +47,7 @@ func (x ResEndpointInfo) NodeInfo() netmap.NodeInfo {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmEndpointInfo docs).
+// Returns an error if parameters are set incorrectly (see PrmEndpointInfo docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Exactly one return value is non-nil. Server status return is returned in ResEndpointInfo.
@@ -58,7 +58,7 @@ func (x ResEndpointInfo) NodeInfo() netmap.NodeInfo {
 func (c *Client) EndpointInfo(ctx context.Context, prm PrmEndpointInfo) (*ResEndpointInfo, error) {
 	// check context
 	if ctx == nil {
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	}
 
 	// form request
@@ -144,7 +144,7 @@ func (x ResNetworkInfo) Info() netmap.NetworkInfo {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmNetworkInfo docs).
+// Returns an error if parameters are set incorrectly (see PrmNetworkInfo docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Exactly one return value is non-nil. Server status return is returned in ResNetworkInfo.
@@ -155,7 +155,7 @@ func (x ResNetworkInfo) Info() netmap.NetworkInfo {
 func (c *Client) NetworkInfo(ctx context.Context, prm PrmNetworkInfo) (*ResNetworkInfo, error) {
 	// check context
 	if ctx == nil {
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	}
 
 	// form request
@@ -224,6 +224,7 @@ func (x ResNetMapSnapshot) NetMap() netmap.NetMap {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
+// Returns an error if parameters are set incorrectly.
 // Context is required and MUST NOT be nil. It is used for network communication.
 //
 // Exactly one return value is non-nil. Server status return is returned in ResNetMapSnapshot.
@@ -234,7 +235,7 @@ func (x ResNetMapSnapshot) NetMap() netmap.NetMap {
 func (c *Client) NetMapSnapshot(ctx context.Context, _ PrmNetMapSnapshot) (*ResNetMapSnapshot, error) {
 	// check context
 	if ctx == nil {
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	}
 
 	// form request body

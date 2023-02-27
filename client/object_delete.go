@@ -114,7 +114,7 @@ func (x ResObjectDelete) Tombstone() oid.ID {
 // FrostFS status codes are returned as `error`, otherwise, are included
 // in the returned result structure.
 //
-// Immediately panics if parameters are set incorrectly (see PrmObjectDelete docs).
+// Returns an error if parameters are set incorrectly (see PrmObjectDelete docs).
 // Context is required and must not be nil. It is used for network communication.
 //
 // Return statuses:
@@ -126,11 +126,11 @@ func (x ResObjectDelete) Tombstone() oid.ID {
 func (c *Client) ObjectDelete(ctx context.Context, prm PrmObjectDelete) (*ResObjectDelete, error) {
 	switch {
 	case ctx == nil:
-		panic(panicMsgMissingContext)
+		return nil, errorMissingContext
 	case prm.addr.GetContainerID() == nil:
-		panic(panicMsgMissingContainer)
+		return nil, errorMissingContainer
 	case prm.addr.GetObjectID() == nil:
-		panic(panicMsgMissingObject)
+		return nil, errorMissingObject
 	}
 
 	// form request body

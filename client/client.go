@@ -69,7 +69,7 @@ func (c *Client) Init(prm PrmInit) {
 // argument, otherwise context.Background() is used. Dial returns context
 // errors, see context package docs for details.
 //
-// Panics if required parameters are set incorrectly, look carefully
+// Returns an error if required parameters are set incorrectly, look carefully
 // at the method documentation.
 //
 // One-time method call during application start-up stage (after Init ) is expected.
@@ -78,12 +78,12 @@ func (c *Client) Init(prm PrmInit) {
 // See also Init / Close.
 func (c *Client) Dial(prm PrmDial) error {
 	if prm.endpoint == "" {
-		panic("server address is unset or empty")
+		return errorServerAddrUnset
 	}
 
 	if prm.timeoutDialSet {
 		if prm.timeoutDial <= 0 {
-			panic("non-positive timeout")
+			return errorNonPositiveTimeout
 		}
 	} else {
 		prm.timeoutDial = 5 * time.Second
@@ -91,7 +91,7 @@ func (c *Client) Dial(prm PrmDial) error {
 
 	if prm.streamTimeoutSet {
 		if prm.streamTimeout <= 0 {
-			panic("non-positive timeout")
+			return errorNonPositiveTimeout
 		}
 	} else {
 		prm.streamTimeout = 10 * time.Second
