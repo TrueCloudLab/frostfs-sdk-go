@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/TrueCloudLab/frostfs-api-go/v2 v2.0.0-20221212144048-1351b6656d68
 	github.com/TrueCloudLab/frostfs-contract v0.0.0-20221213081248-6c805c1b4e42
-	github.com/TrueCloudLab/hrw v1.1.0
+	github.com/TrueCloudLab/hrw v1.1.1-0.20230227111858-79b208bebf52
 	github.com/TrueCloudLab/tzhash v1.7.0
 	github.com/antlr/antlr4/runtime/Go/antlr/v4 v4.0.0-20221202181307-76fa05c21b12
 	github.com/google/uuid v1.3.0

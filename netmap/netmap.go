@@ -152,7 +152,7 @@ func (m NetMap) PlacementVectors(vectors [][]NodeInfo, pivot []byte) ([][]NodeIn
 	for i := range vectors {
 		result[i] = make([]NodeInfo, len(vectors[i]))
 		copy(result[i], vectors[i])
-		hrw.SortSliceByWeightValue(result[i], nodes(result[i]).weights(wf), h)
+		hrw.SortHasherSliceByWeightValue(result[i], nodes(result[i]).weights(wf), h)
 	}
 
 	return result, nil

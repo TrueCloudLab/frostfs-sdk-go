@@ -108,7 +108,7 @@ func (c *context) getSelection(p PlacementPolicy, s netmap.Selector) ([]nodes, e
 			weights[i] = calcBucketWeight(res[i], newMeanIQRAgg(), c.weightFunc)
 		}
 
-		hrw.SortSliceByWeightValue(res, weights, c.hrwSeedHash)
+		hrw.SortHasherSliceByWeightValue(res, weights, c.hrwSeedHash)
 	}
 
 	if s.GetAttribute() == "" {
@@ -164,7 +164,7 @@ func (c *context) getSelectionBase(subnetID subnetid.ID, s netmap.Selector) []no
 
 	if len(c.hrwSeed) != 0 {
 		for i := range result {
-			hrw.SortSliceByWeightValue(result[i].nodes, result[i].nodes.weights(c.weightFunc), c.hrwSeedHash)
+			hrw.SortHasherSliceByWeightValue(result[i].nodes, result[i].nodes.weights(c.weightFunc), c.hrwSeedHash)
 		}
 	}
 
