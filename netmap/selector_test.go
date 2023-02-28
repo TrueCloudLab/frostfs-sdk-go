@@ -50,7 +50,7 @@ func BenchmarkHRWSort(b *testing.B) {
 			copy(realNodes, vectors)
 			b.StartTimer()
 
-			hrw.SortSliceByValue(realNodes, pivot)
+			hrw.SortHasherSliceByValue(realNodes, pivot)
 		}
 	})
 	b.Run("only sort by index", func(b *testing.B) {
@@ -72,7 +72,7 @@ func BenchmarkHRWSort(b *testing.B) {
 			copy(realNodes, vectors)
 			b.StartTimer()
 
-			hrw.SortSliceByWeightValue(realNodes, weights, pivot)
+			hrw.SortHasherSliceByWeightValue(realNodes, weights, pivot)
 		}
 	})
 	b.Run("sort by ID, then by index (deterministic)", func(b *testing.B) {
