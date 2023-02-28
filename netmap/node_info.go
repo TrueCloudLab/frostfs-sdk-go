@@ -25,7 +25,8 @@ import (
 //
 // Instances can be created using built-in var declaration.
 type NodeInfo struct {
-	m netmap.NodeInfo
+	m    netmap.NodeInfo
+	hash uint64
 }
 
 // reads NodeInfo from netmap.NodeInfo message. If checkFieldPresence is set,
@@ -86,6 +87,7 @@ func (x *NodeInfo) readFromV2(m netmap.NodeInfo, checkFieldPresence bool) error 
 	}
 
 	x.m = m
+	x.hash = hrw.Hash(binPublicKey)
 
 	return nil
 }
@@ -167,6 +169,7 @@ func (x *NodeInfo) UnmarshalJSON(data []byte) error {
 // See also PublicKey.
 func (x *NodeInfo) SetPublicKey(key []byte) {
 	x.m.SetPublicKey(key)
+	x.hash = hrw.Hash(x.m.GetPublicKey())
 }
 
 // PublicKey returns value set using SetPublicKey.
@@ -233,6 +236,9 @@ var _ hrw.Hasher = NodeInfo{}
 // Hash is needed to support weighted HRW therefore sort function sorts nodes
 // based on their public key. Hash isn't expected to be used directly.
 func (x NodeInfo) Hash() uint64 {
+	if x.hash != 0 {
+		return x.hash
+	}
 	return hrw.Hash(x.m.GetPublicKey())
 }
 
