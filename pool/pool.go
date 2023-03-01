@@ -32,6 +32,8 @@ import (
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // client represents virtual connection to the single FrostFS network endpoint from which Pool is formed.
@@ -995,11 +997,7 @@ func (c *clientWrapper) incRequests(elapsed time.Duration, method MethodIndex) {
 
 func (c *clientStatusMonitor) handleError(st apistatus.Status, err error) error {
 	if err != nil {
-		// non-status logic error that could be returned
-		// from the SDK client; should not be considered
-		// as a connection error
-		var siErr *object.SplitInfoError
-		if !errors.As(err, &siErr) {
+		if needCountError(err) {
 			c.incErrorRate()
 		}
 
@@ -1016,6 +1014,20 @@ func (c *clientStatusMonitor) handleError(st apistatus.Status, err error) error 
 	}
 
 	return err
+}
+
+func needCountError(err error) bool {
+	// non-status logic error that could be returned
+	// from the SDK client; should not be considered
+	// as a connection error
+	var siErr *object.SplitInfoError
+	if errors.As(err, &siErr) {
+		return false
+	}
+
+	// we can't use errors.Is(err, context.Canceled)
+	// https://github.com/grpc/grpc-go/issues/4375
+	return status.Code(err) != codes.Canceled
 }
 
 // clientBuilder is a type alias of client constructors which open connection
