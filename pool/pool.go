@@ -2542,7 +2542,7 @@ func (p *Pool) GetSplitInfo(ctx context.Context, cnrID cid.ID, objID oid.ID, tok
 	}
 	prm.MarkRaw()
 
-	_, err := p.HeadObject(ctx, prm)
+	res, err := p.HeadObject(ctx, prm)
 
 	var errSplit *object.SplitInfoError
 
@@ -2550,7 +2550,21 @@ func (p *Pool) GetSplitInfo(ctx context.Context, cnrID cid.ID, objID oid.ID, tok
 	case errors.As(err, &errSplit):
 		return errSplit.SplitInfo(), nil
 	case err == nil:
-		return nil, relations.ErrNoSplitInfo
+		if res.SplitID() == nil {
+			return nil, relations.ErrNoSplitInfo
+		}
+
+		splitInfo := object.NewSplitInfo()
+		splitInfo.SetSplitID(res.SplitID())
+		if res.HasParent() {
+			if len(res.Children()) > 0 {
+				splitInfo.SetLink(objID)
+			} else {
+				splitInfo.SetLastPart(objID)
+			}
+		}
+
+		return splitInfo, nil
 	default:
 		return nil, fmt.Errorf("failed to get raw object header: %w", err)
 	}
@@ -2604,38 +2618,6 @@ func (p *Pool) GetLeftSibling(ctx context.Context, cnrID cid.ID, objID oid.ID, t
 		return oid.ID{}, relations.ErrNoLeftSibling
 	}
 	return idMember, nil
-}
-
-// FindSiblingBySplitID implements relations.Relations.
-func (p *Pool) FindSiblingBySplitID(ctx context.Context, cnrID cid.ID, splitID *object.SplitID, tokens relations.Tokens) ([]oid.ID, error) {
-	var query object.SearchFilters
-	query.AddSplitIDFilter(object.MatchStringEqual, splitID)
-
-	var prm PrmObjectSearch
-	prm.SetContainerID(cnrID)
-	prm.SetFilters(query)
-	if tokens.Bearer != nil {
-		prm.UseBearer(*tokens.Bearer)
-	}
-	if tokens.Session != nil {
-		prm.UseSession(*tokens.Session)
-	}
-
-	res, err := p.SearchObjects(ctx, prm)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search objects by split ID: %w", err)
-	}
-
-	var members []oid.ID
-	err = res.Iterate(func(id oid.ID) bool {
-		members = append(members, id)
-		return false
-	})
-	if err != nil {
-		return nil, fmt.Errorf("failed to iterate found objects: %w", err)
-	}
-
-	return members, nil
 }
 
 // FindSiblingByParentID implements relations.Relations.
