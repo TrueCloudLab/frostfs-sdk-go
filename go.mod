@@ -17,6 +17,8 @@ require (
 	go.uber.org/zap v1.24.0
 )
 
+replace github.com/TrueCloudLab/frostfs-api-go/v2 v2.0.0-20221212144048-1351b6656d68 => github.com/KirillovDenis/frostfs-api-go/v2 v2.11.2-0.20230221082308-ac00938fa447
+
 require (
 	github.com/TrueCloudLab/frostfs-crypto v0.5.0 // indirect
 	github.com/TrueCloudLab/rfc6979 v0.3.0 // indirect

@@ -32,6 +32,8 @@ type Token struct {
 
 	sigSet bool
 	sig    refs.Signature
+
+	impersonate bool
 }
 
 // reads Token from the acl.BearerToken message. If checkFieldPresence is set,
@@ -67,6 +69,8 @@ func (b *Token) readFromV2(m acl.BearerToken, checkFieldPresence bool) error {
 	} else if checkFieldPresence {
 		return errors.New("missing token lifetime")
 	}
+
+	b.impersonate = body.GetImpersonate()
 
 	sig := m.GetSignature()
 	if b.sigSet = sig != nil; sig != nil {
@@ -111,6 +115,8 @@ func (b Token) fillBody() *acl.BearerTokenBody {
 
 		body.SetLifetime(&lifetime)
 	}
+
+	body.SetImpersonate(b.impersonate)
 
 	return &body
 }
@@ -206,6 +212,14 @@ func (b Token) EACLTable() eacl.Table {
 	}
 
 	return eacl.Table{}
+}
+
+func (b *Token) SetImpersonate(v bool) {
+	b.impersonate = v
+}
+
+func (b Token) Impersonate() bool {
+	return b.impersonate
 }
 
 // AssertContainer checks if the token is valid within the given container.
